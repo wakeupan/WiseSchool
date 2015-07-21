@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="153" id="zYx-O4-6Gy" customClass="CommentTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="445" height="153"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zYx-O4-6Gy" id="X5Z-HM-qjE">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" tag="10002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AMeng" translatesAutoresizingMaskIntoConstraints="NO" id="q39-8y-dWb">
+                        <rect key="frame" x="28" y="28" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="8oN-ZD-wLo"/>
+                            <constraint firstAttribute="height" constant="60" id="y8H-Vs-wu2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XH1-dS-gKc">
+                        <rect key="frame" x="104" y="28" width="325" height="70"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张小虎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ua-sa-Vb4">
+                        <rect key="frame" x="28" y="96" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="3Ak-6C-KgP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5F-4I-Vs6">
+                        <rect key="frame" x="369" y="114" width="60" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Na3-0f-30z"/>
+                            <constraint firstAttribute="height" constant="30" id="eii-a8-hZu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="评论" backgroundImage="comment_bg">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8ua-sa-Vb4" firstAttribute="leading" secondItem="q39-8y-dWb" secondAttribute="leading" constant="-13" id="7jP-rf-pEt"/>
+                    <constraint firstItem="h5F-4I-Vs6" firstAttribute="trailing" secondItem="X5Z-HM-qjE" secondAttribute="trailingMargin" constant="8" id="8A2-vV-HXs"/>
+                    <constraint firstItem="8ua-sa-Vb4" firstAttribute="width" secondItem="q39-8y-dWb" secondAttribute="width" id="9GL-6f-2C3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="XH1-dS-gKc" secondAttribute="trailing" constant="8" id="DPt-sM-Gie"/>
+                    <constraint firstItem="8ua-sa-Vb4" firstAttribute="leading" secondItem="X5Z-HM-qjE" secondAttribute="leadingMargin" constant="20" id="Iwg-qv-mL0"/>
+                    <constraint firstItem="q39-8y-dWb" firstAttribute="top" secondItem="X5Z-HM-qjE" secondAttribute="topMargin" constant="20" id="ZIL-ft-0rl"/>
+                    <constraint firstItem="XH1-dS-gKc" firstAttribute="leading" secondItem="q39-8y-dWb" secondAttribute="trailing" constant="23" id="Zfw-95-Cfp"/>
+                    <constraint firstItem="XH1-dS-gKc" firstAttribute="leading" secondItem="q39-8y-dWb" secondAttribute="trailing" constant="16" id="aQH-et-ytV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="h5F-4I-Vs6" secondAttribute="bottom" constant="8" id="bOB-25-z0o"/>
+                    <constraint firstItem="XH1-dS-gKc" firstAttribute="top" secondItem="X5Z-HM-qjE" secondAttribute="topMargin" constant="20" id="dQh-aF-keo"/>
+                    <constraint firstItem="8ua-sa-Vb4" firstAttribute="top" secondItem="q39-8y-dWb" secondAttribute="bottom" constant="27" id="dwu-Nv-uqR"/>
+                    <constraint firstItem="8ua-sa-Vb4" firstAttribute="top" secondItem="q39-8y-dWb" secondAttribute="bottom" constant="8" id="iHz-Kl-d72"/>
+                    <constraint firstItem="q39-8y-dWb" firstAttribute="leading" secondItem="X5Z-HM-qjE" secondAttribute="leadingMargin" constant="20" id="lC3-km-dUm"/>
+                    <constraint firstItem="h5F-4I-Vs6" firstAttribute="top" secondItem="XH1-dS-gKc" secondAttribute="bottom" constant="8" id="oOk-nN-9ON"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="h5F-4I-Vs6" secondAttribute="trailing" constant="8" id="v2r-af-WxM"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="7jP-rf-pEt"/>
+                        <exclude reference="dwu-Nv-uqR"/>
+                        <exclude reference="Zfw-95-Cfp"/>
+                        <exclude reference="8A2-vV-HXs"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="btn" destination="h5F-4I-Vs6" id="LGP-FW-JcM"/>
+                <outlet property="content" destination="XH1-dS-gKc" id="yc4-Lb-2xn"/>
+                <outlet property="icon" destination="q39-8y-dWb" id="6Jm-FE-uAh"/>
+            </connections>
+            <point key="canvasLocation" x="377.5" y="294.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="AMeng" width="332" height="341"/>
+        <image name="comment_bg" width="56" height="22"/>
+    </resources>
+</document>
