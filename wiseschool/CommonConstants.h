@@ -41,7 +41,22 @@
 #define MessgeKey @"message"
 #define RowsKey @"rows"
 
+#define DEFINE_BLUE        [UIColor colorWithRed:83.0/255.0 green:193.0/255.0 blue:226.0/255.0 alpha:1]
+#define DEFINE_ORGANG         [UIColor colorWithRed:255.0/255.0 green:186.0/255.0 blue:88.0/255.0 alpha:1]
+#define DEFINE_GREEN      [UIColor colorWithRed:2.0/255.0 green:214.0/255.0 blue:80.0/255.0 alpha:1]
+#define API_NAME_LOGIN_VALIDATE_MOBILE @"zhxy_v3_java/app/login/validateMobile.app"
 
+#define API_NAME_LOGIN_GET_AREA_FOR_CITY @"zhxy_v3_java/app/common/areaInfo.app"
+
+#define API_NAME_LOGIN_GET_SCHOOL_FOR_AREA @"zhxy_v3_java/app/common/schoolInfo.app"
+
+#define API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL @"zhxy_v3_java/app/common/gradeInfo.app"
+
+#define API_NAME_LOGIN_GET_SUBJECT_INFO @"zhxy_v3_java/app/common/subjectInfo.app"
+
+#define API_NAME_LOGIN_CREATE_SUBJECT @"zhxy_v3_java/app/common/subjectCreate.app"
+
+#define HTTP_SUCCEED_FLAG @"1"
 
 //通过storyboard生成控制器
 #define VCFromStoryboard(storyboardName,vcName) [[UIStoryboard storyboardWithName:storyboardName bundle:nil] instantiateViewControllerWithIdentifier:vcName]

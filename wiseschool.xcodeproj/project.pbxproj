@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18032AAC1B5E674500ED801E /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA01B5E674500ED801E /* BaseVC.m */; };
+		18032AAD1B5E674500ED801E /* LoginOneVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA21B5E674500ED801E /* LoginOneVCViewController.m */; };
+		18032AAE1B5E674500ED801E /* LoginOneVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */; };
+		18032AAF1B5E674500ED801E /* LoginThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA51B5E674500ED801E /* LoginThreeVC.m */; };
+		18032AB01B5E674500ED801E /* LoginThreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA61B5E674500ED801E /* LoginThreeVC.xib */; };
+		18032AB11B5E674500ED801E /* LoginTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA81B5E674500ED801E /* LoginTwoVC.m */; };
+		18032AB21B5E674500ED801E /* LoginTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA91B5E674500ED801E /* LoginTwoVC.xib */; };
+		18032AB31B5E674500ED801E /* RoundLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AAB1B5E674500ED801E /* RoundLabel.m */; };
+		18032AB71B5E677A00ED801E /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AB61B5E677A00ED801E /* WZGuideViewController.m */; };
+		18032ABF1B5E67AA00ED801E /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18032ABB1B5E67AA00ED801E /* SMS_SDKLocalizable.strings */; };
+		18032AC01B5E67AA00ED801E /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18032ABD1B5E67AA00ED801E /* SMS_SDK.framework */; };
+		18032AC31B5E67E000ED801E /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AC21B5E67E000ED801E /* HttpManager.m */; };
 		6D0EE5B11B4F764700D24E9D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0EE5B01B4F764700D24E9D /* User.m */; };
 		6D0EE6111B4F868D00D24E9D /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0EE5B51B4F868D00D24E9D /* MBProgressHUD+Add.m */; };
 		6D0EE6121B4F868D00D24E9D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0EE5B71B4F868D00D24E9D /* MBProgressHUD.m */; };
@@ -130,17 +142,6 @@
 		FE94174B1B5A2F760073C4CF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94174A1B5A2F760073C4CF /* MessageUI.framework */; };
 		FE94174D1B5A2F840073C4CF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94174C1B5A2F840073C4CF /* libz.dylib */; };
 		FE94174F1B5A2F8F0073C4CF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94174E1B5A2F8F0073C4CF /* libicucore.dylib */; };
-		FE94175E1B5A304D0073C4CF /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417521B5A304C0073C4CF /* BaseVC.m */; };
-		FE94175F1B5A304D0073C4CF /* LoginOneVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417541B5A304C0073C4CF /* LoginOneVCViewController.m */; };
-		FE9417601B5A304D0073C4CF /* LoginOneVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE9417551B5A304C0073C4CF /* LoginOneVCViewController.xib */; };
-		FE9417611B5A304D0073C4CF /* LoginThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417571B5A304C0073C4CF /* LoginThreeVC.m */; };
-		FE9417621B5A304D0073C4CF /* LoginThreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE9417581B5A304C0073C4CF /* LoginThreeVC.xib */; };
-		FE9417631B5A304D0073C4CF /* LoginTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE94175A1B5A304C0073C4CF /* LoginTwoVC.m */; };
-		FE9417641B5A304D0073C4CF /* LoginTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE94175B1B5A304C0073C4CF /* LoginTwoVC.xib */; };
-		FE9417651B5A304D0073C4CF /* RoundLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE94175D1B5A304D0073C4CF /* RoundLabel.m */; };
-		FE9417691B5A30720073C4CF /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417681B5A30720073C4CF /* WZGuideViewController.m */; };
-		FE94176F1B5A30970073C4CF /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE94176B1B5A30970073C4CF /* SMS_SDKLocalizable.strings */; };
-		FE9417701B5A30970073C4CF /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94176D1B5A30970073C4CF /* SMS_SDK.framework */; };
 		FE9417751B5A31B70073C4CF /* CommentDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417721B5A31B70073C4CF /* CommentDTO.m */; };
 		FE9417761B5A31B70073C4CF /* CommentsData.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9417741B5A31B70073C4CF /* CommentsData.m */; };
 		FE94177D1B5A31D20073C4CF /* CommentHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE9417771B5A31D10073C4CF /* CommentHeadView.xib */; };
@@ -179,6 +180,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18032A9D1B5E663900ED801E /* CommonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonConstants.h; sourceTree = "<group>"; };
+		18032A9F1B5E674500ED801E /* BaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseVC.h; sourceTree = "<group>"; };
+		18032AA01B5E674500ED801E /* BaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
+		18032AA11B5E674500ED801E /* LoginOneVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOneVCViewController.h; sourceTree = "<group>"; };
+		18032AA21B5E674500ED801E /* LoginOneVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOneVCViewController.m; sourceTree = "<group>"; };
+		18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginOneVCViewController.xib; sourceTree = "<group>"; };
+		18032AA41B5E674500ED801E /* LoginThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginThreeVC.h; sourceTree = "<group>"; };
+		18032AA51B5E674500ED801E /* LoginThreeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginThreeVC.m; sourceTree = "<group>"; };
+		18032AA61B5E674500ED801E /* LoginThreeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginThreeVC.xib; sourceTree = "<group>"; };
+		18032AA71B5E674500ED801E /* LoginTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTwoVC.h; sourceTree = "<group>"; };
+		18032AA81B5E674500ED801E /* LoginTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTwoVC.m; sourceTree = "<group>"; };
+		18032AA91B5E674500ED801E /* LoginTwoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTwoVC.xib; sourceTree = "<group>"; };
+		18032AAA1B5E674500ED801E /* RoundLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundLabel.h; sourceTree = "<group>"; };
+		18032AAB1B5E674500ED801E /* RoundLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundLabel.m; sourceTree = "<group>"; };
+		18032AB51B5E677A00ED801E /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
+		18032AB61B5E677A00ED801E /* WZGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZGuideViewController.m; sourceTree = "<group>"; };
+		18032ABC1B5E67AA00ED801E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
+		18032ABD1B5E67AA00ED801E /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
+		18032ABE1B5E67AA00ED801E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
+		18032AC11B5E67E000ED801E /* HttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpManager.h; sourceTree = "<group>"; };
+		18032AC21B5E67E000ED801E /* HttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpManager.m; sourceTree = "<group>"; };
 		6D0EE5AF1B4F764700D24E9D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6D0EE5B01B4F764700D24E9D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6D0EE5B41B4F868D00D24E9D /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
@@ -299,7 +321,6 @@
 		6DA49AA91B467F3A00CA55FE /* Classes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Classes.storyboard; sourceTree = "<group>"; };
 		6DA49AAB1B467F5100CA55FE /* TimeLine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TimeLine.storyboard; sourceTree = "<group>"; };
 		6DA49AAD1B467F6B00CA55FE /* Find.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Find.storyboard; sourceTree = "<group>"; };
-		6DA49AAF1B4680DE00CA55FE /* CommonConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonConstants.h; sourceTree = "<group>"; };
 		FE1210211B50032500ABEDB5 /* BorderBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderBtn.h; sourceTree = "<group>"; };
 		FE1210221B50032500ABEDB5 /* BorderBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderBtn.m; sourceTree = "<group>"; };
 		FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSectionModel.h; sourceTree = "<group>"; };
@@ -406,24 +427,6 @@
 		FE94174A1B5A2F760073C4CF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FE94174C1B5A2F840073C4CF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		FE94174E1B5A2F8F0073C4CF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		FE9417511B5A304C0073C4CF /* BaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseVC.h; sourceTree = "<group>"; };
-		FE9417521B5A304C0073C4CF /* BaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
-		FE9417531B5A304C0073C4CF /* LoginOneVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOneVCViewController.h; sourceTree = "<group>"; };
-		FE9417541B5A304C0073C4CF /* LoginOneVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOneVCViewController.m; sourceTree = "<group>"; };
-		FE9417551B5A304C0073C4CF /* LoginOneVCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginOneVCViewController.xib; sourceTree = "<group>"; };
-		FE9417561B5A304C0073C4CF /* LoginThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginThreeVC.h; sourceTree = "<group>"; };
-		FE9417571B5A304C0073C4CF /* LoginThreeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginThreeVC.m; sourceTree = "<group>"; };
-		FE9417581B5A304C0073C4CF /* LoginThreeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginThreeVC.xib; sourceTree = "<group>"; };
-		FE9417591B5A304C0073C4CF /* LoginTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTwoVC.h; sourceTree = "<group>"; };
-		FE94175A1B5A304C0073C4CF /* LoginTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTwoVC.m; sourceTree = "<group>"; };
-		FE94175B1B5A304C0073C4CF /* LoginTwoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTwoVC.xib; sourceTree = "<group>"; };
-		FE94175C1B5A304D0073C4CF /* RoundLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundLabel.h; sourceTree = "<group>"; };
-		FE94175D1B5A304D0073C4CF /* RoundLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundLabel.m; sourceTree = "<group>"; };
-		FE9417671B5A30720073C4CF /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
-		FE9417681B5A30720073C4CF /* WZGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZGuideViewController.m; sourceTree = "<group>"; };
-		FE94176C1B5A30970073C4CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
-		FE94176D1B5A30970073C4CF /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
-		FE94176E1B5A30970073C4CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
 		FE9417711B5A31B70073C4CF /* CommentDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDTO.h; sourceTree = "<group>"; };
 		FE9417721B5A31B70073C4CF /* CommentDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDTO.m; sourceTree = "<group>"; };
 		FE9417731B5A31B70073C4CF /* CommentsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsData.h; sourceTree = "<group>"; };
@@ -480,7 +483,7 @@
 				FE94174F1B5A2F8F0073C4CF /* libicucore.dylib in Frameworks */,
 				FE94174D1B5A2F840073C4CF /* libz.dylib in Frameworks */,
 				FE94174B1B5A2F760073C4CF /* MessageUI.framework in Frameworks */,
-				FE9417701B5A30970073C4CF /* SMS_SDK.framework in Frameworks */,
+				18032AC01B5E67AA00ED801E /* SMS_SDK.framework in Frameworks */,
 				FE9417491B5A2F6C0073C4CF /* SystemConfiguration.framework in Frameworks */,
 				FE9417361B5A223D0073C4CF /* libmp3lame.a in Frameworks */,
 			);
@@ -496,6 +499,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18032A9E1B5E671600ED801E /* 登陆 */ = {
+			isa = PBXGroup;
+			children = (
+				18032ABA1B5E67AA00ED801E /* SMS_SDK */,
+				18032AB41B5E675800ED801E /* 引导页 */,
+				18032A9F1B5E674500ED801E /* BaseVC.h */,
+				18032AA01B5E674500ED801E /* BaseVC.m */,
+				18032AA11B5E674500ED801E /* LoginOneVCViewController.h */,
+				18032AA21B5E674500ED801E /* LoginOneVCViewController.m */,
+				18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */,
+				18032AA41B5E674500ED801E /* LoginThreeVC.h */,
+				18032AA51B5E674500ED801E /* LoginThreeVC.m */,
+				18032AA61B5E674500ED801E /* LoginThreeVC.xib */,
+				18032AA71B5E674500ED801E /* LoginTwoVC.h */,
+				18032AA81B5E674500ED801E /* LoginTwoVC.m */,
+				18032AA91B5E674500ED801E /* LoginTwoVC.xib */,
+				18032AAA1B5E674500ED801E /* RoundLabel.h */,
+				18032AAB1B5E674500ED801E /* RoundLabel.m */,
+			);
+			name = "登陆";
+			sourceTree = "<group>";
+		};
+		18032AB41B5E675800ED801E /* 引导页 */ = {
+			isa = PBXGroup;
+			children = (
+				18032AB51B5E677A00ED801E /* WZGuideViewController.h */,
+				18032AB61B5E677A00ED801E /* WZGuideViewController.m */,
+			);
+			name = "引导页";
+			sourceTree = "<group>";
+		};
+		18032ABA1B5E67AA00ED801E /* SMS_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				18032ABB1B5E67AA00ED801E /* SMS_SDKLocalizable.strings */,
+				18032ABD1B5E67AA00ED801E /* SMS_SDK.framework */,
+			);
+			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
 		6D0EE5AE1B4F762900D24E9D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,7 +714,7 @@
 		6D222CE81B5DE15D00A05BF7 /* 常量宏 */ = {
 			isa = PBXGroup;
 			children = (
-				6DA49AAF1B4680DE00CA55FE /* CommonConstants.h */,
+				18032A9D1B5E663900ED801E /* CommonConstants.h */,
 				6D0EE63A1B4F88C200D24E9D /* ImageUrls.h */,
 			);
 			name = "常量宏";
@@ -740,10 +783,12 @@
 		6DA49A741B46629B00CA55FE /* WiseSchool */ = {
 			isa = PBXGroup;
 			children = (
+				18032AC11B5E67E000ED801E /* HttpManager.h */,
+				18032AC21B5E67E000ED801E /* HttpManager.m */,
 				6DA49A791B46629B00CA55FE /* AppDelegate.h */,
 				6DA49A7A1B46629B00CA55FE /* AppDelegate.m */,
+				18032A9E1B5E671600ED801E /* 登陆 */,
 				6D222CE81B5DE15D00A05BF7 /* 常量宏 */,
-				FE9417501B5A303E0073C4CF /* 登陆 */,
 				6D0EE5AE1B4F762900D24E9D /* Model */,
 				6DA49AB01B46891300CA55FE /* 主框架 */,
 				FEB8F5B91B47ADEB00EC4F57 /* 我的 */,
@@ -945,46 +990,6 @@
 			path = UUChat;
 			sourceTree = "<group>";
 		};
-		FE9417501B5A303E0073C4CF /* 登陆 */ = {
-			isa = PBXGroup;
-			children = (
-				FE94176A1B5A30970073C4CF /* SMS_SDK */,
-				FE9417661B5A305F0073C4CF /* 引导页 */,
-				FE9417511B5A304C0073C4CF /* BaseVC.h */,
-				FE9417521B5A304C0073C4CF /* BaseVC.m */,
-				FE9417531B5A304C0073C4CF /* LoginOneVCViewController.h */,
-				FE9417541B5A304C0073C4CF /* LoginOneVCViewController.m */,
-				FE9417551B5A304C0073C4CF /* LoginOneVCViewController.xib */,
-				FE9417561B5A304C0073C4CF /* LoginThreeVC.h */,
-				FE9417571B5A304C0073C4CF /* LoginThreeVC.m */,
-				FE9417581B5A304C0073C4CF /* LoginThreeVC.xib */,
-				FE9417591B5A304C0073C4CF /* LoginTwoVC.h */,
-				FE94175A1B5A304C0073C4CF /* LoginTwoVC.m */,
-				FE94175B1B5A304C0073C4CF /* LoginTwoVC.xib */,
-				FE94175C1B5A304D0073C4CF /* RoundLabel.h */,
-				FE94175D1B5A304D0073C4CF /* RoundLabel.m */,
-			);
-			name = "登陆";
-			sourceTree = "<group>";
-		};
-		FE9417661B5A305F0073C4CF /* 引导页 */ = {
-			isa = PBXGroup;
-			children = (
-				FE9417671B5A30720073C4CF /* WZGuideViewController.h */,
-				FE9417681B5A30720073C4CF /* WZGuideViewController.m */,
-			);
-			name = "引导页";
-			sourceTree = "<group>";
-		};
-		FE94176A1B5A30970073C4CF /* SMS_SDK */ = {
-			isa = PBXGroup;
-			children = (
-				FE94176B1B5A30970073C4CF /* SMS_SDKLocalizable.strings */,
-				FE94176D1B5A30970073C4CF /* SMS_SDK.framework */,
-			);
-			path = SMS_SDK;
-			sourceTree = "<group>";
-		};
 		FE99724F1B4C0A2C00E65D58 /* 班级 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1163,10 +1168,12 @@
 			files = (
 				FE9417261B5A223D0073C4CF /* Chat_take_picture.png in Resources */,
 				FE9972591B4C1A3700E65D58 /* ClassesHeaderView.xib in Resources */,
+				18032AB01B5E674500ED801E /* LoginThreeVC.xib in Resources */,
 				6DA49AAE1B467F6B00CA55FE /* Find.storyboard in Resources */,
 				FE9417291B5A223D0073C4CF /* chatfrom_doctor_icon.png in Resources */,
 				6DA49A811B46629B00CA55FE /* Main.storyboard in Resources */,
 				6DA49A861B46629B00CA55FE /* LaunchScreen.xib in Resources */,
+				18032AB21B5E674500ED801E /* LoginTwoVC.xib in Resources */,
 				6DA49A831B46629B00CA55FE /* Images.xcassets in Resources */,
 				6DA49AAC1B467F5100CA55FE /* TimeLine.storyboard in Resources */,
 				FE94172B1B5A223D0073C4CF /* 0.jpeg in Resources */,
@@ -1178,25 +1185,23 @@
 				6D998B061B4E072100D9F275 /* MineHeaderView.xib in Resources */,
 				FE9417271B5A223D0073C4CF /* chat_voice_record.png in Resources */,
 				FE9417241B5A223D0073C4CF /* Chat_record_circle.png in Resources */,
-				FE94176F1B5A30970073C4CF /* SMS_SDKLocalizable.strings in Resources */,
 				FE9417251B5A223D0073C4CF /* chat_send_message.png in Resources */,
 				FE9417281B5A223D0073C4CF /* chatfrom_bg_normal.png in Resources */,
 				FE94172A1B5A223D0073C4CF /* chatto_bg_normal.png in Resources */,
 				FE94172C1B5A223D0073C4CF /* 1.jpeg in Resources */,
 				FE94172D1B5A223D0073C4CF /* headImage.jpeg in Resources */,
 				FE9417211B5A223D0073C4CF /* chat_animation_white3.png in Resources */,
-				FE9417641B5A304D0073C4CF /* LoginTwoVC.xib in Resources */,
 				FEB70B811B5D0E5000F1F77B /* arrow@2x.png in Resources */,
 				FE94171E1B5A223D0073C4CF /* chat_animation3.png in Resources */,
 				6DA49AAA1B467F3A00CA55FE /* Classes.storyboard in Resources */,
 				FE9417221B5A223D0073C4CF /* chat_ipunt_message.png in Resources */,
-				FE9417601B5A304D0073C4CF /* LoginOneVCViewController.xib in Resources */,
 				FE9417231B5A223D0073C4CF /* chat_message_back.png in Resources */,
-				FE9417621B5A304D0073C4CF /* LoginThreeVC.xib in Resources */,
+				18032ABF1B5E67AA00ED801E /* SMS_SDKLocalizable.strings in Resources */,
 				6DA49AA81B467F1400CA55FE /* Mine.storyboard in Resources */,
 				FE94177D1B5A31D20073C4CF /* CommentHeadView.xib in Resources */,
 				FE9417471B5A22910073C4CF /* RootViewController.xib in Resources */,
 				FE9417201B5A223D0073C4CF /* chat_animation_white2.png in Resources */,
+				18032AAE1B5E674500ED801E /* LoginOneVCViewController.xib in Resources */,
 				FE94171D1B5A223D0073C4CF /* chat_animation2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1223,11 +1228,10 @@
 				6D0EE6211B4F868D00D24E9D /* EMSDWebImageManager.m in Sources */,
 				6D0EE6371B4F868D00D24E9D /* PSTGridLayoutRow.m in Sources */,
 				FE94170F1B5A223D0073C4CF /* AFHTTPSessionManager.m in Sources */,
-				FE9417691B5A30720073C4CF /* WZGuideViewController.m in Sources */,
 				FE94172E1B5A223D0073C4CF /* AFNetworkActivityIndicatorManager.m in Sources */,
 				FEB70B821B5D0E5000F1F77B /* MJRefreshBaseView.m in Sources */,
 				FEB70B851B5D0E5000F1F77B /* MJRefreshHeaderView.m in Sources */,
-				FE94175F1B5A304D0073C4CF /* LoginOneVCViewController.m in Sources */,
+				18032AB11B5E674500ED801E /* LoginTwoVC.m in Sources */,
 				FE94173B1B5A223D0073C4CF /* UUMessage.m in Sources */,
 				FE9417391B5A223D0073C4CF /* UUImageAvatarBrowser.m in Sources */,
 				6D0EE6261B4F868D00D24E9D /* UIImage+EMGIF.m in Sources */,
@@ -1251,7 +1255,9 @@
 				6D0EE6341B4F868D00D24E9D /* PSTCollectionViewUpdateItem.m in Sources */,
 				6D0EE6241B4F868D00D24E9D /* NSData+EMImageContentType.m in Sources */,
 				6D0EE6171B4F868D00D24E9D /* MWPhotoBrowser.m in Sources */,
+				18032AC31B5E67E000ED801E /* HttpManager.m in Sources */,
 				6D0EE61D1B4F868D00D24E9D /* EMSDWebImageCompat.m in Sources */,
+				18032AAF1B5E674500ED801E /* LoginThreeVC.m in Sources */,
 				FE94172F1B5A223D0073C4CF /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				FE9417141B5A223D0073C4CF /* AFURLResponseSerialization.m in Sources */,
 				FE9417801B5A31D20073C4CF /* TimeLineVC.m in Sources */,
@@ -1260,7 +1266,7 @@
 				6D998B0F1B4E603500D9F275 /* CoursesVC.m in Sources */,
 				FEB70B841B5D0E5000F1F77B /* MJRefreshFooterView.m in Sources */,
 				FE9417351B5A223D0073C4CF /* UIWebView+AFNetworking.m in Sources */,
-				FE9417631B5A304D0073C4CF /* LoginTwoVC.m in Sources */,
+				18032AAC1B5E674500ED801E /* BaseVC.m in Sources */,
 				FEB8F5CC1B47B99800EC4F57 /* NoteCell.m in Sources */,
 				6D0EE6301B4F868D00D24E9D /* PSTCollectionViewData.m in Sources */,
 				FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */,
@@ -1281,21 +1287,22 @@
 				FE9417341B5A223D0073C4CF /* UIRefreshControl+AFNetworking.m in Sources */,
 				6D0EE6271B4F868D00D24E9D /* UIImage+EMMultiFormat.m in Sources */,
 				6D0EE6331B4F868D00D24E9D /* PSTCollectionViewLayout.m in Sources */,
+				18032AB71B5E677A00ED801E /* WZGuideViewController.m in Sources */,
 				6D0EE6161B4F868D00D24E9D /* MWPhoto.m in Sources */,
+				18032AB31B5E674500ED801E /* RoundLabel.m in Sources */,
 				FE94173F1B5A223D0073C4CF /* UUProgressHUD.m in Sources */,
 				6D0EE6131B4F868D00D24E9D /* MWCaptionView.m in Sources */,
 				FE9417101B5A223D0073C4CF /* AFNetworkReachabilityManager.m in Sources */,
 				6D0EE6221B4F868D00D24E9D /* EMSDWebImagePrefetcher.m in Sources */,
-				FE9417651B5A304D0073C4CF /* RoundLabel.m in Sources */,
 				6D998B041B4E070B00D9F275 /* MineHeaderView.m in Sources */,
 				FE1210231B50032500ABEDB5 /* BorderBtn.m in Sources */,
 				6D0EE62A1B4F868D00D24E9D /* UIImageView+EMWebCache.m in Sources */,
 				FE94171B1B5A223D0073C4CF /* NSDate+Utils.m in Sources */,
 				6D998B091B4E46AA00D9F275 /* ContactVC.m in Sources */,
 				6D0EE62B1B4F868D00D24E9D /* UIView+EMWebCacheOperation.m in Sources */,
+				18032AAD1B5E674500ED801E /* LoginOneVCViewController.m in Sources */,
 				6D0EE6351B4F868D00D24E9D /* PSTGridLayoutInfo.m in Sources */,
 				FE72403A1B51010800AD3735 /* Course.m in Sources */,
-				FE9417611B5A304D0073C4CF /* LoginThreeVC.m in Sources */,
 				6D0EE6361B4F868D00D24E9D /* PSTGridLayoutItem.m in Sources */,
 				6DA49A9D1B46634100CA55FE /* ContainerViewController.m in Sources */,
 				FE9417751B5A31B70073C4CF /* CommentDTO.m in Sources */,
@@ -1329,7 +1336,6 @@
 				FE9122CC1B5B4A750084659D /* GestureCollectionView.m in Sources */,
 				FEB8F5BC1B47AE2300EC4F57 /* IconCell.m in Sources */,
 				6DA49A781B46629B00CA55FE /* main.m in Sources */,
-				FE94175E1B5A304D0073C4CF /* BaseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,6 +1358,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		18032ABB1B5E67AA00ED801E /* SMS_SDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18032ABC1B5E67AA00ED801E /* en */,
+				18032ABE1B5E67AA00ED801E /* zh-Hans */,
+			);
+			name = SMS_SDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		6DA49A7F1B46629B00CA55FE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1366,15 +1381,6 @@
 				6DA49A851B46629B00CA55FE /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		FE94176B1B5A30970073C4CF /* SMS_SDKLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FE94176C1B5A30970073C4CF /* en */,
-				FE94176E1B5A30970073C4CF /* zh-Hans */,
-			);
-			name = SMS_SDKLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

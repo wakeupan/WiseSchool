@@ -12,7 +12,12 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "AppDelegate.h"
 #import "CommonConstants.h"
+#import "HttpManager.h"
 #define ORIGINAL_MAX_WIDTH 640.0f
+
+#define  SUBJECTINFO_ID_KEY @"subjectId"
+#define  SUBJECTINFO_NAME_KEY @"subjectName"
+
 @interface LoginThreeVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, VPImageCropperDelegate>
 {
     BOOL teacherFlag;
@@ -28,7 +33,8 @@
 {
     [self editPortrait];
 }
-- (IBAction)toMainVC {
+- (IBAction)toMainVC
+{
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
     delegate.window.rootViewController = enteranceVC;
@@ -40,24 +46,48 @@
     
     self.iconImageView.clipsToBounds = YES;
     self.iconImageView.layer.cornerRadius = 48.0;
-//    self.iconImageView.layer.borderWidth = 2.0;
-//    self.iconImageView.layer.borderColor = [UIColor grayColor].CGColor;
-    
+
     if(self.navigationController)
     {
         self.navigationController.navigationBarHidden =YES;
     }
-    [self createCustomNavigationBar:NO withTitle:@"账号注册" withBackButton:NO];
+    [self createCustomNavigationBar:NO withTitle:@"账号注册" withBackButton:YES];
     
     [self.teacherView setNeedsDisplay];
     [self.pardentView setNeedsDisplay];
+    [self.relationView setNeedsDisplay];
 
     
     [self.teacherBtn setEnabled:NO];
     [self.pardentBtn setEnabled:NO];
     [self.studentBtn setEnabled:NO];
+    
+    [[self.teacherBtn layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.teacherBtn layer] setCornerRadius:1.0f];
+    [[self.teacherBtn layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.teacherBtn layer] setBorderWidth:1.0f];
+    
+    [[self.pardentBtn layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.pardentBtn layer] setCornerRadius:1.0f];
+    [[self.pardentBtn layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.pardentBtn layer] setBorderWidth:1.0f];
+    
+    [[self.studentBtn layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.studentBtn layer] setCornerRadius:1.0f];
+    [[self.studentBtn layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.studentBtn layer] setBorderWidth:1.0f];
+    
+    [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+    [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+    [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+    
+    [self.teacherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.pardentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.studentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+
         self.teachViewHeight.constant = 0;
         self.pardentViewHeight.constant = 0;
+        self.relationViewHeight.constant = 0;
         [UIView animateWithDuration:0 animations:^
         {
             [self.view layoutIfNeeded];
@@ -66,116 +96,186 @@
             [self.studentBtn setEnabled:YES];
         }];
     
+    self.courseDatas = [[NSMutableArray alloc]init];
     
+    [self.selectedBtn setBackgroundColor:DEFINE_ORGANG];
+    
+    [self.selectedBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+
+- (IBAction)actionSelected:(id)sender {
+}
+
+- (IBAction)actionSelectCourse:(id)sender
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 NSArray *data =[jsonData objectForKey:@"data"];
+                 NSMutableArray *tmpArray =[[NSMutableArray alloc]init];
+                 if(data!=nil&&data.count>0)
+                 {
+                     for(NSDictionary * dic in data)
+                     {
+                         [self.courseDatas addObject:dic];
+                         [tmpArray addObject:dic[SUBJECTINFO_NAME_KEY]];
+                     }
+                 }
+                 self.dataSet = [NSArray arrayWithArray:tmpArray];
+                 
+                 [self.pickerView setHidden:NO];
+                 [self.selectedView setHidden:NO];
+                 
+                 [self.pickerView reloadAllComponents];
+                 
+                 [self.pickerView selectRow:0 inComponent:0 animated:YES];
+                 
+             }
+             
+         }
+         
+         
+     }];
+
 }
 
 - (IBAction) actionSelectedTeacher:(id)sender
 {
     teacherFlag = !teacherFlag;
-    studentFlag = NO;
-    [self.studentBtn setBackgroundColor:[UIColor grayColor]];
-    if (teacherFlag)
-    {
-       self.teachViewHeight.constant = 44;
-       [self.teacherBtn setBackgroundColor:[UIColor redColor]];
-    }
-    else
-    {
-        self.teachViewHeight.constant = 0;
-        
-        [self.teacherBtn setBackgroundColor:[UIColor grayColor]];
-    }
-   [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+
+    [self selectedBtn:0];
 }
 
 - (IBAction) actionSelectedPardent:(id)sender
 {
     
     pardentFlag = !pardentFlag;
-    studentFlag = NO;
-    [self.studentBtn setBackgroundColor:[UIColor grayColor]];
-    if (pardentFlag)
-    {
-        self.pardentViewHeight.constant = 44;
-        [self.pardentBtn setBackgroundColor:[UIColor redColor]];
-    }
-    else
-    {
-        self.pardentViewHeight.constant = 0;
-        
-        [self.pardentBtn setBackgroundColor:[UIColor grayColor]];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
-    }];
 
 
+    [self selectedBtn:1];
 }
 
 - (IBAction) actionSelectedStudent:(id)sender
 {
     studentFlag = !studentFlag;
-    if(studentFlag)
+
+    [self selectedBtn:2];
+
+}
+-(void)selectedBtn:(int)index
+{
+    switch (index)
     {
-        [self.studentBtn setBackgroundColor:[UIColor redColor]];
+        case 0:
+        {
+            if(teacherFlag)
+            {
+                [self.teacherBtn setBackgroundColor:DEFINE_BLUE];
+                [self.teacherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 44;
+                self.relationViewHeight.constant = 44;
+            }
+            else
+            {
+                [self.teacherBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 0;
+                self.relationViewHeight.constant = 0;
+            }
+            if(studentFlag)
+            {
+               studentFlag = NO;
+                
+              [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
+              [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+        }
+            
+        break;
+        case 1:
+        {
+            if(pardentFlag)
+            {
+                [self.pardentBtn setBackgroundColor:DEFINE_BLUE];
+                [self.pardentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 44;
+            }else
+            {
+                [self.pardentBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 0;
+            }
+            
+            if(studentFlag)
+            {
+                studentFlag = NO;
+                
+                [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+            
+        }
+            
+        break;
+        case 2:
+        {
+            if(studentFlag)
+            {
+                [self.studentBtn setBackgroundColor:DEFINE_BLUE];
+                [self.studentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }else
+            {
+                [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+            if(teacherFlag)
+            {
+                teacherFlag = NO;
+                
+                [self.teacherBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 0;
+                self.relationViewHeight.constant = 0;
+            }
+            if(pardentFlag)
+            {
+                pardentFlag = NO;
+                
+                [self.pardentBtn setBackgroundColor:[UIColor whiteColor]];
+                [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 0;
+            }
+        }
+            
+        break;
+            
+        default:
+            break;
     }
-    else
-        [self.studentBtn setBackgroundColor:[UIColor grayColor]];
-    pardentFlag = NO;
     
-    teacherFlag = NO;
-    
-    self.pardentViewHeight.constant = 0;
-    
-    [self.pardentBtn setBackgroundColor:[UIColor grayColor]];
-    
-    self.teachViewHeight.constant = 0;
-    [self.teacherBtn setBackgroundColor:[UIColor grayColor]];
     
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
 
--(void) createCustomNavigationBar:(BOOL)background withTitle:(NSString*)title withBackButton:(BOOL)back
-{
-    
-    
-    int width =[UIScreen mainScreen].bounds.size.width;
-    
-    UIView * bannerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 50)];
-    
-    if(background)
-    {
-        UIImageView *bannerBackground =[[UIImageView alloc]initWithFrame:bannerView.bounds];
-        [bannerBackground setImage:[UIImage imageNamed:@""]];
-        [bannerView addSubview:bannerBackground];
-    }
-    else
-    {
-        [bannerView setBackgroundColor:[UIColor colorWithRed:127/255.0 green:192/225.0 blue:224/255.0 alpha:1]];
-    }
-    
-    if([title length])
-    {
-        int titleWidth =100;
-        UILabel *titleView =[[UILabel alloc] initWithFrame:CGRectMake(width/2-titleWidth/2, 20, titleWidth, 30)];
-        titleView.numberOfLines=0;
-        titleView.textAlignment =NSTextAlignmentCenter;
-        [titleView setText:title];
-        [titleView setTextColor:[UIColor whiteColor]];
-        
-        [titleView setBackgroundColor:[UIColor clearColor]];
-        
-        [bannerView addSubview:titleView];
-        
-    }
-    
-    [self.view addSubview: bannerView];
-
-}
 - (IBAction)pop:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -183,7 +283,21 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+#pragma mark- UIPickerView delegate
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self.dataSet objectAtIndex:row];
+}
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.dataSet count];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
 
 #pragma mark- 图片编辑
 - (void)editPortrait {

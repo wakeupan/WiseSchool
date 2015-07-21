@@ -22,8 +22,19 @@
 @property(nonatomic,weak) IBOutlet UIView *selectedView;
 @property(nonatomic,weak) IBOutlet UIButton *selectedBtn;
 
-@property(nonatomic,retain) NSArray  *dataSet;
-@property(nonatomic,retain) NSMutableArray * quareDatas;
+@property (weak, nonatomic) IBOutlet UIButton *selectSchoolBtn;
+@property (weak, nonatomic) IBOutlet UIButton *selectGardeBtn;
+
+@property(nonatomic,strong) NSArray  *dataSet;
+@property(nonatomic,strong) NSMutableArray * quareDatas;
+
+@property(nonatomic,strong) NSMutableArray * schoolDatas;
+
+@property(nonatomic,strong) NSMutableArray * gradeDatas;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *classTextField;
+
 
 
 - (IBAction) actionNext:(id)sender;
@@ -32,6 +43,8 @@
 - (IBAction) actionSelectCity:(id)sender;
 - (IBAction) actionSelectQuare:(id)sender;
 - (IBAction) actionSelected:(id)sender;
+- (IBAction)actionSelectSchool:(id)sender;
+- (IBAction)actionSelectGarde:(id)sender;
 
 
 
