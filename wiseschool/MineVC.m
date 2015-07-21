@@ -53,6 +53,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     NSLog(@"simple test");
+    NSLog(@"test again");
     
 }
 
