@@ -10,6 +10,8 @@
 	<string>wiseschool</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>6396636DD053CF80A5ABBB3581DE86D81F778A2D</key>
+		<string>https://bitbucket.org/whatya/wiseschool.git</string>
 		<key>DD0F2441F157CBFC4BFC5192D7FFA17614000DD8</key>
 		<string>https://github.com/whatya/WiseSchool</string>
 	</dict>
@@ -17,17 +19,27 @@
 	<string>wiseschool.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DD0F2441F157CBFC4BFC5192D7FFA17614000DD8</key>
+		<key>6396636DD053CF80A5ABBB3581DE86D81F778A2D</key>
 		<string>../..</string>
+		<key>DD0F2441F157CBFC4BFC5192D7FFA17614000DD8</key>
+		<string>../../../WiseSchool</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/whatya/WiseSchool</string>
+	<string>https://bitbucket.org/whatya/wiseschool.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DD0F2441F157CBFC4BFC5192D7FFA17614000DD8</string>
+	<string>6396636DD053CF80A5ABBB3581DE86D81F778A2D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6396636DD053CF80A5ABBB3581DE86D81F778A2D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>wise</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

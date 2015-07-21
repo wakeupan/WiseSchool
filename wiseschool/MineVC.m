@@ -52,6 +52,7 @@
     self.collectionView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    NSLog(@"simple test");
     
 }
 
