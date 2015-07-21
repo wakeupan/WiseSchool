@@ -12,7 +12,7 @@
 <UITableViewDataSource,
 UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic) NSInteger paragraphCount;
 @end
 
 @implementation BlackboardReleaseVC
@@ -21,12 +21,17 @@ UITableViewDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.paragraphCount = 2;
+}
+- (IBAction)addParagraph:(UIButton *)sender
+{
+    self.paragraphCount += 2;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.paragraphCount;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
