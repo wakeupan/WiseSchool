@@ -22,6 +22,7 @@
 @interface MineVC ()<UIGestureRecognizerDelegate>
 
 
+
 @end
 
 @implementation MineVC
@@ -54,6 +55,10 @@
     self.tableView.dataSource = self;
     NSLog(@"simple test");
     NSLog(@"test again");
+    CGRect oldFrame = self.tableView.tableHeaderView.frame;
+    CGRect newFrame = CGRectMake(oldFrame.origin.x, oldFrame.origin.y, oldFrame.size.width, 0);
+    //self.tableView.tableHeaderView.frame = newFrame;
+    
     
 }
 

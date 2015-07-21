@@ -27,6 +27,9 @@
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yhU-tm-XAS" customClass="GestureCollectionView">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                             <color key="backgroundColor" red="0.9137254901960784" green="0.97254901960784312" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="120" id="xOJ-NX-3Df"/>
+                                            </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ohe-Ch-Zlq">
                                                 <size key="itemSize" width="80" height="120"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
