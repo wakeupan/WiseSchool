@@ -11,6 +11,10 @@
 #import "CourseTable.h"
 #import "Course.h"
 
+#import "CommonConstants.h"
+
+#import "HttpManager.h"
+
 @interface CoursesVC ()
 <UICollectionViewDataSource,
 UICollectionViewDelegate,
@@ -32,6 +36,7 @@ CourseTableCellDelegate>
     [super viewDidLoad];
     [self initFakeData];
     self.formerSelectedIndexPath = nil;
+    [self createCourseItem];
 }
 
 - (void)addCourseAt:(NSInteger)cellIndex courseIndex:(NSInteger)index
@@ -151,5 +156,117 @@ CourseTableCellDelegate>
     [self.coursesArray addObjectsFromArray:@[math,art,english,pe,music,chemestry,physicy,chinese]];
     
 }
+-(void)createCourseItem
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    NSString *queryString =[NSString stringWithFormat:@"%@=%@&%@=%@",USER_ID_KEY,USER_ID_VALUE,@"subjectName",@"故事"];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_CREATE_COURSE portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 
+             }
+         }
+         
+         
+     }];
 
+}
+-(void)saveCourse:(NSDictionary*)dic
+{
+    NSError *error;
+    NSMutableDictionary * jsonCourse = [[NSMutableDictionary alloc]init];
+    
+   
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];//此处data参数是我上面提到的key为"data"的数组
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(jsonString);
+    
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    NSString *queryString =[NSString stringWithFormat:@"%@=%@",@"courseData",jsonString];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_SET_COURSE portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+//                 
+//                 
+//                 NSMutableDictionary * tmpCourseData = [jsonData objectForKey:@"data"];
+//                 [tmpCourseData setObject:USER_ID_VALUE forKey:USER_ID_KEY];
+//                 [self saveCourse:tmpCourseData];
+                 
+             }
+         }
+         
+         
+     }];
+    
+}
+-(void)requestCourseinfo
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    NSString *queryString =[NSString stringWithFormat:@"%@=%@",CLASS_ID_KEY,CLASS_ID_VALUE];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_GET_COURSE_INFO portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 NSMutableArray *data = [[jsonData objectForKey:@"data"]mutableCopy];
+                 NSMutableDictionary * dic = [[data objectAtIndex:0]mutableCopy];
+                 
+                 NSMutableArray *courseDatas = [[dic objectForKey:@"data"]mutableCopy];
+                 NSMutableArray *tmp = [[NSMutableArray alloc]init];
+                 for(int i=0;i<courseDatas.count;i++)
+                 {
+                     NSMutableDictionary * courseDic =[[courseDatas objectAtIndex:i]mutableCopy];
+                     [courseDic setObject:@"语文" forKey:@"lesson1"];
+                     [tmp addObject:courseDic];
+                 }
+                
+                 [dic removeObjectForKey:USER_ID_KEY];
+                
+                 [dic setObject:USER_ID_VALUE forKey:USER_ID_KEY];
+
+                 [dic removeObjectForKey:@"data"];
+                 [dic setObject:tmp forKey:@"data"];
+                 
+                 [self saveCourse:dic];
+                 
+             }
+         }
+         
+         
+     }];
+}
 @end

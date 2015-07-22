@@ -80,21 +80,18 @@
     [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
     [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
     [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
-    
-    [self.teacherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.pardentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.studentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+  
 
-        self.teachViewHeight.constant = 0;
-        self.pardentViewHeight.constant = 0;
-        self.relationViewHeight.constant = 0;
-        [UIView animateWithDuration:0 animations:^
-        {
-            [self.view layoutIfNeeded];
-            [self.teacherBtn setEnabled:YES];
-            [self.pardentBtn setEnabled:YES];
-            [self.studentBtn setEnabled:YES];
-        }];
+    self.teachViewHeight.constant = 0;
+    self.pardentViewHeight.constant = 0;
+    self.relationViewHeight.constant = 0;
+    [UIView animateWithDuration:0 animations:^
+    {
+        [self.view layoutIfNeeded];
+        [self.teacherBtn setEnabled:YES];
+        [self.pardentBtn setEnabled:YES];
+        [self.studentBtn setEnabled:YES];
+    }];
     
     self.courseDatas = [[NSMutableArray alloc]init];
     

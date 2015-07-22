@@ -44,6 +44,7 @@
     [self.btnSelectedTeacher setEnabled:NO];
     [self.btnSelectedPardent setEnabled:NO];
     [self.btnSelectedStudent setEnabled:NO];
+    
         self.teachViewHeight.constant = 0;
         self.pardentViewHeight.constant = 0;
         [UIView animateWithDuration:0 animations:^
