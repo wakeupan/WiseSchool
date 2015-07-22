@@ -82,7 +82,7 @@
         [btnNewBack.imageView setContentMode:UIViewContentModeCenter];
         [btnNewBack setImage:[UIImage imageNamed:@"btn_back_normal"] forState:UIControlStateNormal];
         [btnNewBack setImage:[UIImage imageNamed:@"btn_back_pressed"] forState:UIControlStateHighlighted];
-        [btnNewBack addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
+        //[btnNewBack addTarget:self action:@selector(pop:) forControlEvents:UIControlEventTouchUpInside];
         [bannerView addSubview:btnNewBack];
     }
     

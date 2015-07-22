@@ -18,13 +18,15 @@
 @interface CoursesVC ()
 <UICollectionViewDataSource,
 UICollectionViewDelegate,
-CourseTableCellDelegate>
+CourseTableCellDelegate,
+UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *bottomCollectionView;
 @property (nonatomic, strong) NSMutableArray *coursesTableArray;
 @property (nonatomic, strong) NSMutableArray *coursesArray;
 
 @property (nonatomic, strong) NSIndexPath *formerSelectedIndexPath;
+@property (nonatomic, strong) Course *addedCoursre;
 
 @end
 
@@ -36,8 +38,36 @@ CourseTableCellDelegate>
     [super viewDidLoad];
     [self initFakeData];
     self.formerSelectedIndexPath = nil;
-    [self createCourseItem];
 }
+- (IBAction)saveCourseTable:(UIBarButtonItem *)sender
+{
+    //添加课程
+}
+
+- (IBAction)actionAddCourseItem {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入科目名称"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"确定",nil];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+         UITextField *textField = [alertView textFieldAtIndex:0];
+        if (textField.text.length > 0) {
+            Course *course = [[Course alloc] initWith:textField.text selected:NO];
+            self.addedCoursre = course;
+            [self createCourseItem:textField.text];
+        }
+    }
+}
+
 
 - (void)addCourseAt:(NSInteger)cellIndex courseIndex:(NSInteger)index
 {
@@ -134,16 +164,17 @@ CourseTableCellDelegate>
 
 - (void)initFakeData
 {
-    CourseTable *Monday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期一",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    CourseTable *Tuesday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期二",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    CourseTable *Wenseday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期三",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    CourseTable *Thurseday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期四",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    CourseTable *Friday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期五",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    
-    CourseTable *Saturday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期六",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    CourseTable *Sunday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期天",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
-    
-    [self.coursesTableArray addObjectsFromArray:@[Monday,Tuesday,Wenseday,Thurseday,Friday,Saturday,Sunday]];
+    [self requestCourseinfo];
+//    CourseTable *Monday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期一",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    CourseTable *Tuesday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期二",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    CourseTable *Wenseday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期三",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    CourseTable *Thurseday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期四",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    CourseTable *Friday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期五",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    
+//    CourseTable *Saturday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期六",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    CourseTable *Sunday = [[CourseTable alloc] initFromDictionary:@{@"day":@"星期天",@"courses":@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]}];
+//    
+//    [self.coursesTableArray addObjectsFromArray:@[Monday,Tuesday,Wenseday,Thurseday,Friday,Saturday,Sunday]];
     
     Course *math = [[Course alloc] initWith:@"数学" selected:NO];
     Course *art = [[Course alloc] initWith:@"美术" selected:NO];
@@ -156,16 +187,18 @@ CourseTableCellDelegate>
     [self.coursesArray addObjectsFromArray:@[math,art,english,pe,music,chemestry,physicy,chinese]];
     
 }
--(void)createCourseItem
+-(void)createCourseItem:(NSString*)courseName
 {
+    [ProgressHUD show:@"添加课程中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    NSString *queryString =[NSString stringWithFormat:@"%@=%@&%@=%@",USER_ID_KEY,USER_ID_VALUE,@"subjectName",@"故事"];
+    NSString *queryString =[NSString stringWithFormat:@"%@=%@&%@=%@",USER_ID_KEY,USER_ID_VALUE,@"subjectName",courseName];
     
     [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_CREATE_COURSE portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
          if(jsonData !=nil)
          {
+             [ProgressHUD dismiss];
              NSArray* arr = [jsonData allKeys];
              for(NSString* str in arr)
              {
@@ -175,23 +208,32 @@ CourseTableCellDelegate>
              
              if([status compare:@"1"]==NSOrderedSame)
              {
-                 
+                 if (self.addedCoursre) {
+                     [self.coursesArray addObject:self.addedCoursre];
+                     [self.collectionView reloadData];
+                     self.addedCoursre = nil;
+                 }
+             }else{
+                 [ProgressHUD showError:@"添加课程失败！"];
              }
+         }else{
+             [ProgressHUD showError:[error localizedDescription]];
          }
          
          
      }];
 
 }
+
 -(void)saveCourse:(NSDictionary*)dic
 {
     NSError *error;
-    NSMutableDictionary * jsonCourse = [[NSMutableDictionary alloc]init];
+  //  NSMutableDictionary * jsonCourse = [[NSMutableDictionary alloc] init];
     
    
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];//此处data参数是我上面提到的key为"data"的数组
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(jsonString);
+  //  NSLog(jsonString);
     
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
@@ -225,6 +267,7 @@ CourseTableCellDelegate>
 }
 -(void)requestCourseinfo
 {
+    [ProgressHUD show:@"获取课程信息中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
     NSString *queryString =[NSString stringWithFormat:@"%@=%@",CLASS_ID_KEY,CLASS_ID_VALUE];
@@ -233,6 +276,7 @@ CourseTableCellDelegate>
      {
          if(jsonData !=nil)
          {
+             [ProgressHUD dismiss];
              NSArray* arr = [jsonData allKeys];
              for(NSString* str in arr)
              {
@@ -242,31 +286,36 @@ CourseTableCellDelegate>
              
              if([status compare:@"1"]==NSOrderedSame)
              {
-                 NSMutableArray *data = [[jsonData objectForKey:@"data"]mutableCopy];
-                 NSMutableDictionary * dic = [[data objectAtIndex:0]mutableCopy];
+                 NSMutableArray *data = [[jsonData objectForKey:@"data"] mutableCopy];//根数组
+                 NSMutableDictionary * dic = [[data objectAtIndex:0] mutableCopy];//字典
                  
-                 NSMutableArray *courseDatas = [[dic objectForKey:@"data"]mutableCopy];
-                 NSMutableArray *tmp = [[NSMutableArray alloc]init];
+                 NSMutableArray *courseDatas = [[dic objectForKey:@"data"]mutableCopy];//课程数组（day1、day2、day...)
+                 
                  for(int i=0;i<courseDatas.count;i++)
                  {
-                     NSMutableDictionary * courseDic =[[courseDatas objectAtIndex:i]mutableCopy];
-                     [courseDic setObject:@"语文" forKey:@"lesson1"];
-                     [tmp addObject:courseDic];
+                     NSDictionary * courseDic =[courseDatas objectAtIndex:i];
+                     NSString *dayString = [[self class] daysArray][i];
+                      CourseTable *day = [[CourseTable alloc] initFromDictionary:@{@"day":dayString,@"courses":@[courseDic[@"lesson1"],courseDic[@"lesson2"],courseDic[@"lesson3"],courseDic[@"lesson4"],courseDic[@"lesson5"],courseDic[@"lesson6"],courseDic[@"lesson7"],courseDic[@"lesson8"],courseDic[@"lesson9"],courseDic[@"lesson10"]]}];
+                     [self.coursesTableArray addObject:day];
+                     
                  }
-                
-                 [dic removeObjectForKey:USER_ID_KEY];
-                
-                 [dic setObject:USER_ID_VALUE forKey:USER_ID_KEY];
-
-                 [dic removeObjectForKey:@"data"];
-                 [dic setObject:tmp forKey:@"data"];
+                 [self.bottomCollectionView reloadData];
                  
-                 [self saveCourse:dic];
-                 
+             }else{
+                 [ProgressHUD showError:@"没有课程信息！"];
              }
+         }else{
+             [ProgressHUD showError:[error localizedDescription]];
          }
          
          
      }];
+}
+
+
+
++ (NSArray*)daysArray
+{
+    return @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
 }
 @end

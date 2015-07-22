@@ -81,6 +81,8 @@
 		6DA49AAE1B467F6B00CA55FE /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA49AAD1B467F6B00CA55FE /* Find.storyboard */; };
 		FE1210231B50032500ABEDB5 /* BorderBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1210221B50032500ABEDB5 /* BorderBtn.m */; };
 		FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */; };
+		FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */; };
+		FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */; };
 		FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE72402D1B50C79700AD3735 /* AttendanceCell.m */; };
 		FE7240311B50D07100AD3735 /* AttendanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7240301B50D07100AD3735 /* AttendanceVC.m */; };
 		FE7240341B50ED4C00AD3735 /* CourseTable.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7240331B50ED4C00AD3735 /* CourseTable.m */; };
@@ -325,6 +327,9 @@
 		FE1210221B50032500ABEDB5 /* BorderBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderBtn.m; sourceTree = "<group>"; };
 		FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSectionModel.h; sourceTree = "<group>"; };
 		FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedSectionModel.m; sourceTree = "<group>"; };
+		FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
+		FE70D12B1B5FDC92003780C3 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		FE72402C1B50C79700AD3735 /* AttendanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceCell.h; sourceTree = "<group>"; };
 		FE72402D1B50C79700AD3735 /* AttendanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceCell.m; sourceTree = "<group>"; };
 		FE72402F1B50D07100AD3735 /* AttendanceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceVC.h; sourceTree = "<group>"; };
@@ -559,6 +564,7 @@
 		6D0EE5B21B4F867400D24E9D /* 第三方框架 */ = {
 			isa = PBXGroup;
 			children = (
+				FE70D1291B5FDC92003780C3 /* ProgressHUD */,
 				FE94174E1B5A2F8F0073C4CF /* libicucore.dylib */,
 				FE94174C1B5A2F840073C4CF /* libz.dylib */,
 				FE94174A1B5A2F760073C4CF /* MessageUI.framework */,
@@ -844,6 +850,72 @@
 			name = "主框架";
 			sourceTree = "<group>";
 		};
+		FE70D1291B5FDC92003780C3 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */,
+				FE70D12B1B5FDC92003780C3 /* ProgressHUD.h */,
+				FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		FE70D12F1B5FE1AE003780C3 /* 添加成员 */ = {
+			isa = PBXGroup;
+			children = (
+				FEA9C3531B521CE60098E4C2 /* AddClassMemberVC.h */,
+				FEA9C3541B521CE60098E4C2 /* AddClassMemberVC.m */,
+				FEA9C3551B521CE60098E4C2 /* AddClassMemberVC.xib */,
+			);
+			name = "添加成员";
+			sourceTree = "<group>";
+		};
+		FE70D1301B5FE1C2003780C3 /* 联系人列表 */ = {
+			isa = PBXGroup;
+			children = (
+				6D998B071B4E46AA00D9F275 /* ContactVC.h */,
+				6D998B081B4E46AA00D9F275 /* ContactVC.m */,
+				6D998B0A1B4E4CC800D9F275 /* ContactCell.h */,
+				6D998B0B1B4E4CC800D9F275 /* ContactCell.m */,
+			);
+			name = "联系人列表";
+			sourceTree = "<group>";
+		};
+		FE70D1311B5FE1D7003780C3 /* 课表 */ = {
+			isa = PBXGroup;
+			children = (
+				FE7240351B50F55100AD3735 /* CourseTableCell.h */,
+				FE7240361B50F55100AD3735 /* CourseTableCell.m */,
+				6D998B0D1B4E603500D9F275 /* CoursesVC.h */,
+				6D998B0E1B4E603500D9F275 /* CoursesVC.m */,
+			);
+			name = "课表";
+			sourceTree = "<group>";
+		};
+		FE70D1321B5FE1E8003780C3 /* 信息发布 */ = {
+			isa = PBXGroup;
+			children = (
+				FEA1C8191B4E98D900033BF8 /* NoteReleaseTVC.h */,
+				FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */,
+				FEA1C81C1B4E9BFC00033BF8 /* HomeworkTVC.h */,
+				FEA1C81D1B4E9BFC00033BF8 /* HomeworkTVC.m */,
+				FEA1C81F1B4EA20800033BF8 /* BlackboardReleaseVC.h */,
+				FEA1C8201B4EA20800033BF8 /* BlackboardReleaseVC.m */,
+			);
+			name = "信息发布";
+			sourceTree = "<group>";
+		};
+		FE70D1331B5FE1F6003780C3 /* 考勤 */ = {
+			isa = PBXGroup;
+			children = (
+				FE72402C1B50C79700AD3735 /* AttendanceCell.h */,
+				FE72402D1B50C79700AD3735 /* AttendanceCell.m */,
+				FE72402F1B50D07100AD3735 /* AttendanceVC.h */,
+				FE7240301B50D07100AD3735 /* AttendanceVC.m */,
+			);
+			name = "考勤";
+			sourceTree = "<group>";
+		};
 		FE9416AD1B5A21C40073C4CF /* 聊天 */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,9 +1065,6 @@
 		FE99724F1B4C0A2C00E65D58 /* 班级 */ = {
 			isa = PBXGroup;
 			children = (
-				FEA9C3531B521CE60098E4C2 /* AddClassMemberVC.h */,
-				FEA9C3541B521CE60098E4C2 /* AddClassMemberVC.m */,
-				FEA9C3551B521CE60098E4C2 /* AddClassMemberVC.xib */,
 				FE1210211B50032500ABEDB5 /* BorderBtn.h */,
 				FE1210221B50032500ABEDB5 /* BorderBtn.m */,
 				FE9972501B4C0A6300E65D58 /* ClassesVC.h */,
@@ -1004,24 +1073,11 @@
 				FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */,
 				FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */,
 				6DA49AA91B467F3A00CA55FE /* Classes.storyboard */,
-				6D998B071B4E46AA00D9F275 /* ContactVC.h */,
-				6D998B081B4E46AA00D9F275 /* ContactVC.m */,
-				6D998B0A1B4E4CC800D9F275 /* ContactCell.h */,
-				6D998B0B1B4E4CC800D9F275 /* ContactCell.m */,
-				6D998B0D1B4E603500D9F275 /* CoursesVC.h */,
-				6D998B0E1B4E603500D9F275 /* CoursesVC.m */,
-				FEA1C8191B4E98D900033BF8 /* NoteReleaseTVC.h */,
-				FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */,
-				FEA1C81C1B4E9BFC00033BF8 /* HomeworkTVC.h */,
-				FEA1C81D1B4E9BFC00033BF8 /* HomeworkTVC.m */,
-				FEA1C81F1B4EA20800033BF8 /* BlackboardReleaseVC.h */,
-				FEA1C8201B4EA20800033BF8 /* BlackboardReleaseVC.m */,
-				FE72402C1B50C79700AD3735 /* AttendanceCell.h */,
-				FE72402D1B50C79700AD3735 /* AttendanceCell.m */,
-				FE72402F1B50D07100AD3735 /* AttendanceVC.h */,
-				FE7240301B50D07100AD3735 /* AttendanceVC.m */,
-				FE7240351B50F55100AD3735 /* CourseTableCell.h */,
-				FE7240361B50F55100AD3735 /* CourseTableCell.m */,
+				FE70D12F1B5FE1AE003780C3 /* 添加成员 */,
+				FE70D1301B5FE1C2003780C3 /* 联系人列表 */,
+				FE70D1311B5FE1D7003780C3 /* 课表 */,
+				FE70D1321B5FE1E8003780C3 /* 信息发布 */,
+				FE70D1331B5FE1F6003780C3 /* 考勤 */,
 			);
 			name = "班级";
 			sourceTree = "<group>";
@@ -1200,6 +1256,7 @@
 				6DA49AA81B467F1400CA55FE /* Mine.storyboard in Resources */,
 				FE94177D1B5A31D20073C4CF /* CommentHeadView.xib in Resources */,
 				FE9417471B5A22910073C4CF /* RootViewController.xib in Resources */,
+				FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */,
 				FE9417201B5A223D0073C4CF /* chat_animation_white2.png in Resources */,
 				18032AAE1B5E674500ED801E /* LoginOneVCViewController.xib in Resources */,
 				FE94171D1B5A223D0073C4CF /* chat_animation2.png in Resources */,
@@ -1247,6 +1304,7 @@
 				FE9417381B5A223D0073C4CF /* UUAVAudioPlayer.m in Sources */,
 				6D0EE6151B4F868D00D24E9D /* MWGridViewController.m in Sources */,
 				FE94173E1B5A223D0073C4CF /* UUMessageFrame.m in Sources */,
+				FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */,
 				6D0EE6321B4F868D00D24E9D /* PSTCollectionViewItemKey.m in Sources */,
 				FEB70B831B5D0E5000F1F77B /* MJRefreshConst.m in Sources */,
 				FE9972551B4C16FE00E65D58 /* ClassesHeaderView.m in Sources */,
@@ -1477,7 +1535,7 @@
 					"$(PROJECT_DIR)/WiseSchool/SMS_SDK",
 				);
 				INFOPLIST_FILE = WiseSchool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1500,7 +1558,7 @@
 					"$(PROJECT_DIR)/WiseSchool/SMS_SDK",
 				);
 				INFOPLIST_FILE = WiseSchool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

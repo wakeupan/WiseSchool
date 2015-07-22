@@ -54,6 +54,8 @@
 		case UIInterfaceOrientationLandscapeRight:
 			frame.origin.x = -frame.size.width;
 			break;
+        default:
+            break;
 	}
 	return frame;
 }

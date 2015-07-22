@@ -38,9 +38,6 @@
 
 
 - (IBAction) actionNext:(id)sender;
-
-- (IBAction) actionSelectProvince:(id)sender;
-- (IBAction) actionSelectCity:(id)sender;
 - (IBAction) actionSelectQuare:(id)sender;
 - (IBAction) actionSelected:(id)sender;
 - (IBAction)actionSelectSchool:(id)sender;

@@ -8,6 +8,8 @@
 
 #ifndef Aitu_CommonConstants_h
 #define Aitu_CommonConstants_h
+#import "UUProgressHUD.h"
+#import "ProgressHUD.h"
 
 //布局定义
 #define Screen_Width [UIScreen mainScreen].bounds.size.width
@@ -59,8 +61,6 @@
 #define API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL @"zhxy_v3_java/app/common/gradeInfo.app"
 
 #define API_NAME_LOGIN_GET_SUBJECT_INFO @"zhxy_v3_java/app/common/subjectInfo.app"
-
-#define API_NAME_LOGIN_CREATE_SUBJECT @"zhxy_v3_java/app/common/subjectCreate.app"
 
 #define API_NAME_CLASS_GET_COURSE_INFO @"zhxy_v3_java/app/course/courseInfo.app"//获取课程表
 

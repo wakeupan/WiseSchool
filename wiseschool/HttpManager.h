@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 //
-//#define serverUrl @"http://192.168.0.118:"
-#define serverUrl @"http://192.168.13.110:"
+#define serverUrl @"http://192.168.0.118:"
+//#define serverUrl @"http://192.168.13.110:"
 
 
 typedef void(^CallbackWithJsonData)(id jsonData,NSError *error);
@@ -22,10 +22,7 @@ typedef void(^CallbackWithJsonData)(id jsonData,NSError *error);
                                portID:(int)port
                           queryString:(NSString *)queryString
                              callBack:(CallbackWithJsonData)callBack;
-- (void)jsonDataFromServerWithBaseUrl:(NSString *)baseUrl
-                               portID:(int)port
-                          queryDic:(NSDictionary *)queryDic
-                             callBack:(CallbackWithJsonData)callBack;
+
 
 
 @end
