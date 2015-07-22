@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define serverUrl @"http://192.168.0.118:"
+//
+//#define serverUrl @"http://192.168.0.118:"
+#define serverUrl @"http://192.168.13.110:"
 
 
 typedef void(^CallbackWithJsonData)(id jsonData,NSError *error);
