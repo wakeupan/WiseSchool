@@ -81,6 +81,7 @@
 		6DA49AAE1B467F6B00CA55FE /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA49AAD1B467F6B00CA55FE /* Find.storyboard */; };
 		FE1210231B50032500ABEDB5 /* BorderBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1210221B50032500ABEDB5 /* BorderBtn.m */; };
 		FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */; };
+		FE40CA9C1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */; };
 		FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */; };
 		FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */; };
 		FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE72402D1B50C79700AD3735 /* AttendanceCell.m */; };
@@ -327,6 +328,9 @@
 		FE1210221B50032500ABEDB5 /* BorderBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderBtn.m; sourceTree = "<group>"; };
 		FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSectionModel.h; sourceTree = "<group>"; };
 		FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedSectionModel.m; sourceTree = "<group>"; };
+		FE40CA9A1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LoginThreeVC+FinishEnroll.h"; path = "wiseschool/LoginThreeVC+FinishEnroll.h"; sourceTree = SOURCE_ROOT; };
+		FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LoginThreeVC+FinishEnroll.m"; path = "wiseschool/LoginThreeVC+FinishEnroll.m"; sourceTree = SOURCE_ROOT; };
+		FE40CA9D1B621314001FC48E /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API.h; path = wiseschool/API.h; sourceTree = SOURCE_ROOT; };
 		FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 		FE70D12B1B5FDC92003780C3 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
@@ -514,12 +518,14 @@
 				18032AA11B5E674500ED801E /* LoginOneVCViewController.h */,
 				18032AA21B5E674500ED801E /* LoginOneVCViewController.m */,
 				18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */,
-				18032AA41B5E674500ED801E /* LoginThreeVC.h */,
-				18032AA51B5E674500ED801E /* LoginThreeVC.m */,
-				18032AA61B5E674500ED801E /* LoginThreeVC.xib */,
 				18032AA71B5E674500ED801E /* LoginTwoVC.h */,
 				18032AA81B5E674500ED801E /* LoginTwoVC.m */,
 				18032AA91B5E674500ED801E /* LoginTwoVC.xib */,
+				18032AA41B5E674500ED801E /* LoginThreeVC.h */,
+				18032AA51B5E674500ED801E /* LoginThreeVC.m */,
+				18032AA61B5E674500ED801E /* LoginThreeVC.xib */,
+				FE40CA9A1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.h */,
+				FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */,
 				18032AAA1B5E674500ED801E /* RoundLabel.h */,
 				18032AAB1B5E674500ED801E /* RoundLabel.m */,
 			);
@@ -722,6 +728,7 @@
 			children = (
 				18032A9D1B5E663900ED801E /* CommonConstants.h */,
 				6D0EE63A1B4F88C200D24E9D /* ImageUrls.h */,
+				FE40CA9D1B621314001FC48E /* API.h */,
 			);
 			name = "常量宏";
 			sourceTree = "<group>";
@@ -1347,6 +1354,7 @@
 				6D0EE6331B4F868D00D24E9D /* PSTCollectionViewLayout.m in Sources */,
 				18032AB71B5E677A00ED801E /* WZGuideViewController.m in Sources */,
 				6D0EE6161B4F868D00D24E9D /* MWPhoto.m in Sources */,
+				FE40CA9C1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m in Sources */,
 				18032AB31B5E674500ED801E /* RoundLabel.m in Sources */,
 				FE94173F1B5A223D0073C4CF /* UUProgressHUD.m in Sources */,
 				6D0EE6131B4F868D00D24E9D /* MWCaptionView.m in Sources */,

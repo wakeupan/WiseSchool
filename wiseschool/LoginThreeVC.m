@@ -13,33 +13,129 @@
 #import "AppDelegate.h"
 #import "CommonConstants.h"
 #import "HttpManager.h"
-#define ORIGINAL_MAX_WIDTH 640.0f
+#import "LoginThreeVC+FinishEnroll.h"
 
+#define ORIGINAL_MAX_WIDTH 640.0f
 #define  SUBJECTINFO_ID_KEY @"subjectId"
 #define  SUBJECTINFO_NAME_KEY @"subjectName"
 
-@interface LoginThreeVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, VPImageCropperDelegate>
-{
-    BOOL teacherFlag;
-    BOOL pardentFlag;
-    BOOL studentFlag;
-}
-@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@interface LoginThreeVC ()<
+UINavigationControllerDelegate,UIImagePickerControllerDelegate,
+UIActionSheetDelegate, VPImageCropperDelegate>
+
+#pragma mark- Outlets
+@property (weak,   nonatomic) IBOutlet NSLayoutConstraint *relationViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *teachViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pardentViewHeight;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
+@property (weak, nonatomic) IBOutlet UIButton *studentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pardentBtn;
+
+
+@property (weak, nonatomic) IBOutlet UIView *relationView;
+@property (weak, nonatomic) IBOutlet UIView *teacherView;
+@property (weak, nonatomic) IBOutlet UIView *pardentView;
+@property (weak, nonatomic) IBOutlet UIButton *selectCourseBtn;
+
+
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIView *selectedView;
+@property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
+
+#pragma mark- Properties
+@property (nonatomic) BOOL teacherFlag;
+@property (nonatomic) BOOL pardentFlag;
+@property (nonatomic) BOOL studentFlag;
+@property (nonatomic,strong) NSArray  *dataSet;
+@property (nonatomic,strong) NSMutableArray * courseDatas;
 
 @end
 
 @implementation LoginThreeVC
+
+#pragma mark- Target Actions
 - (IBAction)takePhoto:(UITapGestureRecognizer *)sender
 {
     [self editPortrait];
 }
 - (IBAction)toMainVC
 {
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
-    delegate.window.rootViewController = enteranceVC;
+    [self enroll];
+//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//    UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
+//    delegate.window.rootViewController = enteranceVC;
+}
+- (IBAction)actionSelected:(id)sender {
 }
 
+- (IBAction)actionSelectCourse:(id)sender
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 NSArray *data =[jsonData objectForKey:@"data"];
+                 NSMutableArray *tmpArray =[[NSMutableArray alloc]init];
+                 if(data!=nil&&data.count>0)
+                 {
+                     for(NSDictionary * dic in data)
+                     {
+                         [self.courseDatas addObject:dic];
+                         [tmpArray addObject:dic[SUBJECTINFO_NAME_KEY]];
+                     }
+                 }
+                 self.dataSet = [NSArray arrayWithArray:tmpArray];
+                 
+                 [self.pickerView setHidden:NO];
+                 [self.selectedView setHidden:NO];
+                 
+                 [self.pickerView reloadAllComponents];
+                 
+                 [self.pickerView selectRow:0 inComponent:0 animated:YES];
+                 
+             }
+             
+         }
+         
+         
+     }];
+    
+}
+
+- (IBAction) actionSelectedTeacher:(id)sender
+{
+    self.teacherFlag = !self.teacherFlag;
+    [self selectedBtn:0];
+}
+
+- (IBAction) actionSelectedPardent:(id)sender
+{
+    
+    self.pardentFlag = !self.pardentFlag;
+    [self selectedBtn:1];
+}
+
+- (IBAction) actionSelectedStudent:(id)sender
+{
+    self.studentFlag = !self.studentFlag;
+    [self selectedBtn:2];
+    
+}
+
+#pragma mark- VC LifeCycles
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -102,84 +198,14 @@
 }
 
 
-- (IBAction)actionSelected:(id)sender {
-}
-
-- (IBAction)actionSelectCourse:(id)sender
-{
-    HttpManager *httpManager = [HttpManager sharedHttpManager];
-    
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
-     {
-         if(jsonData !=nil)
-         {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
-             NSString * status =[jsonData objectForKey:@"status"];
-             
-             if([status compare:@"1"]==NSOrderedSame)
-             {
-                 NSArray *data =[jsonData objectForKey:@"data"];
-                 NSMutableArray *tmpArray =[[NSMutableArray alloc]init];
-                 if(data!=nil&&data.count>0)
-                 {
-                     for(NSDictionary * dic in data)
-                     {
-                         [self.courseDatas addObject:dic];
-                         [tmpArray addObject:dic[SUBJECTINFO_NAME_KEY]];
-                     }
-                 }
-                 self.dataSet = [NSArray arrayWithArray:tmpArray];
-                 
-                 [self.pickerView setHidden:NO];
-                 [self.selectedView setHidden:NO];
-                 
-                 [self.pickerView reloadAllComponents];
-                 
-                 [self.pickerView selectRow:0 inComponent:0 animated:YES];
-                 
-             }
-             
-         }
-         
-         
-     }];
-
-}
-
-- (IBAction) actionSelectedTeacher:(id)sender
-{
-    teacherFlag = !teacherFlag;
-
-    [self selectedBtn:0];
-}
-
-- (IBAction) actionSelectedPardent:(id)sender
-{
-    
-    pardentFlag = !pardentFlag;
-
-
-    [self selectedBtn:1];
-}
-
-- (IBAction) actionSelectedStudent:(id)sender
-{
-    studentFlag = !studentFlag;
-
-    [self selectedBtn:2];
-
-}
+#pragma mark- Other Custome Methods
 -(void)selectedBtn:(int)index
 {
     switch (index)
     {
         case 0:
         {
-            if(teacherFlag)
+            if(self.teacherFlag)
             {
                 [self.teacherBtn setBackgroundColor:DEFINE_BLUE];
                 [self.teacherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -195,9 +221,9 @@
                 self.teachViewHeight.constant = 0;
                 self.relationViewHeight.constant = 0;
             }
-            if(studentFlag)
+            if(self.studentFlag)
             {
-               studentFlag = NO;
+               self.studentFlag = NO;
                 
               [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
               [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
@@ -207,7 +233,7 @@
         break;
         case 1:
         {
-            if(pardentFlag)
+            if(self.pardentFlag)
             {
                 [self.pardentBtn setBackgroundColor:DEFINE_BLUE];
                 [self.pardentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -219,9 +245,9 @@
                 self.pardentViewHeight.constant = 0;
             }
             
-            if(studentFlag)
+            if(self.studentFlag)
             {
-                studentFlag = NO;
+                self.studentFlag = NO;
                 
                 [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
@@ -232,7 +258,7 @@
         break;
         case 2:
         {
-            if(studentFlag)
+            if(self.studentFlag)
             {
                 [self.studentBtn setBackgroundColor:DEFINE_BLUE];
                 [self.studentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -241,9 +267,9 @@
                 [self.studentBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.studentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
             }
-            if(teacherFlag)
+            if(self.teacherFlag)
             {
-                teacherFlag = NO;
+                self.teacherFlag = NO;
                 
                 [self.teacherBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
@@ -251,9 +277,9 @@
                 self.teachViewHeight.constant = 0;
                 self.relationViewHeight.constant = 0;
             }
-            if(pardentFlag)
+            if(self.pardentFlag)
             {
-                pardentFlag = NO;
+                self.pardentFlag = NO;
                 
                 [self.pardentBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
@@ -273,12 +299,6 @@
     }];
 }
 
-- (IBAction)pop:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-- (IBAction)popToRootVC:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
 
 #pragma mark- UIPickerView delegate
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component

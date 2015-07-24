@@ -50,10 +50,10 @@
 {
     CGFloat menuOffset = CGRectGetWidth(self.menuContainerView.bounds);
     if (scrollView.contentOffset.x == menuOffset) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuClosed" object:nil];
+       // [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuClosed" object:nil];
     }
     if (scrollView.contentOffset.x == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuOpend" object:nil];
+       // [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuOpend" object:nil];
     }
 }
 
