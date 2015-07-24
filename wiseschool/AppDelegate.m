@@ -27,7 +27,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [SMS_SDK registerApp:SMS_APP_KEY withSecret:SMS_APP_SECRET];
     
-    
+    NSLog(@"git test with github");
     // Override point for customization after application launch.
     
     
