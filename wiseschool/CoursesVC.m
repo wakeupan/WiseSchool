@@ -41,7 +41,7 @@ UIAlertViewDelegate>
 }
 - (IBAction)saveCourseTable:(UIBarButtonItem *)sender
 {
-    //添加课程
+    
 }
 
 - (IBAction)actionAddCourseItem {
@@ -265,6 +265,8 @@ UIAlertViewDelegate>
      }];
     
 }
+
+#pragma mark -获取课表
 -(void)requestCourseinfo
 {
     [ProgressHUD show:@"获取课程信息中..."];

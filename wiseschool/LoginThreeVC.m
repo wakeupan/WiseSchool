@@ -62,10 +62,17 @@ UIActionSheetDelegate, VPImageCropperDelegate>
 }
 - (IBAction)toMainVC
 {
-    [self enroll];
+    //[self enroll];
 //    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
 //    UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
 //    delegate.window.rootViewController = enteranceVC;
+    
+    [[HttpManager sharedHttpManager] postImageToserverWithBaseUrl:@"http://192.168.13.111:8090/zhxy_v3_java/app/common/testFile.app"
+                                                            image:self.iconImageView.image
+                                                           params:@{@"mobile":@"13800138000"}
+                                                         callBack:^(id jsonData, NSError *error) {
+                                                               //
+                                                           }];
 }
 - (IBAction)actionSelected:(id)sender {
 }
