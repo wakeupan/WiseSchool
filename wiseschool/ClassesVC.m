@@ -9,6 +9,9 @@
 #import "ClassesVC.h"
 #import "ClassesHeaderView.h"
 #import "CommonConstants.h"
+#import "HomeWorkCell.h"
+#import "Homework.h"
+#import "HttpManager.h"
 
 @interface ClassesVC ()<
 UICollectionViewDataSource,
@@ -20,14 +23,16 @@ ClassesSectionHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *bottomCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) NSMutableArray *homeWorkArray;
+
 @end
 
 @implementation ClassesVC
 #define TopCellID @"TopCell"
 #define BottomCellID @"BottomCell"
 
-#define NoteCell @"NoteCell"
-#define HomeWorkCell @"HomeWorkCell"
+#define NoteCellID @"NoteCell"
+#define HomeWorkCellID @"HomeWorkCell"
 
 #define HeaderID @"HeaderID"
 
@@ -44,6 +49,7 @@ ClassesSectionHeaderViewDelegate>
     [super viewDidLoad];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"ClassesHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
+    [self fetchtHomeworkList];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -97,16 +103,62 @@ ClassesSectionHeaderViewDelegate>
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    if (section == 0) {
+        return 3;
+    }else{
+        return self.homeWorkArray.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:NoteCell];
+        return [tableView dequeueReusableCellWithIdentifier:NoteCellID];
     }else{
-        return [tableView dequeueReusableCellWithIdentifier:HomeWorkCell];
+        HomeWorkCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeWorkCellID];
+        Homework *model = self.homeWorkArray[indexPath.row];
+        cell.model = model;
+        return cell;
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath =  [self.tableView indexPathForSelectedRow];
+    Homework *model = self.homeWorkArray[indexPath.row];
+    if ([segue.identifier isEqualToString:@"show homework detail"]) {
+        UIViewController *vc = segue.destinationViewController;
+        [vc setValue:model.homeworkId forKey:@"homeworkID"];
+    }
+}
+
+#pragma mark- lazy init
+- (NSMutableArray *)homeWorkArray
+{
+    if (!_homeWorkArray) {
+        _homeWorkArray = [[NSMutableArray alloc] init];
+    }
+    return _homeWorkArray;
+}
+
+#pragma mark- fetch data from server
+- (void)fetchtHomeworkList{
+    [ProgressHUD show:@"获取家庭作业中..."];
+    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_CLASS_GET_HOME_WORK_LIST portID:8080 queryString:@"userId=40288de74e60ec7d014e61727eef0000&classId=4028af814e99d8fe014e99dacda2001a" callBack:^(NSDictionary* jsonData, NSError *error) {
+        [ProgressHUD dismiss];
+        NSString *status = jsonData[@"status"];
+        if ([status isEqualToString:@"1"]) {
+            NSArray *temp = jsonData[@"data"];
+            for (NSDictionary *dictionary in temp){
+                Homework *model = [[Homework alloc] initFromDictionary:dictionary];
+                [self.homeWorkArray addObject:model];
+            }
+            [self.tableView reloadData];
+        }else{
+            [ProgressHUD showError:@"获取家庭作业出错！"];
+        }
+        
+    }];
 }
 
 

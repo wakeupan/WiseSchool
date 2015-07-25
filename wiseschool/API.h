@@ -19,12 +19,14 @@
 
 #define API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL @"zhxy_v3_java/app/common/gradeInfo.app"
 
-#define API_NAME_LOGIN_GET_SUBJECT_INFO @"zhxy_v3_java/app/common/subjectInfo.app"
+#define API_NAME_LOGIN_GET_SUBJECT_INFO @"zhxy_v3_java/app/common/subjectInfo.app"//获取科目信息
 
 #define API_NAME_CLASS_GET_COURSE_INFO @"zhxy_v3_java/app/course/courseInfo.app"//获取课程表
 
 #define API_NAME_CLASS_CREATE_COURSE @"zhxy_v3_java/app/common/subjectCreate.app" //添加科目信息
 
 #define API_NAME_CLASS_SET_COURSE @"zhxy_v3_java/app/course/courseMerge.app"//设置课程表
+
+#define API_NAME_CLASS_GET_HOME_WORK_LIST @"zhxy_v3_java/app/homework/homeworkInfo.app" //获取家庭作业列表
 
 #endif

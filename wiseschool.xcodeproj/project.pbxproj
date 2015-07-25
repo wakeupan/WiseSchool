@@ -82,6 +82,8 @@
 		FE1210231B50032500ABEDB5 /* BorderBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1210221B50032500ABEDB5 /* BorderBtn.m */; };
 		FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */; };
 		FE40CA9C1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */; };
+		FE683FC61B6336AB00C3627F /* HomeWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE683FC51B6336AB00C3627F /* HomeWorkCell.m */; };
+		FE683FCA1B635EE700C3627F /* Homework.m in Sources */ = {isa = PBXBuildFile; fileRef = FE683FC91B635EE700C3627F /* Homework.m */; };
 		FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */; };
 		FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */; };
 		FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE72402D1B50C79700AD3735 /* AttendanceCell.m */; };
@@ -90,6 +92,7 @@
 		FE7240371B50F55100AD3735 /* CourseTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7240361B50F55100AD3735 /* CourseTableCell.m */; };
 		FE72403A1B51010800AD3735 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7240391B51010800AD3735 /* Course.m */; };
 		FE72403D1B510E2200AD3735 /* MenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE72403C1B510E2200AD3735 /* MenuVC.m */; };
+		FE8C53A91B6365820084CCFC /* HomeworkDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8C53A81B6365820084CCFC /* HomeworkDetailVC.m */; };
 		FE9122CC1B5B4A750084659D /* GestureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9122CB1B5B4A750084659D /* GestureCollectionView.m */; };
 		FE9122CF1B5B51390084659D /* GestureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9122CE1B5B51390084659D /* GestureScrollView.m */; };
 		FE94170D1B5A223D0073C4CF /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9416B21B5A223D0073C4CF /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -331,6 +334,10 @@
 		FE40CA9A1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LoginThreeVC+FinishEnroll.h"; path = "wiseschool/LoginThreeVC+FinishEnroll.h"; sourceTree = SOURCE_ROOT; };
 		FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LoginThreeVC+FinishEnroll.m"; path = "wiseschool/LoginThreeVC+FinishEnroll.m"; sourceTree = SOURCE_ROOT; };
 		FE40CA9D1B621314001FC48E /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API.h; path = wiseschool/API.h; sourceTree = SOURCE_ROOT; };
+		FE683FC41B6336AB00C3627F /* HomeWorkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeWorkCell.h; path = wiseschool/HomeWorkCell.h; sourceTree = SOURCE_ROOT; };
+		FE683FC51B6336AB00C3627F /* HomeWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeWorkCell.m; path = wiseschool/HomeWorkCell.m; sourceTree = SOURCE_ROOT; };
+		FE683FC81B635EE700C3627F /* Homework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Homework.h; path = wiseschool/Homework.h; sourceTree = SOURCE_ROOT; };
+		FE683FC91B635EE700C3627F /* Homework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Homework.m; path = wiseschool/Homework.m; sourceTree = SOURCE_ROOT; };
 		FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 		FE70D12B1B5FDC92003780C3 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
@@ -346,6 +353,8 @@
 		FE7240391B51010800AD3735 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		FE72403B1B510E2200AD3735 /* MenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuVC.h; sourceTree = "<group>"; };
 		FE72403C1B510E2200AD3735 /* MenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuVC.m; sourceTree = "<group>"; };
+		FE8C53A71B6365820084CCFC /* HomeworkDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeworkDetailVC.h; path = wiseschool/HomeworkDetailVC.h; sourceTree = SOURCE_ROOT; };
+		FE8C53A81B6365820084CCFC /* HomeworkDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeworkDetailVC.m; path = wiseschool/HomeworkDetailVC.m; sourceTree = SOURCE_ROOT; };
 		FE9122CA1B5B4A750084659D /* GestureCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureCollectionView.h; sourceTree = "<group>"; };
 		FE9122CB1B5B4A750084659D /* GestureCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureCollectionView.m; sourceTree = "<group>"; };
 		FE9122CD1B5B51390084659D /* GestureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureScrollView.h; sourceTree = "<group>"; };
@@ -857,6 +866,19 @@
 			name = "主框架";
 			sourceTree = "<group>";
 		};
+		FE683FC71B6341DC00C3627F /* 家庭作业详情 */ = {
+			isa = PBXGroup;
+			children = (
+				FE683FC81B635EE700C3627F /* Homework.h */,
+				FE683FC91B635EE700C3627F /* Homework.m */,
+				FE683FC41B6336AB00C3627F /* HomeWorkCell.h */,
+				FE683FC51B6336AB00C3627F /* HomeWorkCell.m */,
+				FE8C53A71B6365820084CCFC /* HomeworkDetailVC.h */,
+				FE8C53A81B6365820084CCFC /* HomeworkDetailVC.m */,
+			);
+			name = "家庭作业详情";
+			sourceTree = "<group>";
+		};
 		FE70D1291B5FDC92003780C3 /* ProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1102,7 @@
 				FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */,
 				FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */,
 				6DA49AA91B467F3A00CA55FE /* Classes.storyboard */,
+				FE683FC71B6341DC00C3627F /* 家庭作业详情 */,
 				FE70D12F1B5FE1AE003780C3 /* 添加成员 */,
 				FE70D1301B5FE1C2003780C3 /* 联系人列表 */,
 				FE70D1311B5FE1D7003780C3 /* 课表 */,
@@ -1373,6 +1396,7 @@
 				6DA49A9D1B46634100CA55FE /* ContainerViewController.m in Sources */,
 				FE9417751B5A31B70073C4CF /* CommentDTO.m in Sources */,
 				6D0EE6111B4F868D00D24E9D /* MBProgressHUD+Add.m in Sources */,
+				FE683FC61B6336AB00C3627F /* HomeWorkCell.m in Sources */,
 				FE9417331B5A223D0073C4CF /* UIProgressView+AFNetworking.m in Sources */,
 				6D0EE62D1B4F868D00D24E9D /* PSTCollectionView.m in Sources */,
 				FEB8F5BF1B47AEE900EC4F57 /* MineVC.m in Sources */,
@@ -1380,8 +1404,10 @@
 				FE9417461B5A22910073C4CF /* RootViewController.m in Sources */,
 				6D0EE6191B4F868D00D24E9D /* MWTapDetectingView.m in Sources */,
 				6D0EE6201B4F868D00D24E9D /* EMSDWebImageDownloaderOperation.m in Sources */,
+				FE683FCA1B635EE700C3627F /* Homework.m in Sources */,
 				FE9417151B5A223D0073C4CF /* AFURLSessionManager.m in Sources */,
 				6D0EE61C1B4F868D00D24E9D /* EMSDImageCache.m in Sources */,
+				FE8C53A91B6365820084CCFC /* HomeworkDetailVC.m in Sources */,
 				FE7240341B50ED4C00AD3735 /* CourseTable.m in Sources */,
 				FE7240371B50F55100AD3735 /* CourseTableCell.m in Sources */,
 				FE9E31EF1B5A8F1200AAA48C /* MainView.m in Sources */,
