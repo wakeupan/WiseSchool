@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#define FeedIDKEY       @"feedID"
-#define TitleKey        @"title"
-#define TypeTitleKey    @"typeTitle"
-#define ReleaseDateKey  @"releaseDate"
+#define FeedID_KEY       @"infoId"
+#define FeedTitle_Key        @"infoTitle"
+#define TypeTitle_Key    @"infoType"
+#define ReleaseDate_Key  @"infoTime"
 
 @interface BaseFeed : NSObject
 

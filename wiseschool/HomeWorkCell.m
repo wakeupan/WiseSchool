@@ -14,7 +14,7 @@
 {
     _model = model;
     _titleLabel.text = model.title;
-    _releaseGuyLabel.text = model.publishPersonName;
+    _releaseGuyLabel.text = [model.publishPersonName isKindOfClass:[NSString class]] ? model.publishPersonName : @"";
     _releaseDateLabel.text = model.publishTime;
 }
 

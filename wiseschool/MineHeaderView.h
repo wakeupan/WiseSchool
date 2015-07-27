@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FeedSectionModel.h"
+#import "BaseFeed.h"
 
 @interface MineHeaderView : UITableViewHeaderFooterView<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -18,5 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *longView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, strong) FeedSectionModel *model;
 
 @end

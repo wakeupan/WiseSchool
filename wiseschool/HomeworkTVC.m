@@ -20,6 +20,7 @@ UINavigationControllerDelegate,
 UIImagePickerControllerDelegate,
 UIActionSheetDelegate,UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *homeworkTitle;
 @property (weak, nonatomic) IBOutlet UITextView *homeworkText;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *homeworkImageView;
@@ -83,6 +84,8 @@ UIActionSheetDelegate,UITextViewDelegate>
         cell.backgroundColor = [UIColor colorWithRed:115/255.0 green:179/255.0 blue:216/255.0 alpha:1];
         cell.layer.borderWidth = 0;
         selectedModel.selected = YES;
+        self.homeworkTitle.text = [self homeworkTitleString];
+        
     }else{
         lable.textColor = [UIColor colorWithRed:115/255.0 green:179/255.0 blue:216/255.0 alpha:1];
         cell.backgroundColor = [UIColor whiteColor];
@@ -94,6 +97,9 @@ UIActionSheetDelegate,UITextViewDelegate>
     
 }
 
+- (IBAction)postText:(id)sender {
+    [self relaseHomework];
+}
 
 #pragma mark- Lazy init
 - (NSMutableArray *)coursesArray
@@ -102,6 +108,23 @@ UIActionSheetDelegate,UITextViewDelegate>
         _coursesArray = [NSMutableArray new];
     }
     return _coursesArray;
+}
+
+#pragma mark- 拼接作业标题
+- (NSString*)homeworkTitleString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *homeworkString = [currentDateStr stringByAppendingString:@" "];
+    for (Course *course in self.coursesArray){
+        if (course.selected) {
+            NSLog(@"%@",course.courseName);
+            homeworkString = [homeworkString stringByAppendingString:[NSString stringWithFormat:@"%@、",course.courseName]];
+        }
+    }
+    homeworkString = [[homeworkString substringToIndex:homeworkString.length-1] stringByAppendingString:@" 家庭作业"];
+    return homeworkString;
 }
 
 #pragma mark- Remote server data
@@ -123,9 +146,9 @@ UIActionSheetDelegate,UITextViewDelegate>
 
 #pragma mark- 上传图片
 -(void)uploadImageFileOfHomework:(NSString *)uploadImageID image:(UIImage*)image type:(NSString*)type{
-    HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    //    UIImage *testImage = [UIImage imageNamed:@"AMeng"];
+    [ProgressHUD show:@"上传图片中..."];
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
     
     NSString *url= @"http://192.168.13.104:8080/zhxy_v3_java/app/common/commonUploadImg.app";
     
@@ -137,24 +160,22 @@ UIActionSheetDelegate,UITextViewDelegate>
     
     [httpManager postImageToserverWithBaseUrl:url image:image params:params callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self.view endEditing:YES];
+         });
+         
          if(jsonData !=nil)
          {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
              
              NSString * status =[jsonData objectForKey:@"status"];
              
              if([status compare:@"1"]==NSOrderedSame)
              {
-                 if([type isEqualToString:@"1"])
-                 {
-                     //[self findDetailOfHomeWork:self.homeworkID];//测试查看家庭作业详情
-                     //[self deleteHomeWorkByID:self.homeworkID];//测试删除家庭作业
-                 }
+                 [ProgressHUD showSuccess:@"作业发布成功！"];
                  
+             }else{
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
              }
              
          }
@@ -164,45 +185,35 @@ UIActionSheetDelegate,UITextViewDelegate>
 #pragma mark- 发布作业
 -(void)relaseHomework
 {
+    [ProgressHUD show:@"上传家庭作业文本数据中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
+
     
-    NSMutableString *queryString = [NSMutableString stringWithFormat:@"%@=%@",CLASS_ID_KEY,CLASS_ID_VALUE];
+    NSString *userId = @"4028af814ec3ded3014ec467be55001c";
+    NSString *classId = @"4028af814e99d8fe014e99dacda2001c";
+    NSString *title = self.homeworkTitle.text;
+    NSString *content = self.homeworkText.text;
     
+    NSString *param = [NSString stringWithFormat:@"userId=%@&classId=%@&title=%@&content=%@",userId,classId,title,content];
+
     
-    
-    NSMutableString *title =[[NSMutableString alloc]init];
-    
-    NSString *dateString = nil;//[[self.currentDate componentsSeparatedByString:@" "]objectAtIndex:0];
-    [title appendString:dateString];
-    [title appendString:@"语文"];
-    [title appendString:@"家庭作业"];
-    
-    [queryString appendString:[NSString stringWithFormat:@"&%@=%@",@"title",title]];
-    
-    [queryString appendString:[NSString stringWithFormat:@"&%@=%@",@"content",@"xxaoooafgghghhgg"]];
-    
-    [queryString appendString:[NSString stringWithFormat:@"&%@=%@",USER_ID_KEY,USER_ID_VALUE]];
-    
-    
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CALSS_RELEASE_HOMEWORK portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CALSS_RELEASE_HOMEWORK portID:8080 queryString:param callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
              NSString * status =[jsonData objectForKey:@"status"];
              
              if([status compare:@"1"]==NSOrderedSame)
              {
                  self.homeworkID = [[jsonData objectForKey:@"data"] objectAtIndex:0][@"id"];
-                 
-                 UIImage *testImage =[UIImage imageNamed:@"AMeng"];
-                 [self uploadImageFileOfHomework:[[jsonData objectForKey:@"data"] objectAtIndex:0][@"id"] image:testImage type:@"1"];
+                 [self uploadImageFileOfHomework:self.homeworkID image:self.homeworkImageView.image type:@"1"];
+             }else{
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
              }
              
+         }else{
+             [ProgressHUD show:[error localizedDescription]];
          }
          
          
@@ -210,38 +221,7 @@ UIActionSheetDelegate,UITextViewDelegate>
     
 }
 
-#pragma mark- 获取作业详情
--(void)findDetailOfHomeWork:(NSString*)homeworkId
-{
-    HttpManager *httpManager = [HttpManager sharedHttpManager];
-    
-    NSString *queryString = [NSString stringWithFormat:@"%@=%@",@"homeworkId",homeworkId];
-    
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CALSS_FIND_DETAIL_OF_HOMEWORK portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
-     {
-         if(jsonData !=nil)
-         {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
-             NSString * status =[jsonData objectForKey:@"status"];
-             
-             if([status compare:@"1"]==NSOrderedSame)
-             {
-                 [self createHomeworkComment:[[jsonData objectForKey:@"data"] objectAtIndex:0][@"homeworkId"] ];
-                 
-             }
-             
-             
-         }
-         
-         
-     }];
-    
-    
-}
+
 
 #pragma mark- 添加评论
 -(void)createHomeworkComment:(NSString*)homeworkID

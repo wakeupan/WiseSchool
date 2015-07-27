@@ -39,7 +39,7 @@ UIAccelerometerDelegate>
     self.homeworkRowHeightsArray = [NSMutableArray new];
     self.commentsRowHeightsArray = [NSMutableArray new];
     [self initFakeData];
-    //[self fetchHomeworkDetail];
+    [self findDetailOfHomeWork];
 }
 
 #pragma mark- Table view datasource and delegates
@@ -78,13 +78,15 @@ UIAccelerometerDelegate>
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCell];
             UIImageView *imageView = [cell.contentView.subviews lastObject];
             dispatch_async(kBgQueue, ^{
-                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:testImage]];
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contentStr]];
                 UIImage *image = [UIImage imageWithData:imageData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     imageView.contentMode = UIViewContentModeScaleAspectFit;
                     CGSize imageSize = image.size;
                     CGFloat newImageHeight = imageSize.height * (Screen_Width / imageSize.width);
-                    self.homeworkRowHeightsArray[1] = @(newImageHeight);
+                    if (image) {
+                        self.homeworkRowHeightsArray[1] = @(newImageHeight);
+                    }
                     imageView.image = image;
                     [self.tableView beginUpdates];
                     [self.tableView endUpdates];
@@ -135,40 +137,60 @@ UIAccelerometerDelegate>
      }];
 }
 
-//- (void)fetchHomeworkDetail
-//{
-//    [ProgressHUD show:@"获取家庭作业详情中..."];
-//    NSString *param = [NSString stringWithFormat:@"homeworkId=%@",self.homeworkID];
-//    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:@"zhxy_v3_java/app/homework/homeworkDetail.app" portID:8080 queryString:param callBack:^(NSDictionary* jsonData, NSError *error) {
-//        [ProgressHUD dismiss];
-//        NSArray *array = jsonData[@"data"];
-//        NSDictionary *dicionary = [array lastObject];
-//        
-//        self.titleLabel.text = dicionary[@"title"];
-//        self.contentTextView.text = dicionary[@"content"];
-//        dispatch_async(kBgQueue, ^{
-//            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:testImage]];
-//            UIImage *image = [UIImage imageWithData:imageData];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.imageView.image = image;
-//            });
-//            
-//        });
-//    }];
-//}
+#pragma mark- 获取作业详情
+-(void)findDetailOfHomeWork
+{
+    [ProgressHUD show:@"获取作业详情中..."];
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    NSString *queryString = [NSString stringWithFormat:@"%@=%@",@"homeworkId",self.homeworkID];
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CALSS_FIND_DETAIL_OF_HOMEWORK portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+     {
+         [ProgressHUD dismiss];
+         if(jsonData !=nil)
+         {
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 NSArray *dataArray = jsonData[@"data"];
+                 NSDictionary *dataDic = [dataArray lastObject];
+                 NSString *title = dataDic[@"title"];
+                 NSString *imageUrl = [dataDic[@"homeworkImages"] firstObject][@"sourceUrl"];
+                 if (!imageUrl) {
+                     imageUrl = @"";
+                 }
+                 NSString *content = dataDic[@"content"];
+                 self.homeworkArray = [NSMutableArray arrayWithArray:@[title,imageUrl,content]];
+                 NSString *text = self.homeworkArray[2];
+                 float height = [self heightFromString:text];
+                 self.homeworkRowHeightsArray = [NSMutableArray arrayWithArray:@[@44,@0,@(height)]];
+                 [self.tableView reloadData];
+
+                 
+             }
+             
+             
+         }
+         
+         
+     }];
+    
+    
+}
 
 #define LongText @"国家的前途，民族的命运，人民的幸福，是当代中国青年必须和必将承担的重任。一代青年有一代青年的历史际遇。我们的国家正在走向繁荣富强，我们的民族正在走向伟大复兴，我们的人民正在走向更加幸福美好的生活。当代中国青年要有所作为，就必须投身人民的伟大奋斗。同人民一起奋斗，青春才能亮丽；同人民一起前进，青春才能昂扬；同人民一起梦想，青春才能无悔。"
 #pragma mark- Init fake data
 - (void)initFakeData
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.homeworkArray = [NSMutableArray arrayWithArray:@[@"2015-04-06 语文作业",testImage,LongText]];
-        NSString *text = self.homeworkArray[2];
-        float height = [self heightFromString:text];
-        self.homeworkRowHeightsArray = [NSMutableArray arrayWithArray:@[@44,@0,@(height)]];
-        [self.tableView reloadData];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.homeworkArray = [NSMutableArray arrayWithArray:@[@"2015-04-06 语文作业",testImage,LongText]];
+//        NSString *text = self.homeworkArray[2];
+//        float height = [self heightFromString:text];
+//        self.homeworkRowHeightsArray = [NSMutableArray arrayWithArray:@[@44,@0,@(height)]];
+//        [self.tableView reloadData];
+//    });
     
 }
 

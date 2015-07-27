@@ -44,7 +44,7 @@ UITableViewDelegate>
 #pragma mark- VC Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initFakeData];//生成测试数据
+   // [self getAppInfo:nil];
     //注册自定义视图xib 通告类sectionHeader
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"MineHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
@@ -133,7 +133,7 @@ UITableViewDelegate>
         return headerView;
     }else{
         MineHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
-        headerView.titleLabel.text = feedSection.sectionTitle;
+        headerView.model = feedSection;
         return headerView;
     }
 }
@@ -209,35 +209,54 @@ UITableViewDelegate>
     thirdSection.sectionTitle = @"电子学生证";
     thirdSection.feedsList = @[temp1,temp2,temp3,temp4,temp4,temp4,temp4,temp4,temp4,temp4];
     
-    [self.feedSectionArray addObjectsFromArray:@[firstSection,secondSection,thirdSection]];
+    FeedSectionModel *attendence = [[FeedSectionModel alloc] initFromDictionary:@{ClassId_Key:@"xxxxxxx",
+                                                                                  ClassName_Key:@"电子学生证",
+                                                                                 Feeds_Key:@[temp1,temp2,temp3,temp4,temp4,temp4,temp4,temp4,temp4,temp4]}];
+
+    
+    [self.feedSectionArray addObject:attendence];
     
 }
 
 #pragma mark- Remote sever
 -(void)getAppInfo:(NSString *)userID
 {
-    
-    NSString *queryString = [NSString stringWithFormat:@"%@=%@",USER_ID_KEY,userID];
+    [ProgressHUD show:@"获取班级信息中..."];
+    NSString *queryString = [NSString stringWithFormat:@"%@=%@",USER_ID_KEY,HOMEPAGE_USER_ID_VALUE];
     
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     [httpManager jsonDataFromServerWithBaseUrl:API_NAME_INDEX_GET_APPINFO portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
+         
          if(jsonData !=nil)
          {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
-             NSString * status =[jsonData objectForKey:@"status"];
+             [ProgressHUD dismiss];
              
-             if([status compare:@"1"]==NSOrderedSame)
-             {
-                 
-                 
-                 
-                 
+             NSArray *temp = jsonData[@"data"];
+             NSDictionary *classDicFromServer = [temp lastObject];
+             NSArray *classInfoList = classDicFromServer[@"classInfoDataList"];
+             NSMutableArray *classes = [NSMutableArray new];
+             for (NSDictionary *classDic in classInfoList){
+                 NSArray *feedsArray = classDic[@"infoList"];
+                 NSMutableArray *feeds = [NSMutableArray new];
+                 for (NSDictionary *feedDic in feedsArray){
+                     BaseFeed *feed = [[BaseFeed alloc] initFromDictionary:@{FeedID_KEY:feedDic[FeedID_KEY],
+                                                                             FeedTitle_Key:feedDic[FeedTitle_Key],
+                                                                             TypeTitle_Key:feedDic[TypeTitle_Key],
+                                                                             ReleaseDate_Key:feedDic[ReleaseDate_Key]}];
+                     [feeds addObject:feed];
+                 }
+                 FeedSectionModel *classFeed = [[FeedSectionModel alloc] initFromDictionary:@{ClassId_Key:classDic[ClassId_Key],
+                                                                                ClassName_Key:classDic[ClassName_Key],
+                                                                                Feeds_Key:feeds}];
+                 [classes addObject:classFeed];
              }
+             self.feedSectionArray = classes;
+             [self initFakeData];
+             [self.tableView reloadData];
+             [self.collectionView reloadData];
+         }else{
+             [ProgressHUD showError:[error localizedDescription]];
          }
          
          

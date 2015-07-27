@@ -269,7 +269,6 @@ UIAlertViewDelegate>
    
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];//此处data参数是我上面提到的key为"data"的数组
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  //  NSLog(jsonString);
     
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     

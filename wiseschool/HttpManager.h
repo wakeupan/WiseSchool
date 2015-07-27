@@ -10,8 +10,8 @@
 #import <UIKit/UIKit.h>
 //#define serverUrl @"http://192.168.0.118:"
 //#define serverUrl @"http://192.168.13.110:"
-#define serverUrl @"http://192.168.13.104:"
-
+#define serverUrl @"http://192.168.13.104:"//家庭作业列表
+//#define serverUrl @"http://192.168.13.106:"//首页
 
 typedef void(^CallbackWithJsonData)(id jsonData,NSError *error);
 

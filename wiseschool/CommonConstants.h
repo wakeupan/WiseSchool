@@ -51,6 +51,8 @@
 #define USER_ID_VALUE @"40288de74e60ec7d014e61727eef0000"
 #define CLASS_ID_VALUE @"4028af814e99d8fe014e99dacda2001a"
 
+#define HOMEPAGE_USER_ID_VALUE @"40288dea4ec85a8c014ec85cb5890000"
+
 #define DEFINE_BLUE        [UIColor colorWithRed:83.0/255.0 green:193.0/255.0 blue:226.0/255.0 alpha:1]
 #define DEFINE_ORGANG         [UIColor colorWithRed:255.0/255.0 green:186.0/255.0 blue:88.0/255.0 alpha:1]
 #define DEFINE_GREEN      [UIColor colorWithRed:2.0/255.0 green:214.0/255.0 blue:80.0/255.0 alpha:1]

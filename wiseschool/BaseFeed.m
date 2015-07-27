@@ -13,10 +13,10 @@
 {
     self = [super init];
     if (self) {
-        _feedID = dictionary[FeedIDKEY];
-        _title = dictionary[TitleKey];
-        _typeTitle = dictionary[TypeTitleKey];
-        _releaseDate = dictionary[ReleaseDateKey];
+        _feedID = dictionary[FeedID_KEY];
+        _title = dictionary[FeedTitle_Key];
+        _typeTitle = dictionary[TypeTitle_Key];
+        _releaseDate = dictionary[ReleaseDate_Key];
     }
     return self;
 }

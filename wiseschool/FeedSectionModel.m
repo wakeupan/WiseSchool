@@ -9,5 +9,14 @@
 #import "FeedSectionModel.h"
 
 @implementation FeedSectionModel
-
+- (instancetype)initFromDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        _classId = dictionary[ClassId_Key];
+        _sectionTitle = dictionary[ClassName_Key];
+        _feedsList = dictionary[Feeds_Key];
+    }
+    return self;
+}
 @end

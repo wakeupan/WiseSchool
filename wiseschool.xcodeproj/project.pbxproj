@@ -527,6 +527,15 @@
 			children = (
 				18032ABA1B5E67AA00ED801E /* SMS_SDK */,
 				18032AB41B5E675800ED801E /* 引导页 */,
+				FE02EA131B65CE4E006A58A2 /* LoginOneVCViewController.h */,
+				FE02EA141B65CE4E006A58A2 /* LoginOneVCViewController.m */,
+				FE02EA151B65CE4E006A58A2 /* LoginOneVCViewController.xib */,
+				FE02EA161B65CE4E006A58A2 /* LoginThreeVC.h */,
+				FE02EA171B65CE4E006A58A2 /* LoginThreeVC.m */,
+				FE02EA181B65CE4E006A58A2 /* LoginThreeVC.xib */,
+				FE02EA191B65CE4E006A58A2 /* LoginTwoVC.h */,
+				FE02EA1A1B65CE4E006A58A2 /* LoginTwoVC.m */,
+				FE02EA1B1B65CE4E006A58A2 /* LoginTwoVC.xib */,
 				18032A9F1B5E674500ED801E /* BaseVC.h */,
 				18032AA01B5E674500ED801E /* BaseVC.m */,
 				FE40CA9A1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.h */,
@@ -540,15 +549,6 @@
 		18032AB41B5E675800ED801E /* 引导页 */ = {
 			isa = PBXGroup;
 			children = (
-				FE02EA131B65CE4E006A58A2 /* LoginOneVCViewController.h */,
-				FE02EA141B65CE4E006A58A2 /* LoginOneVCViewController.m */,
-				FE02EA151B65CE4E006A58A2 /* LoginOneVCViewController.xib */,
-				FE02EA161B65CE4E006A58A2 /* LoginThreeVC.h */,
-				FE02EA171B65CE4E006A58A2 /* LoginThreeVC.m */,
-				FE02EA181B65CE4E006A58A2 /* LoginThreeVC.xib */,
-				FE02EA191B65CE4E006A58A2 /* LoginTwoVC.h */,
-				FE02EA1A1B65CE4E006A58A2 /* LoginTwoVC.m */,
-				FE02EA1B1B65CE4E006A58A2 /* LoginTwoVC.xib */,
 				18032AB51B5E677A00ED801E /* WZGuideViewController.h */,
 				18032AB61B5E677A00ED801E /* WZGuideViewController.m */,
 			);
@@ -569,10 +569,6 @@
 			children = (
 				6D0EE5AF1B4F764700D24E9D /* User.h */,
 				6D0EE5B01B4F764700D24E9D /* User.m */,
-				6D0EE63B1B4F95A200D24E9D /* BaseFeed.h */,
-				6D0EE63C1B4F95A200D24E9D /* BaseFeed.m */,
-				FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */,
-				FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */,
 				FE7240321B50ED4C00AD3735 /* CourseTable.h */,
 				FE7240331B50ED4C00AD3735 /* CourseTable.m */,
 				FE7240381B51010800AD3735 /* Course.h */,
@@ -890,13 +886,15 @@
 		FE02EA0F1B64D9BE006A58A2 /* 自定义视图 */ = {
 			isa = PBXGroup;
 			children = (
+				6D0EE63B1B4F95A200D24E9D /* BaseFeed.h */,
+				6D0EE63C1B4F95A200D24E9D /* BaseFeed.m */,
+				FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */,
+				FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */,
 				FEB8F5BA1B47AE2300EC4F57 /* IconCell.h */,
 				FEB8F5BB1B47AE2300EC4F57 /* IconCell.m */,
 				FEB8F5CA1B47B99800EC4F57 /* NoteCell.h */,
 				FEB8F5CB1B47B99800EC4F57 /* NoteCell.m */,
-				6D998B021B4E070B00D9F275 /* MineHeaderView.h */,
-				6D998B031B4E070B00D9F275 /* MineHeaderView.m */,
-				6D998B051B4E072100D9F275 /* MineHeaderView.xib */,
+				FE02EA221B65E2CD006A58A2 /* 班级信息 */,
 				FE02EA0C1B64D428006A58A2 /* EIDCardHeaderView.h */,
 				FE02EA0D1B64D428006A58A2 /* EIDCardHeaderView.m */,
 				FE02EA0A1B64D0A4006A58A2 /* EIDCardHeaderView.xib */,
@@ -908,7 +906,17 @@
 			name = "自定义视图";
 			sourceTree = "<group>";
 		};
-		FE683FC71B6341DC00C3627F /* 家庭作业详情 */ = {
+		FE02EA221B65E2CD006A58A2 /* 班级信息 */ = {
+			isa = PBXGroup;
+			children = (
+				6D998B021B4E070B00D9F275 /* MineHeaderView.h */,
+				6D998B031B4E070B00D9F275 /* MineHeaderView.m */,
+				6D998B051B4E072100D9F275 /* MineHeaderView.xib */,
+			);
+			name = "班级信息";
+			sourceTree = "<group>";
+		};
+		FE683FC71B6341DC00C3627F /* 家庭作业 */ = {
 			isa = PBXGroup;
 			children = (
 				FE683FC81B635EE700C3627F /* Homework.h */,
@@ -920,7 +928,7 @@
 				FE8C53A71B6365820084CCFC /* HomeworkDetailVC.h */,
 				FE8C53A81B6365820084CCFC /* HomeworkDetailVC.m */,
 			);
-			name = "家庭作业详情";
+			name = "家庭作业";
 			sourceTree = "<group>";
 		};
 		FE70D1291B5FDC92003780C3 /* ProgressHUD */ = {
@@ -1140,7 +1148,7 @@
 				FE1210221B50032500ABEDB5 /* BorderBtn.m */,
 				6DA49AA91B467F3A00CA55FE /* Classes.storyboard */,
 				FE02EA041B64BE85006A58A2 /* 班级主界面 */,
-				FE683FC71B6341DC00C3627F /* 家庭作业详情 */,
+				FE683FC71B6341DC00C3627F /* 家庭作业 */,
 				FE70D12F1B5FE1AE003780C3 /* 添加成员 */,
 				FE70D1301B5FE1C2003780C3 /* 联系人列表 */,
 				FE70D1311B5FE1D7003780C3 /* 课表 */,

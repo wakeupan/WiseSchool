@@ -49,7 +49,7 @@ ClassesSectionHeaderViewDelegate>
     [super viewDidLoad];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"ClassesHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
-  //  [self fetchtHomeworkList];
+    [self fetchtHomeworkList];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -106,7 +106,7 @@ ClassesSectionHeaderViewDelegate>
     if (section == 0) {
         return 3;
     }else{
-        return 2;// self.homeWorkArray.count;
+        return self.homeWorkArray.count;
     }
 }
 
@@ -116,20 +116,20 @@ ClassesSectionHeaderViewDelegate>
         return [tableView dequeueReusableCellWithIdentifier:NoteCellID];
     }else{
         HomeWorkCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeWorkCellID];
-       // Homework *model = self.homeWorkArray[indexPath.row];
-       // cell.model = model;
+        Homework *model = self.homeWorkArray[indexPath.row];
+        cell.model = model;
         return cell;
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([segue.identifier isEqualToString:@"show homework detail"]) {
-//        NSIndexPath *indexPath =  [self.tableView indexPathForSelectedRow];
-//        Homework *model = self.homeWorkArray[indexPath.row];
-//        UIViewController *vc = segue.destinationViewController;
-//        [vc setValue:model.homeworkId forKey:@"homeworkID"];
-//    }
+    if ([segue.identifier isEqualToString:@"show homework detail"]) {
+        NSIndexPath *indexPath =  [self.tableView indexPathForSelectedRow];
+        Homework *model = self.homeWorkArray[indexPath.row];
+        UIViewController *vc = segue.destinationViewController;
+        [vc setValue:model.homeworkId forKey:@"homeworkID"];
+    }
 }
 
 #pragma mark- lazy init
@@ -144,7 +144,9 @@ ClassesSectionHeaderViewDelegate>
 #pragma mark- fetch data from server
 - (void)fetchtHomeworkList{
     [ProgressHUD show:@"获取家庭作业中..."];
-    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_CLASS_GET_HOME_WORK_LIST portID:8080 queryString:@"userId=40288de74e60ec7d014e61727eef0000&classId=4028af814e99d8fe014e99dacda2001a" callBack:^(NSDictionary* jsonData, NSError *error) {
+    NSString *queryString = @"userId=4028af814ec3ded3014ec467be55001c&classId=4028af814e99d8fe014e99dacda2001c";
+    //@"userId=40288de74e60ec7d014e61727eef0000&classId=4028af814e99d8fe014e99dacda2001a"
+    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_CLASS_GET_HOME_WORK_LIST portID:8080 queryString:queryString callBack:^(NSDictionary* jsonData, NSError *error) {
         [ProgressHUD dismiss];
         NSString *status = jsonData[@"status"];
         if ([status isEqualToString:@"1"]) {
