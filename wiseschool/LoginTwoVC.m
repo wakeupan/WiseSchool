@@ -13,6 +13,8 @@
 
 #import "HttpManager.h"
 
+#import "AppDelegate.h" 
+
 #define AREA_ID_KEY @"areaId"
 #define AREA_NAME_KEY @"areaName"
 
@@ -117,7 +119,7 @@
     [self.selectGardeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-   [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_AREA_FOR_CITY portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
+   [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_AREA_FOR_CITY portID:8090 queryString:@"" callBack:^(id jsonData,NSError *error)
     {
         if(jsonData !=nil)
         {
@@ -169,7 +171,7 @@
     
     NSString *queryString =[NSString stringWithFormat:@"%@=%@",AREA_ID_KEY,areaData[AREA_ID_KEY]];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SCHOOL_FOR_AREA portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SCHOOL_FOR_AREA portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
          if(jsonData !=nil)
          {
@@ -217,7 +219,7 @@
     
     NSString *queryString =[NSString stringWithFormat:@"%@=%@",SCHOOL_ID_KEY,areaData[SCHOOL_ID_KEY]];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
          if(jsonData !=nil)
          {
@@ -236,7 +238,7 @@
                      NSMutableArray *tmpGrade =[[NSMutableArray alloc]init];
                      for(NSDictionary * dic in data)
                      {
-                         [self.schoolDatas addObject:dic];
+                         [self.gradeDatas addObject:dic];
                          
                          [tmpGrade addObject:dic[GRADE_NAME_KEY]];
                      }
@@ -294,6 +296,12 @@
     {
         [self.selectGardeBtn setTitle:self.dataSet[pickerIndex] forState:UIControlStateNormal];
         [self.selectGardeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+        
+        appDelegate.user.gradeId = [self.gradeDatas objectAtIndex:pickerIndex][@"gradeId"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[self.gradeDatas objectAtIndex:pickerIndex][@"gradeId"]forKey:@"gradeId"];
     }
     
 }
@@ -311,12 +319,28 @@
     [self requestGradeData:schoolIndex];
 }
 
+-(BOOL)validateInputMessage
+{
+    
+    return YES;
+}
+
+
+
 - (IBAction) actionNext:(id)sender
 {
+    
+    
     LoginThreeVC *login3= [[LoginThreeVC alloc ]initWithNibName:@"LoginThreeVC" bundle:nil];
     
     [self.navigationController pushViewController:login3 animated:YES];
 
+}
+
+-(void)setUserData
+{
+    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    delegate.user.ClassNo = [self.classTextField.text integerValue];
 }
 - (void)didReceiveMemoryWarning
 {

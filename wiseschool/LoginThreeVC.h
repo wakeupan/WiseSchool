@@ -8,7 +8,11 @@
 
 #import "BaseVC.h"
 
-@interface LoginThreeVC : BaseVC
+@interface LoginThreeVC : BaseVC<UIAlertViewDelegate>
 @property (weak,   nonatomic) IBOutlet UIImageView *iconImageView;
 @property (nonatomic, strong) NSURLSession *upLoadSession;
+
+@property (nonatomic, strong) NSString *classId;
+
+@property (nonatomic, strong) NSString *userId;
 @end

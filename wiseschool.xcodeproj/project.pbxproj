@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		18032AAC1B5E674500ED801E /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA01B5E674500ED801E /* BaseVC.m */; };
-		18032AAD1B5E674500ED801E /* LoginOneVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA21B5E674500ED801E /* LoginOneVCViewController.m */; };
-		18032AAE1B5E674500ED801E /* LoginOneVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */; };
-		18032AAF1B5E674500ED801E /* LoginThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA51B5E674500ED801E /* LoginThreeVC.m */; };
-		18032AB01B5E674500ED801E /* LoginThreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA61B5E674500ED801E /* LoginThreeVC.xib */; };
-		18032AB11B5E674500ED801E /* LoginTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AA81B5E674500ED801E /* LoginTwoVC.m */; };
-		18032AB21B5E674500ED801E /* LoginTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18032AA91B5E674500ED801E /* LoginTwoVC.xib */; };
 		18032AB31B5E674500ED801E /* RoundLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AAB1B5E674500ED801E /* RoundLabel.m */; };
 		18032AB71B5E677A00ED801E /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18032AB61B5E677A00ED801E /* WZGuideViewController.m */; };
 		18032ABF1B5E67AA00ED801E /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18032ABB1B5E67AA00ED801E /* SMS_SDKLocalizable.strings */; };
@@ -79,6 +73,16 @@
 		6DA49AAA1B467F3A00CA55FE /* Classes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA49AA91B467F3A00CA55FE /* Classes.storyboard */; };
 		6DA49AAC1B467F5100CA55FE /* TimeLine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA49AAB1B467F5100CA55FE /* TimeLine.storyboard */; };
 		6DA49AAE1B467F6B00CA55FE /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA49AAD1B467F6B00CA55FE /* Find.storyboard */; };
+		FE02EA071B64C70A006A58A2 /* UIViewController+DismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA061B64C70A006A58A2 /* UIViewController+DismissKeyboard.m */; };
+		FE02EA0B1B64D0A4006A58A2 /* EIDCardHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE02EA0A1B64D0A4006A58A2 /* EIDCardHeaderView.xib */; };
+		FE02EA0E1B64D428006A58A2 /* EIDCardHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA0D1B64D428006A58A2 /* EIDCardHeaderView.m */; };
+		FE02EA121B65CC2F006A58A2 /* APITester.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA111B65CC2F006A58A2 /* APITester.m */; };
+		FE02EA1C1B65CE4E006A58A2 /* LoginOneVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA141B65CE4E006A58A2 /* LoginOneVCViewController.m */; };
+		FE02EA1D1B65CE4E006A58A2 /* LoginOneVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE02EA151B65CE4E006A58A2 /* LoginOneVCViewController.xib */; };
+		FE02EA1E1B65CE4E006A58A2 /* LoginThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA171B65CE4E006A58A2 /* LoginThreeVC.m */; };
+		FE02EA1F1B65CE4E006A58A2 /* LoginThreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE02EA181B65CE4E006A58A2 /* LoginThreeVC.xib */; };
+		FE02EA201B65CE4E006A58A2 /* LoginTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE02EA1A1B65CE4E006A58A2 /* LoginTwoVC.m */; };
+		FE02EA211B65CE4E006A58A2 /* LoginTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE02EA1B1B65CE4E006A58A2 /* LoginTwoVC.xib */; };
 		FE1210231B50032500ABEDB5 /* BorderBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1210221B50032500ABEDB5 /* BorderBtn.m */; };
 		FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE36C9451B4FFF08007DCC4D /* FeedSectionModel.m */; };
 		FE40CA9C1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */; };
@@ -157,7 +161,6 @@
 		FE9972521B4C0A6300E65D58 /* ClassesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9972511B4C0A6300E65D58 /* ClassesVC.m */; };
 		FE9972551B4C16FE00E65D58 /* ClassesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */; };
 		FE9972591B4C1A3700E65D58 /* ClassesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */; };
-		FE9E31EF1B5A8F1200AAA48C /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9E31EE1B5A8F1200AAA48C /* MainView.m */; };
 		FEA1C81B1B4E98D900033BF8 /* NoteReleaseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */; };
 		FEA1C81E1B4E9BFC00033BF8 /* HomeworkTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA1C81D1B4E9BFC00033BF8 /* HomeworkTVC.m */; };
 		FEA1C8211B4EA20800033BF8 /* BlackboardReleaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA1C8201B4EA20800033BF8 /* BlackboardReleaseVC.m */; };
@@ -171,7 +174,6 @@
 		FEB70B851B5D0E5000F1F77B /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB70B801B5D0E5000F1F77B /* MJRefreshHeaderView.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FEB8F5BC1B47AE2300EC4F57 /* IconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB8F5BB1B47AE2300EC4F57 /* IconCell.m */; };
 		FEB8F5BF1B47AEE900EC4F57 /* MineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB8F5BE1B47AEE900EC4F57 /* MineVC.m */; };
-		FEB8F5C91B47B84200EC4F57 /* MineVC+DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB8F5C81B47B84200EC4F57 /* MineVC+DataSource.m */; };
 		FEB8F5CC1B47B99800EC4F57 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB8F5CB1B47B99800EC4F57 /* NoteCell.m */; };
 /* End PBXBuildFile section */
 
@@ -189,15 +191,6 @@
 		18032A9D1B5E663900ED801E /* CommonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonConstants.h; sourceTree = "<group>"; };
 		18032A9F1B5E674500ED801E /* BaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseVC.h; sourceTree = "<group>"; };
 		18032AA01B5E674500ED801E /* BaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
-		18032AA11B5E674500ED801E /* LoginOneVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOneVCViewController.h; sourceTree = "<group>"; };
-		18032AA21B5E674500ED801E /* LoginOneVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOneVCViewController.m; sourceTree = "<group>"; };
-		18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginOneVCViewController.xib; sourceTree = "<group>"; };
-		18032AA41B5E674500ED801E /* LoginThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginThreeVC.h; sourceTree = "<group>"; };
-		18032AA51B5E674500ED801E /* LoginThreeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginThreeVC.m; sourceTree = "<group>"; };
-		18032AA61B5E674500ED801E /* LoginThreeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginThreeVC.xib; sourceTree = "<group>"; };
-		18032AA71B5E674500ED801E /* LoginTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTwoVC.h; sourceTree = "<group>"; };
-		18032AA81B5E674500ED801E /* LoginTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTwoVC.m; sourceTree = "<group>"; };
-		18032AA91B5E674500ED801E /* LoginTwoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTwoVC.xib; sourceTree = "<group>"; };
 		18032AAA1B5E674500ED801E /* RoundLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundLabel.h; sourceTree = "<group>"; };
 		18032AAB1B5E674500ED801E /* RoundLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundLabel.m; sourceTree = "<group>"; };
 		18032AB51B5E677A00ED801E /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -327,6 +320,22 @@
 		6DA49AA91B467F3A00CA55FE /* Classes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Classes.storyboard; sourceTree = "<group>"; };
 		6DA49AAB1B467F5100CA55FE /* TimeLine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TimeLine.storyboard; sourceTree = "<group>"; };
 		6DA49AAD1B467F6B00CA55FE /* Find.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Find.storyboard; sourceTree = "<group>"; };
+		FE02EA051B64C70A006A58A2 /* UIViewController+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DismissKeyboard.h"; sourceTree = "<group>"; };
+		FE02EA061B64C70A006A58A2 /* UIViewController+DismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DismissKeyboard.m"; sourceTree = "<group>"; };
+		FE02EA0A1B64D0A4006A58A2 /* EIDCardHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EIDCardHeaderView.xib; path = wiseschool/EIDCardHeaderView.xib; sourceTree = SOURCE_ROOT; };
+		FE02EA0C1B64D428006A58A2 /* EIDCardHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EIDCardHeaderView.h; path = wiseschool/EIDCardHeaderView.h; sourceTree = SOURCE_ROOT; };
+		FE02EA0D1B64D428006A58A2 /* EIDCardHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EIDCardHeaderView.m; path = wiseschool/EIDCardHeaderView.m; sourceTree = SOURCE_ROOT; };
+		FE02EA101B65CC2F006A58A2 /* APITester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APITester.h; path = wiseschool/APITester.h; sourceTree = SOURCE_ROOT; };
+		FE02EA111B65CC2F006A58A2 /* APITester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APITester.m; path = wiseschool/APITester.m; sourceTree = SOURCE_ROOT; };
+		FE02EA131B65CE4E006A58A2 /* LoginOneVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginOneVCViewController.h; sourceTree = "<group>"; };
+		FE02EA141B65CE4E006A58A2 /* LoginOneVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginOneVCViewController.m; sourceTree = "<group>"; };
+		FE02EA151B65CE4E006A58A2 /* LoginOneVCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginOneVCViewController.xib; sourceTree = "<group>"; };
+		FE02EA161B65CE4E006A58A2 /* LoginThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginThreeVC.h; sourceTree = "<group>"; };
+		FE02EA171B65CE4E006A58A2 /* LoginThreeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginThreeVC.m; sourceTree = "<group>"; };
+		FE02EA181B65CE4E006A58A2 /* LoginThreeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginThreeVC.xib; sourceTree = "<group>"; };
+		FE02EA191B65CE4E006A58A2 /* LoginTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTwoVC.h; sourceTree = "<group>"; };
+		FE02EA1A1B65CE4E006A58A2 /* LoginTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTwoVC.m; sourceTree = "<group>"; };
+		FE02EA1B1B65CE4E006A58A2 /* LoginTwoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTwoVC.xib; sourceTree = "<group>"; };
 		FE1210211B50032500ABEDB5 /* BorderBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderBtn.h; sourceTree = "<group>"; };
 		FE1210221B50032500ABEDB5 /* BorderBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderBtn.m; sourceTree = "<group>"; };
 		FE36C9441B4FFF08007DCC4D /* FeedSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSectionModel.h; sourceTree = "<group>"; };
@@ -460,8 +469,6 @@
 		FE9972531B4C16FE00E65D58 /* ClassesHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassesHeaderView.h; sourceTree = "<group>"; };
 		FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassesHeaderView.m; sourceTree = "<group>"; };
 		FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassesHeaderView.xib; sourceTree = "<group>"; };
-		FE9E31ED1B5A8F1200AAA48C /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
-		FE9E31EE1B5A8F1200AAA48C /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		FEA1C8191B4E98D900033BF8 /* NoteReleaseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteReleaseTVC.h; sourceTree = "<group>"; };
 		FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteReleaseTVC.m; sourceTree = "<group>"; };
 		FEA1C81C1B4E9BFC00033BF8 /* HomeworkTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeworkTVC.h; sourceTree = "<group>"; };
@@ -487,8 +494,6 @@
 		FEB8F5BB1B47AE2300EC4F57 /* IconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconCell.m; sourceTree = "<group>"; };
 		FEB8F5BD1B47AEE900EC4F57 /* MineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineVC.h; sourceTree = "<group>"; };
 		FEB8F5BE1B47AEE900EC4F57 /* MineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineVC.m; sourceTree = "<group>"; };
-		FEB8F5C71B47B84200EC4F57 /* MineVC+DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MineVC+DataSource.h"; sourceTree = "<group>"; };
-		FEB8F5C81B47B84200EC4F57 /* MineVC+DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MineVC+DataSource.m"; sourceTree = "<group>"; };
 		FEB8F5CA1B47B99800EC4F57 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
 		FEB8F5CB1B47B99800EC4F57 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -524,15 +529,6 @@
 				18032AB41B5E675800ED801E /* 引导页 */,
 				18032A9F1B5E674500ED801E /* BaseVC.h */,
 				18032AA01B5E674500ED801E /* BaseVC.m */,
-				18032AA11B5E674500ED801E /* LoginOneVCViewController.h */,
-				18032AA21B5E674500ED801E /* LoginOneVCViewController.m */,
-				18032AA31B5E674500ED801E /* LoginOneVCViewController.xib */,
-				18032AA71B5E674500ED801E /* LoginTwoVC.h */,
-				18032AA81B5E674500ED801E /* LoginTwoVC.m */,
-				18032AA91B5E674500ED801E /* LoginTwoVC.xib */,
-				18032AA41B5E674500ED801E /* LoginThreeVC.h */,
-				18032AA51B5E674500ED801E /* LoginThreeVC.m */,
-				18032AA61B5E674500ED801E /* LoginThreeVC.xib */,
 				FE40CA9A1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.h */,
 				FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */,
 				18032AAA1B5E674500ED801E /* RoundLabel.h */,
@@ -544,6 +540,15 @@
 		18032AB41B5E675800ED801E /* 引导页 */ = {
 			isa = PBXGroup;
 			children = (
+				FE02EA131B65CE4E006A58A2 /* LoginOneVCViewController.h */,
+				FE02EA141B65CE4E006A58A2 /* LoginOneVCViewController.m */,
+				FE02EA151B65CE4E006A58A2 /* LoginOneVCViewController.xib */,
+				FE02EA161B65CE4E006A58A2 /* LoginThreeVC.h */,
+				FE02EA171B65CE4E006A58A2 /* LoginThreeVC.m */,
+				FE02EA181B65CE4E006A58A2 /* LoginThreeVC.xib */,
+				FE02EA191B65CE4E006A58A2 /* LoginTwoVC.h */,
+				FE02EA1A1B65CE4E006A58A2 /* LoginTwoVC.m */,
+				FE02EA1B1B65CE4E006A58A2 /* LoginTwoVC.xib */,
 				18032AB51B5E677A00ED801E /* WZGuideViewController.h */,
 				18032AB61B5E677A00ED801E /* WZGuideViewController.m */,
 			);
@@ -579,6 +584,8 @@
 		6D0EE5B21B4F867400D24E9D /* 第三方框架 */ = {
 			isa = PBXGroup;
 			children = (
+				FE02EA051B64C70A006A58A2 /* UIViewController+DismissKeyboard.h */,
+				FE02EA061B64C70A006A58A2 /* UIViewController+DismissKeyboard.m */,
 				FE70D1291B5FDC92003780C3 /* ProgressHUD */,
 				FE94174E1B5A2F8F0073C4CF /* libicucore.dylib */,
 				FE94174C1B5A2F840073C4CF /* libz.dylib */,
@@ -807,6 +814,8 @@
 			children = (
 				18032AC11B5E67E000ED801E /* HttpManager.h */,
 				18032AC21B5E67E000ED801E /* HttpManager.m */,
+				FE02EA101B65CC2F006A58A2 /* APITester.h */,
+				FE02EA111B65CC2F006A58A2 /* APITester.m */,
 				6DA49A791B46629B00CA55FE /* AppDelegate.h */,
 				6DA49A7A1B46629B00CA55FE /* AppDelegate.m */,
 				18032A9E1B5E671600ED801E /* 登陆 */,
@@ -866,6 +875,39 @@
 			name = "主框架";
 			sourceTree = "<group>";
 		};
+		FE02EA041B64BE85006A58A2 /* 班级主界面 */ = {
+			isa = PBXGroup;
+			children = (
+				FE9972501B4C0A6300E65D58 /* ClassesVC.h */,
+				FE9972511B4C0A6300E65D58 /* ClassesVC.m */,
+				FE9972531B4C16FE00E65D58 /* ClassesHeaderView.h */,
+				FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */,
+				FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */,
+			);
+			name = "班级主界面";
+			sourceTree = "<group>";
+		};
+		FE02EA0F1B64D9BE006A58A2 /* 自定义视图 */ = {
+			isa = PBXGroup;
+			children = (
+				FEB8F5BA1B47AE2300EC4F57 /* IconCell.h */,
+				FEB8F5BB1B47AE2300EC4F57 /* IconCell.m */,
+				FEB8F5CA1B47B99800EC4F57 /* NoteCell.h */,
+				FEB8F5CB1B47B99800EC4F57 /* NoteCell.m */,
+				6D998B021B4E070B00D9F275 /* MineHeaderView.h */,
+				6D998B031B4E070B00D9F275 /* MineHeaderView.m */,
+				6D998B051B4E072100D9F275 /* MineHeaderView.xib */,
+				FE02EA0C1B64D428006A58A2 /* EIDCardHeaderView.h */,
+				FE02EA0D1B64D428006A58A2 /* EIDCardHeaderView.m */,
+				FE02EA0A1B64D0A4006A58A2 /* EIDCardHeaderView.xib */,
+				FE9122CA1B5B4A750084659D /* GestureCollectionView.h */,
+				FE9122CB1B5B4A750084659D /* GestureCollectionView.m */,
+				FE9122CD1B5B51390084659D /* GestureScrollView.h */,
+				FE9122CE1B5B51390084659D /* GestureScrollView.m */,
+			);
+			name = "自定义视图";
+			sourceTree = "<group>";
+		};
 		FE683FC71B6341DC00C3627F /* 家庭作业详情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,6 +915,8 @@
 				FE683FC91B635EE700C3627F /* Homework.m */,
 				FE683FC41B6336AB00C3627F /* HomeWorkCell.h */,
 				FE683FC51B6336AB00C3627F /* HomeWorkCell.m */,
+				FEA1C81C1B4E9BFC00033BF8 /* HomeworkTVC.h */,
+				FEA1C81D1B4E9BFC00033BF8 /* HomeworkTVC.m */,
 				FE8C53A71B6365820084CCFC /* HomeworkDetailVC.h */,
 				FE8C53A81B6365820084CCFC /* HomeworkDetailVC.m */,
 			);
@@ -926,8 +970,6 @@
 			children = (
 				FEA1C8191B4E98D900033BF8 /* NoteReleaseTVC.h */,
 				FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */,
-				FEA1C81C1B4E9BFC00033BF8 /* HomeworkTVC.h */,
-				FEA1C81D1B4E9BFC00033BF8 /* HomeworkTVC.m */,
 				FEA1C81F1B4EA20800033BF8 /* BlackboardReleaseVC.h */,
 				FEA1C8201B4EA20800033BF8 /* BlackboardReleaseVC.m */,
 			);
@@ -1096,12 +1138,8 @@
 			children = (
 				FE1210211B50032500ABEDB5 /* BorderBtn.h */,
 				FE1210221B50032500ABEDB5 /* BorderBtn.m */,
-				FE9972501B4C0A6300E65D58 /* ClassesVC.h */,
-				FE9972511B4C0A6300E65D58 /* ClassesVC.m */,
-				FE9972531B4C16FE00E65D58 /* ClassesHeaderView.h */,
-				FE9972541B4C16FE00E65D58 /* ClassesHeaderView.m */,
-				FE9972581B4C1A3700E65D58 /* ClassesHeaderView.xib */,
 				6DA49AA91B467F3A00CA55FE /* Classes.storyboard */,
+				FE02EA041B64BE85006A58A2 /* 班级主界面 */,
 				FE683FC71B6341DC00C3627F /* 家庭作业详情 */,
 				FE70D12F1B5FE1AE003780C3 /* 添加成员 */,
 				FE70D1301B5FE1C2003780C3 /* 联系人列表 */,
@@ -1142,33 +1180,11 @@
 			isa = PBXGroup;
 			children = (
 				6DA49AA71B467F1400CA55FE /* Mine.storyboard */,
-				FEB8F5BA1B47AE2300EC4F57 /* IconCell.h */,
-				FEB8F5BB1B47AE2300EC4F57 /* IconCell.m */,
-				FE9E31ED1B5A8F1200AAA48C /* MainView.h */,
-				FE9E31EE1B5A8F1200AAA48C /* MainView.m */,
-				FEB8F5CA1B47B99800EC4F57 /* NoteCell.h */,
-				FEB8F5CB1B47B99800EC4F57 /* NoteCell.m */,
 				FEB8F5BD1B47AEE900EC4F57 /* MineVC.h */,
 				FEB8F5BE1B47AEE900EC4F57 /* MineVC.m */,
-				6D998B021B4E070B00D9F275 /* MineHeaderView.h */,
-				6D998B031B4E070B00D9F275 /* MineHeaderView.m */,
-				6D998B051B4E072100D9F275 /* MineHeaderView.xib */,
-				FEB8F5C61B47B7FF00EC4F57 /* 数据源 */,
-				FE9122CA1B5B4A750084659D /* GestureCollectionView.h */,
-				FE9122CB1B5B4A750084659D /* GestureCollectionView.m */,
-				FE9122CD1B5B51390084659D /* GestureScrollView.h */,
-				FE9122CE1B5B51390084659D /* GestureScrollView.m */,
+				FE02EA0F1B64D9BE006A58A2 /* 自定义视图 */,
 			);
 			name = "我的";
-			sourceTree = "<group>";
-		};
-		FEB8F5C61B47B7FF00EC4F57 /* 数据源 */ = {
-			isa = PBXGroup;
-			children = (
-				FEB8F5C71B47B84200EC4F57 /* MineVC+DataSource.h */,
-				FEB8F5C81B47B84200EC4F57 /* MineVC+DataSource.m */,
-			);
-			name = "数据源";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1254,12 +1270,11 @@
 			files = (
 				FE9417261B5A223D0073C4CF /* Chat_take_picture.png in Resources */,
 				FE9972591B4C1A3700E65D58 /* ClassesHeaderView.xib in Resources */,
-				18032AB01B5E674500ED801E /* LoginThreeVC.xib in Resources */,
 				6DA49AAE1B467F6B00CA55FE /* Find.storyboard in Resources */,
 				FE9417291B5A223D0073C4CF /* chatfrom_doctor_icon.png in Resources */,
+				FE02EA211B65CE4E006A58A2 /* LoginTwoVC.xib in Resources */,
 				6DA49A811B46629B00CA55FE /* Main.storyboard in Resources */,
 				6DA49A861B46629B00CA55FE /* LaunchScreen.xib in Resources */,
-				18032AB21B5E674500ED801E /* LoginTwoVC.xib in Resources */,
 				6DA49A831B46629B00CA55FE /* Images.xcassets in Resources */,
 				6DA49AAC1B467F5100CA55FE /* TimeLine.storyboard in Resources */,
 				FE94172B1B5A223D0073C4CF /* 0.jpeg in Resources */,
@@ -1270,6 +1285,8 @@
 				FE94171F1B5A223D0073C4CF /* chat_animation_white1.png in Resources */,
 				6D998B061B4E072100D9F275 /* MineHeaderView.xib in Resources */,
 				FE9417271B5A223D0073C4CF /* chat_voice_record.png in Resources */,
+				FE02EA1D1B65CE4E006A58A2 /* LoginOneVCViewController.xib in Resources */,
+				FE02EA1F1B65CE4E006A58A2 /* LoginThreeVC.xib in Resources */,
 				FE9417241B5A223D0073C4CF /* Chat_record_circle.png in Resources */,
 				FE9417251B5A223D0073C4CF /* chat_send_message.png in Resources */,
 				FE9417281B5A223D0073C4CF /* chatfrom_bg_normal.png in Resources */,
@@ -1280,6 +1297,7 @@
 				FEB70B811B5D0E5000F1F77B /* arrow@2x.png in Resources */,
 				FE94171E1B5A223D0073C4CF /* chat_animation3.png in Resources */,
 				6DA49AAA1B467F3A00CA55FE /* Classes.storyboard in Resources */,
+				FE02EA0B1B64D0A4006A58A2 /* EIDCardHeaderView.xib in Resources */,
 				FE9417221B5A223D0073C4CF /* chat_ipunt_message.png in Resources */,
 				FE9417231B5A223D0073C4CF /* chat_message_back.png in Resources */,
 				18032ABF1B5E67AA00ED801E /* SMS_SDKLocalizable.strings in Resources */,
@@ -1288,7 +1306,6 @@
 				FE9417471B5A22910073C4CF /* RootViewController.xib in Resources */,
 				FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */,
 				FE9417201B5A223D0073C4CF /* chat_animation_white2.png in Resources */,
-				18032AAE1B5E674500ED801E /* LoginOneVCViewController.xib in Resources */,
 				FE94171D1B5A223D0073C4CF /* chat_animation2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,6 +1324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE02EA1C1B65CE4E006A58A2 /* LoginOneVCViewController.m in Sources */,
 				FE9417111B5A223D0073C4CF /* AFSecurityPolicy.m in Sources */,
 				FE94170E1B5A223D0073C4CF /* AFHTTPRequestOperationManager.m in Sources */,
 				FE94170D1B5A223D0073C4CF /* AFHTTPRequestOperation.m in Sources */,
@@ -1318,26 +1336,27 @@
 				FE94172E1B5A223D0073C4CF /* AFNetworkActivityIndicatorManager.m in Sources */,
 				FEB70B821B5D0E5000F1F77B /* MJRefreshBaseView.m in Sources */,
 				FEB70B851B5D0E5000F1F77B /* MJRefreshHeaderView.m in Sources */,
-				18032AB11B5E674500ED801E /* LoginTwoVC.m in Sources */,
 				FE94173B1B5A223D0073C4CF /* UUMessage.m in Sources */,
 				FE9417391B5A223D0073C4CF /* UUImageAvatarBrowser.m in Sources */,
 				6D0EE6261B4F868D00D24E9D /* UIImage+EMGIF.m in Sources */,
-				FEB8F5C91B47B84200EC4F57 /* MineVC+DataSource.m in Sources */,
 				FEA1C8211B4EA20800033BF8 /* BlackboardReleaseVC.m in Sources */,
 				FEA1C81B1B4E98D900033BF8 /* NoteReleaseTVC.m in Sources */,
 				FEA1C81E1B4E9BFC00033BF8 /* HomeworkTVC.m in Sources */,
 				FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */,
 				6D998B0C1B4E4CC800D9F275 /* ContactCell.m in Sources */,
+				FE02EA1E1B65CE4E006A58A2 /* LoginThreeVC.m in Sources */,
 				6D0EE61A1B4F868D00D24E9D /* MWZoomingScrollView.m in Sources */,
 				6D0EE62E1B4F868D00D24E9D /* PSTCollectionViewCell.m in Sources */,
 				6D0EE5B11B4F764700D24E9D /* User.m in Sources */,
 				FE9417381B5A223D0073C4CF /* UUAVAudioPlayer.m in Sources */,
 				6D0EE6151B4F868D00D24E9D /* MWGridViewController.m in Sources */,
+				FE02EA071B64C70A006A58A2 /* UIViewController+DismissKeyboard.m in Sources */,
 				FE94173E1B5A223D0073C4CF /* UUMessageFrame.m in Sources */,
 				FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */,
 				6D0EE6321B4F868D00D24E9D /* PSTCollectionViewItemKey.m in Sources */,
 				FEB70B831B5D0E5000F1F77B /* MJRefreshConst.m in Sources */,
 				FE9972551B4C16FE00E65D58 /* ClassesHeaderView.m in Sources */,
+				FE02EA121B65CC2F006A58A2 /* APITester.m in Sources */,
 				FE94177F1B5A31D20073C4CF /* CommentTableViewCell.m in Sources */,
 				6DA49A7B1B46629B00CA55FE /* AppDelegate.m in Sources */,
 				6D0EE6341B4F868D00D24E9D /* PSTCollectionViewUpdateItem.m in Sources */,
@@ -1345,7 +1364,7 @@
 				6D0EE6171B4F868D00D24E9D /* MWPhotoBrowser.m in Sources */,
 				18032AC31B5E67E000ED801E /* HttpManager.m in Sources */,
 				6D0EE61D1B4F868D00D24E9D /* EMSDWebImageCompat.m in Sources */,
-				18032AAF1B5E674500ED801E /* LoginThreeVC.m in Sources */,
+				FE02EA0E1B64D428006A58A2 /* EIDCardHeaderView.m in Sources */,
 				FE94172F1B5A223D0073C4CF /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				FE9417141B5A223D0073C4CF /* AFURLResponseSerialization.m in Sources */,
 				FE9417801B5A31D20073C4CF /* TimeLineVC.m in Sources */,
@@ -1358,6 +1377,7 @@
 				FEB8F5CC1B47B99800EC4F57 /* NoteCell.m in Sources */,
 				6D0EE6301B4F868D00D24E9D /* PSTCollectionViewData.m in Sources */,
 				FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */,
+				FE02EA201B65CE4E006A58A2 /* LoginTwoVC.m in Sources */,
 				FE9122CF1B5B51390084659D /* GestureScrollView.m in Sources */,
 				6D0EE61E1B4F868D00D24E9D /* EMSDWebImageDecoder.m in Sources */,
 				FE94173C1B5A223D0073C4CF /* UUMessageCell.m in Sources */,
@@ -1389,7 +1409,6 @@
 				FE94171B1B5A223D0073C4CF /* NSDate+Utils.m in Sources */,
 				6D998B091B4E46AA00D9F275 /* ContactVC.m in Sources */,
 				6D0EE62B1B4F868D00D24E9D /* UIView+EMWebCacheOperation.m in Sources */,
-				18032AAD1B5E674500ED801E /* LoginOneVCViewController.m in Sources */,
 				6D0EE6351B4F868D00D24E9D /* PSTGridLayoutInfo.m in Sources */,
 				FE72403A1B51010800AD3735 /* Course.m in Sources */,
 				6D0EE6361B4F868D00D24E9D /* PSTGridLayoutItem.m in Sources */,
@@ -1410,7 +1429,6 @@
 				FE8C53A91B6365820084CCFC /* HomeworkDetailVC.m in Sources */,
 				FE7240341B50ED4C00AD3735 /* CourseTable.m in Sources */,
 				FE7240371B50F55100AD3735 /* CourseTableCell.m in Sources */,
-				FE9E31EF1B5A8F1200AAA48C /* MainView.m in Sources */,
 				6D0EE61F1B4F868D00D24E9D /* EMSDWebImageDownloader.m in Sources */,
 				FE9417451B5A22910073C4CF /* ChatModel.m in Sources */,
 				6D0EE61B1B4F868D00D24E9D /* DACircularProgressView.m in Sources */,

@@ -41,8 +41,16 @@
     }
     
    [self createCustomNavigationBar:NO withTitle:@"账号注册" withBackButton:NO];
+    
+    self.phoneTXT.delegate =self;
    
-   
+    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    if(appDelegate.user==nil)
+    {
+        appDelegate.user =[[User alloc]init];
+    }
+    
 }
 #pragma  mark ACTIONS
 - (IBAction)toMainVC
@@ -52,7 +60,31 @@
     UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
     delegate.window.rootViewController = enteranceVC;
 }
-
+-(void)verifyCode
+{
+    
+           [SMS_SDK commitVerifyCode:self.codeTXT.text result:^(enum SMS_ResponseState state)
+           {
+               if (1==state)
+               {
+    
+                   LoginTwoVC *login2= [[LoginTwoVC alloc ]initWithNibName:@"LoginTwoVC" bundle:nil];
+    
+                   [self.navigationController pushViewController:login2 animated:YES];
+               }
+               else if (0==state)
+               {
+                   NSLog(@"验证失败");
+                   NSString* str=[NSString stringWithFormat:NSLocalizedString(@"verifycodeerrormsg", nil)];
+                   UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"verifycodeerrortitle", nil)
+                                                                 message:str
+                                                                delegate:self
+                                                       cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                       otherButtonTitles:nil, nil];
+                   [alert show];
+               }
+           }];
+}
 - (IBAction) actionJoinClasses:(id)sender
 {
    if (self.codeTXT.text.length != 4)
@@ -66,99 +98,104 @@
    }
    else
    {
-//       HttpManager *httpManager = [HttpManager sharedHttpManager];
-//
-//       
-//       NSString *queryString =[NSString stringWithFormat:@"mobile=%@&smsCode=%@",self.phoneTXT.text,@""];
-//       
-//       [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_VALIDATE_MOBILE portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
-//        {
-//            if(jsonData !=nil)
-//            {
-//                NSArray* arr = [jsonData allKeys];
-//                for(NSString* str in arr)
-//                {
-//                    NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-//                    if([str compare:@"data"]==NSOrderedSame)
-//                    {
-//                        NSDictionary *data =[jsonData objectForKey:str];
-//                        
-//                        NSString * userID = [data objectForKey:@"userID"];
-//                        
-//                        
-//                        NSInteger isEntry = [data objectForKey:@"isEntryIndex"];
-//                        
-//                        if(isEntry == 0)
-//                        {
-//                            
-//                        }
-//                        else if (isEntry ==1)
-//                        {
-//                            
-//                        }
-//                    }
-//                }
-//                
-//            }
-//            
-//        }];
-//
-//       [SMS_SDK commitVerifyCode:self.codeTXT.text result:^(enum SMS_ResponseState state)
-//       {
-//           if (1==state)
-//           {
-//
-//               LoginTwoVC *login2= [[LoginTwoVC alloc ]initWithNibName:@"LoginTwoVC" bundle:nil];
-//               
-//               [self.navigationController pushViewController:login2 animated:YES];
-//           }
-//           else if (0==state)
-//           {
-//               NSLog(@"验证失败");
-//               NSString* str=[NSString stringWithFormat:NSLocalizedString(@"verifycodeerrormsg", nil)];
-//               UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"verifycodeerrortitle", nil)
-//                                                             message:str
-//                                                            delegate:self
-//                                                   cancelButtonTitle:NSLocalizedString(@"sure", nil)
-//                                                   otherButtonTitles:nil, nil];
-//               [alert show];
-//           }
-//       }];
+       [self verifyCode];
+
    }
 
-
+    [self actionToNext];
+  
+}
+-(void)actionToNext
+{
     
     LoginTwoVC *login2= [[LoginTwoVC alloc ]initWithNibName:@"LoginTwoVC" bundle:nil];
     
     [self.navigationController pushViewController:login2 animated:YES];
 }
+-(void)requestUserId
+{
+           HttpManager *httpManager = [HttpManager sharedHttpManager];
+    
+    
+           NSString *queryString =[NSString stringWithFormat:@"mobile=%@&smsCode=%@",self.phoneTXT.text,@""];
+    
+           [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_VALIDATE_MOBILE portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+            {
+                if(jsonData !=nil)
+                {
+                    NSArray* arr = [jsonData allKeys];
+                    for(NSString* str in arr)
+                    {
+                        NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
 
+                    }
+                    
+                    NSString * status =[jsonData objectForKey:@"status"];
+                    
+                    if([status compare:@"1"]==NSOrderedSame)
+                    {
+                        NSArray *data =[jsonData objectForKey:@"data"];
+                        if(data!=nil&&data.count>0)
+                        {
+                            AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+                            appDelegate.user.userID = [data objectAtIndex:0][@"userId"];
+                            
+                            NSInteger isEntryIndex = [data objectAtIndex:0][@"isEntityIndex"];
+                            
+                            if(isEntryIndex==1)
+                            {
+                            
+                                [self toMainVC];
+                            }
+                            else
+                            {
+                                [self actionToNext];
+                            }
+                           
+                        }
+                        
+                    }
+
+                    
+                    
+                    
+                }
+                
+            }];
+}
+-(void)getValidateCodebySMS
+{
+           [SMS_SDK getVerificationCodeBySMSWithPhone:self.phoneTXT.text
+                                                 zone:CHINA_AREA_ZONE
+                                               result:^(SMS_SDKError *error)
+            {
+                if (!error)
+                {
+    
+                }
+                else
+                {
+                    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"codesenderrtitle"
+                                                                  message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"sure"
+                                                        otherButtonTitles:nil, nil];
+                    [alert show];
+    
+                }
+                
+            }];
+}
 - (IBAction) actionGetCode:(id)sender
 {
+    
+   [self.phoneTXT resignFirstResponder];
    if([self validatePhoneNumber:self.phoneTXT.text])
    {
-       [SMS_SDK getVerificationCodeBySMSWithPhone:self.phoneTXT.text
-                                             zone:CHINA_AREA_ZONE
-                                           result:^(SMS_SDKError *error)
-        {
-            if (!error)
-            {
-//                [self presentViewController:verify animated:YES completion:^{
-//                    ;
-//                }];
-            }
-            else
-            {
-                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"codesenderrtitle"
-                                                              message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
-                                                             delegate:self
-                                                    cancelButtonTitle:@"sure"
-                                                    otherButtonTitles:nil, nil];
-                [alert show];
+      
+       
+       [self requestUserId];
 
-            }
-            
-        }];
 
    }
 }
@@ -169,7 +206,17 @@
     [self.phoneTXT setText:@""];
     [self.clearBtn  setHidden:YES];
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+//    [self.clearBtn setHidden:NO];
+}
 
+- (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    [self.clearBtn setHidden:NO];
+    
+    return YES;
+}
 -(BOOL)validatePhoneNumber:(NSString*)phoneNumber
 {
 
@@ -232,43 +279,7 @@
     }
 }
 
-//-(void) createCustomNavigationBar:(BOOL)background withTitle:(NSString*)title withBackButton:(BOOL)back
-//{
-//    
-//    
-//    int width =[UIScreen mainScreen].bounds.size.width;
-//    
-//    UIView * bannerView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 50)];
-//    
-//    if(background)
-//    {
-//        UIImageView *bannerBackground =[[UIImageView alloc]initWithFrame:bannerView.bounds];
-//        [bannerBackground setImage:[UIImage imageNamed:@""]];
-//        [bannerView addSubview:bannerBackground];
-//    }
-//    else
-//    {
-//        [bannerView setBackgroundColor:[UIColor colorWithRed:127/255.0 green:192/225.0 blue:224/255.0 alpha:1]];
-//    }
-//    
-//    if([title length])
-//    {
-//        int titleWidth =100;
-//        UILabel *titleView =[[UILabel alloc] initWithFrame:CGRectMake(width/2-titleWidth/2, 20, titleWidth, 30)];
-//        titleView.numberOfLines=0;
-//        titleView.textAlignment =NSTextAlignmentCenter;
-//        [titleView setText:title];
-//        [titleView setTextColor:[UIColor whiteColor]];
-//        
-//        [titleView setBackgroundColor:[UIColor clearColor]];
-//        
-//        [bannerView addSubview:titleView];
-//        
-//    }
-//    [self.view addSubview: bannerView];
-//    
-//    
-//}
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -280,8 +291,5 @@
     [super didReceiveMemoryWarning];
  
 }
-
-
-
 
 @end

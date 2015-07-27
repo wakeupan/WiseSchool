@@ -11,6 +11,7 @@
 #import "UUProgressHUD.h"
 #import "ProgressHUD.h"
 #import "API.h"
+#import "UIViewController+DismissKeyboard.h"
 
 //布局定义
 #define Screen_Width [UIScreen mainScreen].bounds.size.width

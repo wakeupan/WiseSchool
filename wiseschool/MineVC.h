@@ -13,11 +13,11 @@
 #import "FeedSectionModel.h"
 
 @interface MineVC : UIViewController
-@property(nonatomic) BOOL test;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic,strong) NSMutableArray *recentContactsArray;
-@property (nonatomic,strong) NSMutableArray *feedSectionArray;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;//顶部最近联系人视图
+@property (weak, nonatomic) IBOutlet UITableView *tableView;//通告、家庭作业、电子学生证视图
+
+@property (nonatomic,strong) NSMutableArray *recentContactsArray;//联系人数据源
+@property (nonatomic,strong) NSMutableArray *feedSectionArray;//资讯数据源
 
 @end

@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class LoginOneVCViewController;
+#import "User.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) LoginOneVCViewController *viewController;
+
+@property (strong, nonatomic) User *user;
 
 @end
 

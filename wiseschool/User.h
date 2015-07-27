@@ -32,6 +32,14 @@
 @property (nonatomic,strong) NSString *studentOrTeacher;//学生或者老师
 @property (nonatomic,strong) NSString *incheckOrManager;//审核中或者管理员
 
+@property (nonatomic,strong) NSString *gradeId;
+@property (nonatomic,strong) NSString *subjectId;
+@property (nonatomic,strong) NSString *subjectName;
+@property (nonatomic) int ClassNo;
+@property (nonatomic,strong) NSString *userType;
+@property (nonatomic,strong) NSString *relationship;
+@property (nonatomic,strong) NSString *childName;
+
 @property (nonatomic) BOOL onTime;//是否准时到达
 @property (nonatomic) BOOL marked;//是否已经被点名
 

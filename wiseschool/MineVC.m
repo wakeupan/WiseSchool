@@ -7,8 +7,8 @@
 //
 
 #import "MineVC.h"
-#import "MineVC+DataSource.h"
 #import "MineHeaderView.h"
+#import "EIDCardHeaderView.h"
 #import "ImageUrls.h"
 #import "User.h"
 #import "BaseFeed.h"
@@ -18,74 +18,69 @@
 #import "RootViewController.h"
 #import "AppDelegate.h"
 #import "ContainerViewController.h"
+#import "HttpManager.h"
 
-@interface MineVC ()<UIGestureRecognizerDelegate>
-
-
-
+@interface MineVC ()<
+UIGestureRecognizerDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegate,
+UITableViewDataSource,
+UITableViewDelegate>
 @end
 
 @implementation MineVC
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-////    AppDelegate *appdelegate = [UIApplication sharedApplication].delegate;
-////    ContainerViewController *containerVC = (ContainerViewController*)appdelegate.window.rootViewController;
-////    CGFloat menuOffset = CGRectGetWidth(containerVC.menuContainerView.bounds);
-////    CGFloat scrollViewOffset = containerVC.scrollView.contentOffset.x;
-//    
-//    if ([scrollView isKindOfClass:[UICollectionView class]]) {
-//        CGFloat negetiveX = scrollView.contentOffset.x;
-//        if (negetiveX < 0) {
-//            scrollView.scrollEnabled = NO;
-//            
-//        }
-//    }
-//}
+#define collectionCellID @"IconCell"
+#define tableCellID @"NoteCell"
+#define HeaderID @"HeaderID"
+#define EIDCardHeaderID @"EIDCardID"
+#define EIDCardHeaderTitle @"电子学生证"
 
+#define HeaderHeight 205
+#define EIDCardHeaderHeight 44
+#define RowHeight 40
+
+
+#pragma mark- VC Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initFakeData];
+    [self initFakeData];//生成测试数据
+    //注册自定义视图xib 通告类sectionHeader
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"MineHeaderView" bundle:nil];
-    [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:@"HeaderID"];
+    [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
+    //电子学生证sectionHeader
+    UINib *eIDcardHeaderNib = [UINib nibWithNibName:@"EIDCardHeaderView" bundle:nil];
+    [self.tableView registerNib:eIDcardHeaderNib forHeaderFooterViewReuseIdentifier:EIDCardHeaderID];
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    NSLog(@"simple test");
-    NSLog(@"test again");
     //CGRect oldFrame = self.tableView.tableHeaderView.frame;
     //CGRect newFrame = CGRectMake(oldFrame.origin.x, oldFrame.origin.y, oldFrame.size.width, 0);
     //self.tableView.tableHeaderView.frame = newFrame;
-    
-    
-}
-
-
-- (void)viewDidLayoutSubviews
-{
-    [self.collectionView setContentOffset:CGPointMake(1, 0)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    //注册侧滑菜单开关通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuOpend) name:@"MenuOpend" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuClosed) name:@"MenuClosed" object:nil];
 }
 
-- (void)menuOpend
+#pragma mark- 菜单打开时disable掉视图滑动
+- (void)menuOpend{ self.collectionView.scrollEnabled = NO; }
+- (void)menuClosed{ self.collectionView.scrollEnabled = YES;}
+
+#pragma mark- Layout
+//首页加载后将联系人视图左滑动一个像素，解决与菜单滑动冲突问题
+- (void)viewDidLayoutSubviews
 {
-    self.collectionView.scrollEnabled = NO;
-    
+    [self.collectionView setContentOffset:CGPointMake(1, 0)];
 }
 
-- (void)menuClosed
-{
-    self.collectionView.scrollEnabled = YES;
-}
-
+#pragma mark- Collection view delegate and datasource
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //User *model = self.recentContactsArray[indexPath.row];
@@ -94,17 +89,72 @@
    
 }
 
-
-
-- (IBAction)dismissBox:(UITapGestureRecognizer *)sender {
-  
-}
-
-- (void)tapSectionAt:(NSInteger)indexPath
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"detected.....");
+    return self.recentContactsArray.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    IconCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellID forIndexPath:indexPath];
+    cell.user = self.recentContactsArray[indexPath.row];
+    return cell;
 }
 
+#pragma mark- TableView datasoruce and delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    FeedSectionModel *feedSection = self.feedSectionArray[section];
+    if ([feedSection.sectionTitle isEqualToString:EIDCardHeaderTitle]) {
+        return feedSection.feedsList.count;
+    }else{
+        return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:tableCellID];
+    FeedSectionModel *feedSection = self.feedSectionArray[indexPath.section];
+    cell.feed = feedSection.feedsList[indexPath.row];
+    return cell;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.feedSectionArray.count;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    FeedSectionModel *feedSection = self.feedSectionArray[section];
+    if ([feedSection.sectionTitle isEqualToString:EIDCardHeaderTitle]) {
+        EIDCardHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:EIDCardHeaderID];
+        headerView.titleLabel.text = feedSection.sectionTitle;
+        return headerView;
+    }else{
+        MineHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
+        headerView.titleLabel.text = feedSection.sectionTitle;
+        return headerView;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    FeedSectionModel *feedSection = self.feedSectionArray[section];
+    if ([feedSection.sectionTitle isEqualToString:EIDCardHeaderTitle]){
+        return EIDCardHeaderHeight;
+    }else{
+        return HeaderHeight;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return RowHeight;
+}
+
+#pragma mark- Lazy init
 - (NSMutableArray *)recentContactsArray
 {
     if (!_recentContactsArray) {
@@ -122,9 +172,12 @@
 }
 
 
+
+#pragma mark- Add test data
 - (void)initFakeData
 {
     //添加联系人数据
+    
     [self.recentContactsArray addObject:[[User alloc] initFromDictionary:@{@"username":@"whatya",@"iconUrl":image1}]];
     [self.recentContactsArray addObject:[[User alloc] initFromDictionary:@{@"username":@"蓝胖子",@"iconUrl":image2}]];
     [self.recentContactsArray addObject:[[User alloc] initFromDictionary:@{@"username":@"王大锤",@"iconUrl":image3}]];
@@ -154,9 +207,41 @@
     
     FeedSectionModel *thirdSection = [[FeedSectionModel alloc] init];
     thirdSection.sectionTitle = @"电子学生证";
-    thirdSection.feedsList = @[temp4];
+    thirdSection.feedsList = @[temp1,temp2,temp3,temp4,temp4,temp4,temp4,temp4,temp4,temp4];
     
     [self.feedSectionArray addObjectsFromArray:@[firstSection,secondSection,thirdSection]];
+    
+}
+
+#pragma mark- Remote sever
+-(void)getAppInfo:(NSString *)userID
+{
+    
+    NSString *queryString = [NSString stringWithFormat:@"%@=%@",USER_ID_KEY,userID];
+    
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_INDEX_GET_APPINFO portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 
+                 
+                 
+                 
+             }
+         }
+         
+         
+     }];
     
 }
 

@@ -31,21 +31,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuOpend) name:@"MenuOpend" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuClosed) name:@"MenuClosed" object:nil];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapedAt:)];
-    
     [self addGestureRecognizer:tap];
     
 }
 
-- (void)menuOpend
-{
-    self.scrollView.scrollEnabled = NO;
-    
-}
+- (void)menuOpend{ self.scrollView.scrollEnabled = NO; }
 
-- (void)menuClosed
-{
-    self.scrollView.scrollEnabled = YES;
-}
+- (void)menuClosed{ self.scrollView.scrollEnabled = YES;}
 
 
 @end

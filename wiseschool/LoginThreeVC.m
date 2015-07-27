@@ -62,26 +62,62 @@ UIActionSheetDelegate, VPImageCropperDelegate>
 }
 - (IBAction)toMainVC
 {
-    //[self enroll];
-//    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//    UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
-//    delegate.window.rootViewController = enteranceVC;
-    
-    [[HttpManager sharedHttpManager] postImageToserverWithBaseUrl:@"http://192.168.13.111:8090/zhxy_v3_java/app/common/testFile.app"
-                                                            image:self.iconImageView.image
-                                                           params:@{@"mobile":@"13800138000"}
-                                                         callBack:^(id jsonData, NSError *error) {
-                                                               //
-                                                           }];
+    [self addClass:nil];
+   //   [self enroll];
+
 }
-- (IBAction)actionSelected:(id)sender {
+
+- (void)actionSetOtherItem {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入科目名称"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"确定",nil];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        if (textField.text.length > 0)
+        {
+            AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+            
+            [self.selectCourseBtn setTitle:textField.text forState:UIControlStateNormal];
+            
+            delegate.user.subjectName = textField.text;
+        }
+    }
+}
+- (IBAction)actionSelected:(id)sender
+{
+    int pickerIndex = 0;
+    pickerIndex = [self.pickerView selectedRowInComponent:0];
+    
+    [self.pickerView setHidden:YES];
+    [self.selectedView setHidden:YES];
+    
+    if((pickerIndex+1)== self.dataSet.count)
+    {
+        [self actionSetOtherItem];
+    }else
+    {
+        [self.selectCourseBtn setTitle:self.dataSet[pickerIndex] forState:UIControlStateNormal];
+        AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+        
+        delegate.user.subjectName = self.dataSet[pickerIndex];
+    }
 }
 
 - (IBAction)actionSelectCourse:(id)sender
 {
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8090 queryString:@"" callBack:^(id jsonData,NSError *error)
      {
          if(jsonData !=nil)
          {
@@ -104,6 +140,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                          [tmpArray addObject:dic[SUBJECTINFO_NAME_KEY]];
                      }
                  }
+                 [tmpArray addObject:@"其他"];
                  self.dataSet = [NSArray arrayWithArray:tmpArray];
                  
                  [self.pickerView setHidden:NO];
@@ -140,6 +177,22 @@ UIActionSheetDelegate, VPImageCropperDelegate>
     self.studentFlag = !self.studentFlag;
     [self selectedBtn:2];
     
+}
+#pragma mark uialertview deleage
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag== 5)
+    {
+        if(buttonIndex == 0)
+        {
+            [self addClassStyle:1];
+        }
+        else
+        {
+            [self addClassStyle:0];
+        }
+    }
 }
 
 #pragma mark- VC LifeCycles
@@ -202,9 +255,131 @@ UIActionSheetDelegate, VPImageCropperDelegate>
     
     [self.selectedBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
+    AppDelegate *delegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.userId =delegate.user.userID;
+    
+//    [self addClass];
+    
 }
 
+#pragma mark_API_INTEFACE
+-(void)addClass:(User*)user
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    NSMutableString *quesryString = [[NSMutableString alloc]init];
+    [quesryString appendString:[NSString stringWithFormat:@"%@=%@",USER_ID_KEY, self.userId]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userName",@"张虎"]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userType",@"1"]];
+//    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    NSString *gradeId =[[NSUserDefaults standardUserDefaults]objectForKey:@"gradeId"];
+    
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"gradeId",gradeId]];
 
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%d",@"classSeqNo",100]];
+    NSString *userType = @"1";
+    if([userType isEqualToString:@"2"]||[userType isEqualToString:@"4"])
+    {
+        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"childName",@"张小虎"]];
+        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"relationship",@"父子"]];
+    }
+    
+    if([userType isEqualToString:@"1"]||[userType isEqualToString:@"4"])
+    {
+        if(NO)
+        {
+      
+          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectId",@"父子"]];
+        }else
+        {
+     
+          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectName",@"神经"]];
+        }
+    }
+    
+
+    
+    
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_ADD_CLASS portID:8090 queryString:quesryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+
+                 NSArray *data =[jsonData objectForKey:@"data"];
+   
+                 if(data!=nil&&data.count>0)
+                 {
+                     self.classId = [data objectAtIndex:0][@"classId"];
+                     
+                     NSString *isNew = [data objectAtIndex:0][@"isNewClass"];
+                     
+                     if([isNew isEqualToString:@"1"])
+                     {
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"创建班级成功"
+                                                                         message:@"是否需要审核"
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"需要"
+                                                               otherButtonTitles:@"不需要",nil];
+                         [alert setTag:5];
+                         [alert show];
+                     }else
+                     {
+                         AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+                         UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
+                         delegate.window.rootViewController = enteranceVC;
+                     }
+                 }
+                 
+            }
+         }
+         
+         
+     }];
+}
+-(void)addClassStyle:(int)isAudit
+{
+    HttpManager *httpManager = [HttpManager sharedHttpManager];
+    NSMutableString *quesryString = [[NSMutableString alloc]init];
+    [quesryString appendString:[NSString stringWithFormat:@"%@=%@",@"classId",self.classId]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%d",@"isAudit",isAudit]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",USER_ID_KEY,self.userId]];
+    //    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_ADD_STYLE portID:8090 queryString:quesryString callBack:^(id jsonData,NSError *error)
+     {
+         if(jsonData !=nil)
+         {
+             NSArray* arr = [jsonData allKeys];
+             for(NSString* str in arr)
+             {
+                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
+             }
+             NSString * status =[jsonData objectForKey:@"status"];
+             
+             if([status compare:@"1"]==NSOrderedSame)
+             {
+                 
+                     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+                     UIViewController *enteranceVC = VCFromStoryboard(@"Main", @"EntranceVC");
+                     delegate.window.rootViewController = enteranceVC;
+                 
+                 
+             }
+         }
+         
+         
+     }];
+
+}
 #pragma mark- Other Custome Methods
 -(void)selectedBtn:(int)index
 {

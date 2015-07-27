@@ -8,7 +8,7 @@
 
 #import "BaseVC.h"
 
-@interface LoginOneVCViewController : BaseVC
+@interface LoginOneVCViewController : BaseVC<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *errorLabel;
 
 @property(nonatomic,weak) IBOutlet UIImageView *phoneIV;
