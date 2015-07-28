@@ -40,7 +40,7 @@ UIActionSheetDelegate,UITextViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self fetchSubjectInfo];
-    self.rowwHeights = [NSMutableArray arrayWithArray:@[@44,@44,@200,@240,@44]];
+    self.rowwHeights = [NSMutableArray arrayWithArray:@[@44,@44,@150,@240,@44]];
 }
 
 #pragma mark- TableView datasource and delegate
@@ -223,37 +223,7 @@ UIActionSheetDelegate,UITextViewDelegate>
 
 
 
-#pragma mark- 添加评论
--(void)createHomeworkComment:(NSString*)homeworkID
-{
-    HttpManager *httpManager = [HttpManager sharedHttpManager];
-    
-    NSString *queryString = [NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",@"homeworkId",homeworkID,@"content",@"ameng 的评论",@"userId",USER_ID_VALUE];
-    
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CALSS_CREATE_HOMEWORK_COMMENTS portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
-     {
-         if(jsonData !=nil)
-         {
-             NSArray* arr = [jsonData allKeys];
-             for(NSString* str in arr)
-             {
-                 NSLog(@"%@=%@", str,[jsonData objectForKey:str]);
-             }
-             NSString * status =[jsonData objectForKey:@"status"];
-             
-             if([status compare:@"1"]==NSOrderedSame)
-             {
-                 UIImage *testImage =[UIImage imageNamed:@"sophe"];
-                 [self uploadImageFileOfHomework:[[jsonData objectForKey:@"data"] objectAtIndex:0][@"id"] image:testImage type:@"2"];
-             }
-             
-             
-         }
-         
-         
-     }];
-    
-}
+
 
 #pragma mark- Target Action
 - (IBAction)takePhoto:(UITapGestureRecognizer *)sender {

@@ -2026,12 +2026,16 @@
                                             <constraint firstAttribute="height" constant="1" id="ZIP-Dd-Rs5"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="4SF-mP-Lt7">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="4SF-mP-Lt7">
                                         <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="c9O-9J-noS"/>
                                             <constraint firstAttribute="height" constant="34" id="qmS-Ug-EFQ"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="svz-jz-W2b" appends="YES" id="LlO-KY-2w6"/>
+                                        </connections>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kI0-wm-rT5">
                                         <rect key="frame" x="50" y="10" width="504" height="30"/>
@@ -2046,6 +2050,9 @@
                                         <state key="normal" title="发送">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addComment:" destination="mO2-Gn-Hh4" eventType="touchUpInside" id="iFL-gy-0jW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2083,10 +2090,18 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="commentImageView" destination="4SF-mP-Lt7" id="Vhw-Fg-TaF"/>
+                        <outlet property="inputViewBottomDistance" destination="Wnc-iA-0Xs" id="SKN-zG-goa"/>
                         <outlet property="tableView" destination="w2J-bd-vw0" id="vdX-7C-Ks7"/>
+                        <outlet property="textFiled" destination="kI0-wm-rT5" id="Qxd-KZ-Omf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXY-ta-ujW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="svz-jz-W2b">
+                    <connections>
+                        <action selector="takePhoto:" destination="mO2-Gn-Hh4" id="f5E-My-MLh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1121" y="1231"/>
         </scene>
