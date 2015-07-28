@@ -106,7 +106,7 @@ ClassesSectionHeaderViewDelegate>
     if (section == 0) {
         return 3;
     }else{
-        return 6;//self.homeWorkArray.count;
+        return self.homeWorkArray.count;
     }
 }
 
@@ -116,20 +116,20 @@ ClassesSectionHeaderViewDelegate>
         return [tableView dequeueReusableCellWithIdentifier:NoteCellID];
     }else{
         HomeWorkCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeWorkCellID];
-        //Homework *model = self.homeWorkArray[indexPath.row];
-        //cell.model = model;
+        Homework *model = self.homeWorkArray[indexPath.row];
+        cell.model = model;
         return cell;
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([segue.identifier isEqualToString:@"show homework detail"]) {
-//        NSIndexPath *indexPath =  [self.tableView indexPathForSelectedRow];
-//        Homework *model = self.homeWorkArray[indexPath.row];
-//        UIViewController *vc = segue.destinationViewController;
-//        [vc setValue:model.homeworkId forKey:@"homeworkID"];
-//    }
+    if ([segue.identifier isEqualToString:@"show homework detail"]) {
+        NSIndexPath *indexPath =  [self.tableView indexPathForSelectedRow];
+        Homework *model = self.homeWorkArray[indexPath.row];
+        UIViewController *vc = segue.destinationViewController;
+        [vc setValue:model.homeworkId forKey:@"homeworkID"];
+    }
 }
 
 #pragma mark- lazy init

@@ -45,4 +45,6 @@
 
 #define API_NAME_CALSS_CREATE_HOMEWORK_COMMENTS @"zhxy_v3_java/app/homework/homeworkCommentCreate.app"//家庭作业评论
 
+#define API_NAME_NOTICE_RELEASE_NOTICE @"zhxy_v3_java/app/parentNotice/publishParentNotice.app"//发布通知
+
 #endif

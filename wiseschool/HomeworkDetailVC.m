@@ -11,6 +11,8 @@
 #import "CommonConstants.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "Comment.h"
+#import "UIImageView+EMWebCache.h"
 
 @interface HomeworkDetailVC ()
 <UITableViewDataSource,
@@ -29,16 +31,17 @@ UINavigationControllerDelegate>
 @property (nonatomic) BOOL imageSelected;
 @property (strong,nonatomic) UITapGestureRecognizer *tap;
 @property (weak, nonatomic) IBOutlet UITextField *textFiled;
+@property (nonatomic) BOOL loadComments;
 
 
 @end
 
 @implementation HomeworkDetailVC
 
-#define CommentsCellID @"CommentCell"
-#define TitleCell @"TitleCell"
-#define ContentCell @"ContentCell"
-#define ImageCell @"ImageCell"
+#define CommentsCellID  @"CommentCell"
+#define TitleCell       @"TitleCell"
+#define ContentCell     @"ContentCell"
+#define ImageCell       @"ImageCell"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #define testImage @"http://imglf0.ph.126.net/Q0lEkXfAGUGrZlIXFtkeCg==/643451796778429089.jpg"
@@ -127,7 +130,7 @@ UINavigationControllerDelegate>
     if (section == 0) {
         return self.homeworkArray.count;
     }else{
-        return 10;
+        return self.commentsArray.count;
     }
 }
 
@@ -179,6 +182,16 @@ UINavigationControllerDelegate>
         }
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentsCellID];
+        UILabel *usernameLabel = (UILabel*)[cell.contentView viewWithTag:1973];
+        UILabel *contentLabel = (UILabel*)[cell.contentView viewWithTag:1974];
+        UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:1975];
+        
+        Comment *model = self.commentsArray[indexPath.row];
+        usernameLabel.text = model.personName;
+        contentLabel.text = model.content;
+        if (model.commentImages) {
+            [imageView sd_setImageWithURL:URL(model.commentImages[Comment_compressImage_key]) placeholderImage:[UIImage imageNamed:@"AMeng"]];
+        }
         return cell;
     }
 }
@@ -241,7 +254,29 @@ UINavigationControllerDelegate>
                  NSString *text = self.homeworkArray[2];
                  float height = [self heightFromString:text];
                  self.homeworkRowHeightsArray = [NSMutableArray arrayWithArray:@[@44,@0,@(height)]];
-                 [self.tableView reloadData];
+                 
+                 NSArray *commentInfos = dataDic[@"commentInfos"];
+                 [self.commentsArray removeAllObjects];
+                 for (NSDictionary *comment in commentInfos){
+                     NSDictionary *imagesDic = [comment[Comment_CommentImages_key] lastObject];
+                     Comment *model = nil;
+                     if (imagesDic) {
+                         model = [[Comment alloc] initFromDictionary:@{Comment_Content_key:comment[Comment_Content_key],
+                                                                        Comment_PersonName_key:comment[Comment_PersonName_key],
+                                                                        Commnet_Time_key:comment[Commnet_Time_key],
+                                                                        Comment_CommentImages_key:imagesDic}];
+                     }else{
+                         model = [[Comment alloc] initFromDictionary:@{Comment_Content_key:comment[Comment_Content_key],
+                                                                       Comment_PersonName_key:comment[Comment_PersonName_key],
+                                                                       Commnet_Time_key:comment[Commnet_Time_key]}];
+                     }
+                     [self.commentsArray addObject:model];
+                 }
+                // if (!self.loadComments) {
+                     [self.tableView reloadData];
+                // }else{
+                     //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
+                // }
 
                  
              }
@@ -274,6 +309,9 @@ UINavigationControllerDelegate>
                      [self uploadImageFileOfHomework:[[jsonData objectForKey:@"data"] objectAtIndex:0][@"id"] image:self.commentImageView.image type:@"2"];
                  }else{
                      [ProgressHUD showSuccess:@"评论成功！" Interaction:YES];
+                     
+                     self.loadComments = YES;
+                     [self findDetailOfHomeWork];
                  }
                  
              }
@@ -291,7 +329,7 @@ UINavigationControllerDelegate>
     [ProgressHUD show:@"上传图片中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    NSString *url= @"http://192.168.13.104:8080/zhxy_v3_java/app/common/commonUploadImg.app";
+    NSString *url= @"http://192.168.13.103:8080/zhxy_v3_java/app/common/commonUploadImg.app";
     
     NSMutableDictionary *params =[[NSMutableDictionary alloc]init];
     
@@ -302,9 +340,6 @@ UINavigationControllerDelegate>
     [httpManager postImageToserverWithBaseUrl:url image:image params:params callBack:^(id jsonData,NSError *error)
      {
          [ProgressHUD dismiss];
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self.view endEditing:YES];
-         });
          
          if(jsonData !=nil)
          {
@@ -314,6 +349,8 @@ UINavigationControllerDelegate>
              if([status compare:@"1"]==NSOrderedSame)
              {
                  [ProgressHUD showSuccess:@"评论添加成功！"];
+                 self.loadComments = YES;
+                 [self findDetailOfHomeWork];
                  
              }else{
                  [ProgressHUD showError:jsonData[@"errorMsg"]];

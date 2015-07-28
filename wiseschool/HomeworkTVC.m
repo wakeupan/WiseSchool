@@ -40,7 +40,7 @@ UIActionSheetDelegate,UITextViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self fetchSubjectInfo];
-    self.rowwHeights = [NSMutableArray arrayWithArray:@[@44,@44,@150,@240,@44]];
+    self.rowwHeights = [NSMutableArray arrayWithArray:@[@44,@44,@150,@200,@44]];
 }
 
 #pragma mark- TableView datasource and delegate
@@ -150,7 +150,7 @@ UIActionSheetDelegate,UITextViewDelegate>
     [ProgressHUD show:@"上传图片中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    NSString *url= @"http://192.168.13.104:8080/zhxy_v3_java/app/common/commonUploadImg.app";
+    NSString *url= @"http://192.168.13.103:8080/zhxy_v3_java/app/common/commonUploadImg.app";
     
     NSMutableDictionary *params =[[NSMutableDictionary alloc]init];
     
