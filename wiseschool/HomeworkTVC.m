@@ -150,7 +150,7 @@ UIActionSheetDelegate,UITextViewDelegate>
     [ProgressHUD show:@"上传图片中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    NSString *url= @"http://192.168.13.103:8080/zhxy_v3_java/app/common/commonUploadImg.app";
+    NSString *url= @"http://192.168.13.106:8080/zhxy_v3_java/app/common/commonUploadImg.app";
     
     NSMutableDictionary *params =[[NSMutableDictionary alloc]init];
     
@@ -189,8 +189,8 @@ UIActionSheetDelegate,UITextViewDelegate>
     HttpManager *httpManager = [HttpManager sharedHttpManager];
 
     
-    NSString *userId = @"4028af814ec3ded3014ec467be55001c";
-    NSString *classId = @"4028af814e99d8fe014e99dacda2001c";
+    NSString *userId = @"4028af814ed340b3014ed3509558000d";
+    NSString *classId = @"4028af814ed340b3014ed35a358e0010";
     NSString *title = self.homeworkTitle.text;
     NSString *content = self.homeworkText.text;
     

@@ -144,8 +144,7 @@ ClassesSectionHeaderViewDelegate>
 #pragma mark- fetch data from server
 - (void)fetchtHomeworkList{
     [ProgressHUD show:@"获取家庭作业中..."];
-    NSString *queryString = @"userId=4028af814ec3ded3014ec467be55001c&classId=4028af814e99d8fe014e99dacda2001c";
-    //@"userId=40288de74e60ec7d014e61727eef0000&classId=4028af814e99d8fe014e99dacda2001a"
+    NSString *queryString = @"userId=4028af814ed340b3014ed3509558000d&classId=4028af814ed340b3014ed35a358e0010";
     [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_CLASS_GET_HOME_WORK_LIST portID:8080 queryString:queryString callBack:^(NSDictionary* jsonData, NSError *error) {
         [ProgressHUD dismiss];
         NSString *status = jsonData[@"status"];

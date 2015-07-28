@@ -58,15 +58,15 @@ UIActionSheetDelegate,UITextViewDelegate>
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
     
-    NSString *userId = @"40288dea4ec85a8c014ec9210ca60004";
-    NSString *classId = @"402880f64e9ac77f014e9ae06ddb0005";
+    NSString *userId = @"4028af814ed340b3014ed3509558000d";
+    NSString *classId = @"4028af814ed340b3014ed35a358e0010";
     NSString *title = self.titleTF.text;
     NSString *content = self.textView.text;
     
     NSString *param = [NSString stringWithFormat:@"classId=%@&userId=%@&title=%@&content=%@&isNeedReply=%@",classId,userId,title,content,self.needReply];
     
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_NOTICE_RELEASE_NOTICE portID:8090 queryString:param callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_NOTICE_RELEASE_NOTICE portID:8080 queryString:param callBack:^(id jsonData,NSError *error)
      {
          [ProgressHUD dismiss];
          if(jsonData !=nil)
