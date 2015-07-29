@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSString *content;
 @property (nonatomic,strong) UIImage  *image;
+@property (nonatomic) UIViewContentMode mode;
 
-- (instancetype)initWith:(NSIndexPath*)indexPath andTitle:(NSString*)title andContent:(NSString*)content andImage:(UIImage*)image;
+- (instancetype)initWith:(NSIndexPath*)indexPath andTitle:(NSString*)title andContent:(NSString*)content andImage:(UIImage*)image mode:(UIViewContentMode)mode;
 @end

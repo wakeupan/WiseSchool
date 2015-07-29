@@ -88,7 +88,6 @@
 		FE40CA9C1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FE40CA9B1B61DF4F001FC48E /* LoginThreeVC+FinishEnroll.m */; };
 		FE51D56E1B671B6700AAF6A7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D56D1B671B6700AAF6A7 /* Comment.m */; };
 		FE51D5721B67526200AAF6A7 /* Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D5711B67526200AAF6A7 /* Notice.m */; };
-		FE51D5751B67687700AAF6A7 /* BlackBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D5741B67687700AAF6A7 /* BlackBoardCell.m */; };
 		FE51D5781B678EA600AAF6A7 /* TitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D5771B678EA600AAF6A7 /* TitleCell.m */; };
 		FE51D57B1B678EBA00AAF6A7 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D57A1B678EBA00AAF6A7 /* ImageCell.m */; };
 		FE51D57E1B678ECC00AAF6A7 /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D57D1B678ECC00AAF6A7 /* ContentCell.m */; };
@@ -354,8 +353,6 @@
 		FE51D56D1B671B6700AAF6A7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = wiseschool/Comment.m; sourceTree = SOURCE_ROOT; };
 		FE51D5701B67526200AAF6A7 /* Notice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notice.h; path = wiseschool/Notice.h; sourceTree = SOURCE_ROOT; };
 		FE51D5711B67526200AAF6A7 /* Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Notice.m; path = wiseschool/Notice.m; sourceTree = SOURCE_ROOT; };
-		FE51D5731B67687700AAF6A7 /* BlackBoardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlackBoardCell.h; path = wiseschool/BlackBoardCell.h; sourceTree = SOURCE_ROOT; };
-		FE51D5741B67687700AAF6A7 /* BlackBoardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlackBoardCell.m; path = wiseschool/BlackBoardCell.m; sourceTree = SOURCE_ROOT; };
 		FE51D5761B678EA600AAF6A7 /* TitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleCell.h; path = wiseschool/TitleCell.h; sourceTree = SOURCE_ROOT; };
 		FE51D5771B678EA600AAF6A7 /* TitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleCell.m; path = wiseschool/TitleCell.m; sourceTree = SOURCE_ROOT; };
 		FE51D5791B678EBA00AAF6A7 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCell.h; path = wiseschool/ImageCell.h; sourceTree = SOURCE_ROOT; };
@@ -1010,8 +1007,6 @@
 		FE70D1321B5FE1E8003780C3 /* 黑板报 */ = {
 			isa = PBXGroup;
 			children = (
-				FE51D5731B67687700AAF6A7 /* BlackBoardCell.h */,
-				FE51D5741B67687700AAF6A7 /* BlackBoardCell.m */,
 				FEA1C81F1B4EA20800033BF8 /* BlackboardReleaseVC.h */,
 				FEA1C8201B4EA20800033BF8 /* BlackboardReleaseVC.m */,
 				FE51D5761B678EA600AAF6A7 /* TitleCell.h */,
@@ -1486,7 +1481,6 @@
 				FE7240341B50ED4C00AD3735 /* CourseTable.m in Sources */,
 				FE7240371B50F55100AD3735 /* CourseTableCell.m in Sources */,
 				6D0EE61F1B4F868D00D24E9D /* EMSDWebImageDownloader.m in Sources */,
-				FE51D5751B67687700AAF6A7 /* BlackBoardCell.m in Sources */,
 				FE9417451B5A22910073C4CF /* ChatModel.m in Sources */,
 				6D0EE61B1B4F868D00D24E9D /* DACircularProgressView.m in Sources */,
 				6D0EE6281B4F868D00D24E9D /* UIImage+EMWebP.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "BlackboardReleaseVC.h"
-#import "BlackBoardCell.h"
 #import "HttpManager.h"
 #import "CommonConstants.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -66,6 +65,8 @@ ContentCellDelegate>
     [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
     [self.tableView endUpdates];
     
+    [self.tableView reloadData];
+    
 }
 
 - (void)didFinisheEditWith:(NSString *)text at:(NSIndexPath *)indexPath
@@ -121,14 +122,16 @@ ContentCellDelegate>
         model.indexPath = indexPath;
         cell.model = model;
         cell.delegate = self;
+        [cell layoutSubviews];
         return cell;
     }else if (indexPath.row == 1){
         ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:ImageCellID];
         BlackBoardModel *model = temp[1];
         model.indexPath = indexPath;
         cell.model = model;
-        cell.paraImageView.contentMode = UIViewContentModeScaleAspectFill;
+        //cell.paraImageView.contentMode = UIViewContentModeScaleAspectFill;
         cell.delegate = self;
+        [cell layoutSubviews];
         return cell;
     }else{
         ContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ContentCellID];
@@ -136,6 +139,7 @@ ContentCellDelegate>
         model.indexPath = indexPath;
         cell.model = model;
         cell.delegate = self;
+        [cell layoutSubviews];
         return cell;
     }
 }
@@ -148,23 +152,18 @@ ContentCellDelegate>
 
 - (void)initFakeData
 {
-    BlackBoardModel *titleModel = [[BlackBoardModel alloc] init];
-    titleModel.title = @"黑板报一";
-    BlackBoardModel *imageModel = [[BlackBoardModel alloc] init];
-    BlackBoardModel *contentModel = [[BlackBoardModel alloc] init];
-    contentModel.content = @"黑板报正文！";
+    BlackBoardModel *titleModel = [[BlackBoardModel alloc] init];titleModel.title = @"黑板报一";
+    BlackBoardModel *imageModel = [[BlackBoardModel alloc] init];//imageModel.mode = UIViewContentModeScaleAspectFill;
+    BlackBoardModel *contentModel = [[BlackBoardModel alloc] init];contentModel.content = @"黑板报正文！";
+
     
-    BlackBoardModel *titleModel1 = [[BlackBoardModel alloc] init];
-    titleModel1.title = @"黑板报二";
-    BlackBoardModel *imageModel1 = [[BlackBoardModel alloc] init];
-    BlackBoardModel *contentModel1 = [[BlackBoardModel alloc] init];
-    contentModel.content = @"黑板报正文二！";
+    BlackBoardModel *titleModel1 = [[BlackBoardModel alloc] init];titleModel1.title = @"黑板报二";
+    BlackBoardModel *imageModel1 = [[BlackBoardModel alloc] init];//imageModel1.mode = UIViewContentModeScaleAspectFill;
+    BlackBoardModel *contentModel1 = [[BlackBoardModel alloc] init];contentModel.content = @"黑板报正文二！";
     
-    BlackBoardModel *titleModel2 = [[BlackBoardModel alloc] init];
-    titleModel2.title = @"黑板报三";
-    BlackBoardModel *imageModel2 = [[BlackBoardModel alloc] init];
-    BlackBoardModel *contentModel2 = [[BlackBoardModel alloc] init];
-    contentModel2.content = @"黑板报正文三！";
+    BlackBoardModel *titleModel2 = [[BlackBoardModel alloc] init];titleModel2.title = @"黑板报三";
+    BlackBoardModel *imageModel2 = [[BlackBoardModel alloc] init];//imageModel2.mode = UIViewContentModeScaleAspectFill;
+    BlackBoardModel *contentModel2 = [[BlackBoardModel alloc] init];contentModel2.content = @"黑板报正文三！";
     
     
     NSMutableArray *para0 = [NSMutableArray arrayWithArray:@[titleModel,imageModel,contentModel]];
@@ -244,7 +243,7 @@ ContentCellDelegate>
         NSMutableArray *temp = self.blacBoardArray[self.currentImageIndexPath.section];
         NSMutableArray *rowHeightsTemp = self.rowHeightsArray[self.currentImageIndexPath.section];
  
-        self.currentImageView.contentMode = UIViewContentModeScaleAspectFit;
+       // self.currentImageView.contentMode = UIViewContentModeScaleAspectFill;
         CGSize imageSize = portraitImg.size;
         CGFloat newImageHeight = imageSize.height * (Screen_Width / imageSize.width);
         rowHeightsTemp[1] = @(newImageHeight);

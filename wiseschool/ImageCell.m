@@ -25,6 +25,7 @@
 {
     _model = model;
     self.paraImageView.image = model.image;
+    self.paraImageView.contentMode = model.mode;
     
 }
 @end

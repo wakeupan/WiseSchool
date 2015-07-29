@@ -1304,7 +1304,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="1GM-Mj-e5M">
                                                     <rect key="frame" x="262" y="2" width="76" height="76"/>
                                                 </imageView>
-                                                <imageView tag="1973" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccj-8I-FmX">
+                                                <imageView tag="1973" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccj-8I-FmX">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                                     <gestureRecognizers/>
                                                 </imageView>

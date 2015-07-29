@@ -13,6 +13,7 @@
                 andTitle:(NSString *)title
               andContent:(NSString *)content
                 andImage:(UIImage *)image
+                    mode:(UIViewContentMode)mode
 {
     self = [super init];
     if (self) {
@@ -20,6 +21,7 @@
         _title = title;
         _content = content;
         _image = image;
+       // _mode = UIViewContentModeScaleAspectFill;
     }
     return self;
 }
