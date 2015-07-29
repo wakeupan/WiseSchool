@@ -12,6 +12,11 @@
 #import "HomeWorkCell.h"
 #import "Homework.h"
 #import "HttpManager.h"
+#import "Notice.h"
+#import "NoticeCell.h"
+#import "UIImageView+EMWebCache.h"
+#import "CourseTable.h"
+#import "CourseTableCell.h"
 
 @interface ClassesVC ()<
 UICollectionViewDataSource,
@@ -24,12 +29,22 @@ ClassesSectionHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *homeWorkArray;
+@property (nonatomic, strong) NSMutableArray *noticeArray;
+@property (nonatomic, strong) NSMutableDictionary *blacBoardDictionary;
+@property (nonatomic, strong) NSMutableArray *coursesTableArray;
+
+@property (weak, nonatomic) IBOutlet UILabel *blackBoardTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *blackBoardImageView;
+@property (weak, nonatomic) IBOutlet UILabel *contactsInfoLB;
+@property (nonatomic, strong) NSString *contactsInfoString;
+
+@property (nonatomic, strong) NSMutableArray *classNameArray;
 
 @end
 
 @implementation ClassesVC
 #define TopCellID @"TopCell"
-#define BottomCellID @"BottomCell"
+#define BottomCellID @"BottomCourseCell"
 
 #define NoteCellID @"NoteCell"
 #define HomeWorkCellID @"HomeWorkCell"
@@ -49,7 +64,18 @@ ClassesSectionHeaderViewDelegate>
     [super viewDidLoad];
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"ClassesHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
+    self.blacBoardDictionary = [NSMutableDictionary new];
+    self.coursesTableArray = [NSMutableArray new];
+    self.classNameArray = [NSMutableArray new];
     [self fetchtHomeworkList];
+    [self fetchBlackBoardData];
+    [self fetchClassNames];
+}
+
+- (void)updateCourseInfo
+{
+    self.contactsInfoLB.text = self.contactsInfoString;
+    [self.bottomCollectionView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -72,15 +98,24 @@ ClassesSectionHeaderViewDelegate>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    if ([collectionView isEqual:self.topCollectionView]){
+        return self.classNameArray.count;
+    }else{
+        return self.coursesTableArray.count;
+    }
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = nil;
     if ([collectionView isEqual:self.topCollectionView]) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:TopCellID forIndexPath:indexPath];
+        UILabel *nameLabel = [cell.contentView.subviews lastObject];
+        nameLabel.text = self.classNameArray[indexPath.row][@"className"];
     }else{
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:BottomCellID forIndexPath:indexPath];
+        CourseTableCell *dayCell = (CourseTableCell*)cell;
+        dayCell.courseTable = self.coursesTableArray[indexPath.row];
+        
     }
     return cell;
 }
@@ -104,7 +139,7 @@ ClassesSectionHeaderViewDelegate>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 3;
+        return self.noticeArray.count;
     }else{
         return self.homeWorkArray.count;
     }
@@ -113,7 +148,10 @@ ClassesSectionHeaderViewDelegate>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:NoteCellID];
+        NoticeCell *cell = [tableView dequeueReusableCellWithIdentifier:NoteCellID];
+        Notice *notice = self.noticeArray[indexPath.row];
+        cell.notice = notice;
+        return cell;
     }else{
         HomeWorkCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeWorkCellID];
         Homework *model = self.homeWorkArray[indexPath.row];
@@ -132,6 +170,17 @@ ClassesSectionHeaderViewDelegate>
     }
 }
 
+- (void)updateBlackBoard
+{
+    NSString *title = self.blacBoardDictionary[@"blackBoardTitle"];
+    NSString *url = self.blacBoardDictionary[@"blackBoardImage"];
+    self.blackBoardTitle.text = title.length > 0 ? title : @"没有新的黑板报！";
+    if (url.length > 0) {
+        [self.blackBoardImageView sd_setImageWithURL:URL(url) placeholderImage:nil];
+    }
+    
+}
+
 #pragma mark- lazy init
 - (NSMutableArray *)homeWorkArray
 {
@@ -139,6 +188,14 @@ ClassesSectionHeaderViewDelegate>
         _homeWorkArray = [[NSMutableArray alloc] init];
     }
     return _homeWorkArray;
+}
+
+- (NSMutableArray*)noticeArray
+{
+    if (!_noticeArray) {
+        _noticeArray = [[NSMutableArray alloc] init];
+    }
+    return _noticeArray;
 }
 
 #pragma mark- fetch data from server
@@ -162,5 +219,66 @@ ClassesSectionHeaderViewDelegate>
     }];
 }
 
+- (void)fetchBlackBoardData
+{
+    NSString *queryStirng = @"userId=4028af814ed340b3014ed3509558000d&classId=4028af814ed340b3014ed35a358e0010&parentNoticeCount=20";
+    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_FETCH_CLASS_HOME_PAGE portID:8080 queryString:queryStirng callBack:^(id jsonData, NSError *error) {
+        NSString *status = jsonData[@"status"];
+        if ([status isEqualToString:@"1"]) {
+            NSArray *temp = jsonData[@"data"][0][@"parentNoticeBlocks"];
+            for (NSDictionary *dictionary in temp){
+                Notice *model = [[Notice alloc] initFromDictionary:dictionary];
+                [self.noticeArray addObject:model];
+            }
+            [self.tableView reloadData];
+            self.blacBoardDictionary = jsonData[@"data"][0][@"blackboardBlock"];
+            [self updateBlackBoard];//更新很板报
+            
+            //获取课表
+            NSMutableArray *courseDatas = jsonData[@"data"][0][@"courseBlock"][@"courseList"];//课程数组（day1、day2、day...)
+            
+            for(int i=0;i<courseDatas.count;i++)
+            {
+                NSDictionary * courseDic =[courseDatas objectAtIndex:i];
+                NSString *dayString = [[self class] daysArray][i];
+                CourseTable *day = [[CourseTable alloc] initFromDictionary:@{@"day":dayString,@"courses":@[courseDic[@"lesson1"][@"name"],courseDic[@"lesson2"][@"name"],courseDic[@"lesson3"][@"name"],courseDic[@"lesson4"][@"name"],courseDic[@"lesson5"][@"name"],courseDic[@"lesson6"][@"name"],courseDic[@"lesson7"][@"name"],courseDic[@"lesson8"][@"name"],courseDic[@"lesson9"][@"name"],courseDic[@"lesson10"][@"name"]]}];
+                [self.coursesTableArray addObject:day];
+                
+            }
+            self.contactsInfoString = jsonData[@"data"][0][@"courseBlock"][@"classTitle"];
+            [self updateCourseInfo];
+            
+        }else{
+            [ProgressHUD showError:@"获取家庭作业出错！"];
+        }
+
+    }];
+}
+
+- (void)fetchClassNames
+{
+    NSString *queryString = @"userId=4028af814ed340b3014ed3509558000d";
+    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_FETCH_CLASS_NAMES portID:8080 queryString:queryString callBack:^(id jsonData, NSError *error) {
+        NSString *status = jsonData[@"status"];
+        if ([status isEqualToString:@"1"]) {
+            NSArray *namesArray = jsonData[@"data"];
+            for (NSDictionary *dic in namesArray){
+                [self.classNameArray addObject:dic];
+            }
+            [self.topCollectionView reloadData];
+        }
+    }];
+}
+
++ (NSArray*)daysArray
+{
+    return @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
+}
+
++ (NSString*)dayIndex:(NSString*)incomeDayString
+{
+    NSInteger index = [[[self class] daysArray] indexOfObject:incomeDayString];
+    return [NSString stringWithFormat:@"%d",index+1];
+}
 
 @end

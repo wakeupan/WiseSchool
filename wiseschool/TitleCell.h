@@ -13,6 +13,7 @@
 
 - (void)didFinisheEditWith:(NSString*)text at:(NSIndexPath*)indexPath;
 - (void)deleteAt:(NSIndexPath*)indexPath;
+- (void)didStartEditAt:(NSIndexPath*)indexPath;
 
 @end
 

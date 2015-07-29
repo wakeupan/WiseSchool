@@ -108,7 +108,7 @@ UITableViewDelegate>
     [contactsArray addObject:[[User alloc] initFromDictionary:@{@"username":@"苏菲",@"iconUrl":image10,@"studentOrTeacher":@"",@"incheckOrManager":@"学生"}]];
     
     for (User *user in contactsArray){
-        NSString* index = [self firstLetter:user.username];
+        NSString* index = [self firstLetter:user];
         if (![self.indexArray containsObject:index]) {
             [self.indexArray addObject:index];
         }
@@ -124,6 +124,9 @@ UITableViewDelegate>
     [self.indexArray sortUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
         return [obj1 compare:obj2];
     }];
+    NSString *teacherIndex = [self.indexArray lastObject];
+    [self.indexArray removeLastObject];
+    [self.indexArray insertObject:teacherIndex atIndex:0];
     
 }
 - (IBAction)addMember
@@ -133,12 +136,17 @@ UITableViewDelegate>
     [self.navigationController pushViewController:addMemberVC animated:YES];
 }
 
-- (NSString*)firstLetter:(NSString*)inComingString
+- (NSString*)firstLetter:(User*)inComingUser
 {
-    NSMutableString *ms = [[NSMutableString alloc] initWithString:inComingString];
-    CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformMandarinLatin, NO);
-    CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformStripDiacritics, NO);
-    return [[ms substringToIndex:1] uppercaseString];
+    if ([inComingUser.incheckOrManager isEqualToString:@"学生"]) {
+        NSMutableString *ms = [[NSMutableString alloc] initWithString:inComingUser.username];
+        CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformMandarinLatin, NO);
+        CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformStripDiacritics, NO);
+        return [[ms substringToIndex:1] uppercaseString];
+    }else{
+        return @"老师";
+    }
+    
 }
 
 @end

@@ -14,6 +14,7 @@
 
 @property(nonatomic,strong) NSString *day;
 @property(nonatomic,strong) NSMutableArray *courses;
+@property(nonatomic,strong) NSMutableArray *highlightsArray;
 
 - (instancetype)initFromDictionary:(NSDictionary*)dictionary;
 

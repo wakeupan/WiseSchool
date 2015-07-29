@@ -11,7 +11,7 @@
 @implementation ContentCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.contentTV.delegate = self;
 }
 
 - (void)setModel:(BlackBoardModel *)model
@@ -23,5 +23,10 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [self.delegate finishedEditWith:textView.text at:self.model.indexPath];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.delegate tvdDidStartEditAt:self.model.indexPath];
 }
 @end

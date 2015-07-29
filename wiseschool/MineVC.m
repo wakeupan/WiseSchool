@@ -44,7 +44,7 @@ UITableViewDelegate>
 #pragma mark- VC Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-   // [self getAppInfo:nil];
+    [self getAppInfo:nil];
     //注册自定义视图xib 通告类sectionHeader
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"MineHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:HeaderID];
@@ -191,11 +191,19 @@ UITableViewDelegate>
     [self.recentContactsArray addObject:[[User alloc] initFromDictionary:@{@"username":@"苏菲",@"iconUrl":image10}]];
     
     //添加通知数据
-    id temp1 = [[BaseFeed alloc] initFromDictionary:@{@"title":@"王小明家长王大明，申请加入班级",@"typeTitle":@"系统通告",@"releaseDate":@"2015-6-15"}];
-    id temp2 = [[BaseFeed alloc] initFromDictionary:@{@"title":@"关于端午节放假的告家长书",@"typeTitle":@"班级通告",@"releaseDate":@"2015-6-09"}];
-    id temp3 = [[BaseFeed alloc] initFromDictionary:@{@"title":@"数学老师张大鹏，成功加入班级",@"typeTitle":@"动态信息",@"releaseDate":@"2015-6-09"}];
+    id temp1 = [[BaseFeed alloc] initFromDictionary:@{FeedTitle_Key:@"王小明家长王大明，申请加入班级",
+                                                      TypeTitle_Key:@"系统通告",
+                                                      ReleaseDate_Key:@"2015-6-15"}];
+    id temp2 = [[BaseFeed alloc] initFromDictionary:@{FeedTitle_Key:@"关于端午节放假的告家长书",
+                                                      TypeTitle_Key:@"班级通告",
+                                                      ReleaseDate_Key:@"2015-6-09"}];
+    id temp3 = [[BaseFeed alloc] initFromDictionary:@{FeedTitle_Key:@"数学老师张大鹏，成功加入班级",
+                                                      TypeTitle_Key:@"动态信息",
+                                                      ReleaseDate_Key:@"2015-6-09"}];
     
-    id temp4 = [[BaseFeed alloc] initFromDictionary:@{@"title":@"您的孩子王小明，于8:15进入学校大门。",@"typeTitle":@"系统通告",@"releaseDate":@"2015-6-09"}];
+    id temp4 = [[BaseFeed alloc] initFromDictionary:@{FeedTitle_Key:@"您的孩子王小明，于8:15进入学校大门。",
+                                                      TypeTitle_Key:@"系统通告",
+                                                      ReleaseDate_Key:@"2015-6-09"}];
     
     FeedSectionModel *firstSection = [[FeedSectionModel alloc] init];
     firstSection.sectionTitle = @"一年级（2）班";
@@ -211,7 +219,7 @@ UITableViewDelegate>
     
     FeedSectionModel *attendence = [[FeedSectionModel alloc] initFromDictionary:@{ClassId_Key:@"xxxxxxx",
                                                                                   ClassName_Key:@"电子学生证",
-                                                                                 Feeds_Key:@[temp1,temp2,temp3,temp4,temp4,temp4,temp4,temp4,temp4,temp4]}];
+                                                                                 Feeds_Key:@[temp4,temp4,temp4,temp4,temp4,temp4,temp4]}];
 
     
     [self.feedSectionArray addObject:attendence];
@@ -225,7 +233,7 @@ UITableViewDelegate>
     NSString *queryString = [NSString stringWithFormat:@"%@=%@",USER_ID_KEY,HOMEPAGE_USER_ID_VALUE];
     
     HttpManager *httpManager = [HttpManager sharedHttpManager];
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_INDEX_GET_APPINFO portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_INDEX_GET_APPINFO portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
          
          if(jsonData !=nil)

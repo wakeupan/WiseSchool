@@ -267,7 +267,7 @@ UIAlertViewDelegate>
     paramDic[@"data"] = coursesArray;
     
    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];//此处data参数是我上面提到的key为"data"的数组
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     HttpManager *httpManager = [HttpManager sharedHttpManager];
@@ -346,6 +346,6 @@ UIAlertViewDelegate>
 + (NSString*)dayIndex:(NSString*)incomeDayString
 {
     NSInteger index = [[[self class] daysArray] indexOfObject:incomeDayString];
-    return [NSString stringWithFormat:@"%ld",index+1];
+    return [NSString stringWithFormat:@"%d",index+1];
 }
 @end

@@ -12,6 +12,7 @@
 @protocol ContentCellDelegate <NSObject>
 
 - (void)finishedEditWith:(NSString*)text at:(NSIndexPath*)indexPath;
+- (void)tvdDidStartEditAt:(NSIndexPath*)indexPath;
 
 @end
 

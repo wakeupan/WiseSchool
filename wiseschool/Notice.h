@@ -22,4 +22,6 @@
 @property (nonatomic,strong) NSString *hasReply;
 @property (nonatomic,strong) NSString *hasRead;
 
+- (instancetype)initFromDictionary:(NSDictionary*)dictionary;
+
 @end

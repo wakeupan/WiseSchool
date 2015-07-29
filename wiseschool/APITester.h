@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "HttpManager.h"
 @interface APITester : NSObject
-
+- (void)releaseBlackBoard;
 @end

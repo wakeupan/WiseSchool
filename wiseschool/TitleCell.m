@@ -31,4 +31,9 @@
     }
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.delegate didStartEditAt:self.model.indexPath];
+}
+
 @end

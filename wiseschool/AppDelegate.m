@@ -11,6 +11,7 @@
 
 #import "WZGuideViewController.h"
 #import <SMS_SDK/SMS_SDK.h>
+#import "APITester.h"
 
 #define  SMS_APP_KEY  @"8dcbbd7d3874"
 #define  SMS_APP_SECRET @"ddff0c730649307e43fff59e13d33a2d"
@@ -29,7 +30,8 @@
     
     NSLog(@"git test with github");
     // Override point for customization after application launch.
-    
+    APITester *apiTester = [[APITester alloc] init];
+    [apiTester releaseBlackBoard];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"])
     {

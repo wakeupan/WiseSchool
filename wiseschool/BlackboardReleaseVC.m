@@ -33,9 +33,12 @@ ContentCellDelegate>
 @property (nonatomic) NSInteger paragraphCount;
 @property (nonatomic,strong) NSMutableArray *blacBoardArray;
 @property (nonatomic,strong) NSMutableArray *rowHeightsArray;
+@property (nonatomic,strong) NSMutableArray *successedIDs;
+@property (nonatomic)  int uploadedImageCount;
 
 @property (nonatomic,strong) NSIndexPath *currentImageIndexPath;
 @property (nonatomic,strong) UIImageView *currentImageView;
+@property (weak, nonatomic) IBOutlet UITextField *blackBoardTitle;
 
 @end
 
@@ -44,10 +47,120 @@ ContentCellDelegate>
 #define ContentCellID @"ContentCell"
 #define ImageCellID @"ImageCell"
 
+- (IBAction)release:(UIBarButtonItem *)sender
+{
+    NSMutableDictionary *baseDic = [[NSMutableDictionary alloc] init];
+    baseDic[@"classId"] = @"4028af814ed340b3014ed35a358e0010";
+    baseDic[@"title"] = self.blackBoardTitle.text;
+    baseDic[@"userId"] = @"4028af814ed340b3014ed3509558000d";
+    baseDic[@"content"] = @"xxxx";
+    
+    NSMutableArray *childArray = [[NSMutableArray alloc] init];
+    for (int i = 0 ;i < self.blacBoardArray.count;i++){
+        NSArray *array = self.blacBoardArray[i];
+        
+        BlackBoardModel *titleModel = array[0];
+        BlackBoardModel *contentModel = array[2];
+        NSMutableDictionary *childDicInArray = [[NSMutableDictionary alloc] init];
+        childDicInArray[@"title"] = titleModel.title;
+        childDicInArray[@"content"] = contentModel.content;
+        childDicInArray[@"seqNo"] = @(i);
+        [childArray addObject:childDicInArray];
+    }
+    baseDic[@"blackboardItemDatas"] = childArray;
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:baseDic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSString *queryString = [NSString stringWithFormat:@"blackboardData=%@",jsonString];
+    
+    [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_RELEASE_BLACK_BOARD portID:8080 queryString:queryString callBack:^(id jsonData, NSError *error) {
+        if (jsonData) {
+            NSString *status = jsonData[@"status"];
+            if ([status isEqualToString:@"1"]) {
+                NSLog(@"黑板报发布成功返回：%@",jsonData);
+                [ProgressHUD showSuccess:@"文本发布成功！" Interaction:YES];
+                NSArray *array = jsonData[@"data"];
+                for (NSDictionary *dic in array){
+                    [self.successedIDs addObject:dic[@"id"]];
+                }
+                [self startUploadImage];
+            }else{
+                NSString *error = jsonData[@"errorMsg"];
+                [ProgressHUD showError:error Interaction:YES];
+            }
+        }
+    }];
+
+}
+
+- (void)startUploadImage
+{
+    if (self.blacBoardArray.count == 0) {return;}
+    NSArray *array = [self.blacBoardArray firstObject];
+    BlackBoardModel *model = array[1];
+    if (model.image) {
+        NSString *url= @"http://192.168.13.106:8080/zhxy_v3_java/app/common/commonUploadImg.app";
+        
+        NSMutableDictionary *params =[[NSMutableDictionary alloc]init];
+        
+        [params setObject:[self.successedIDs firstObject] forKey:@"id"];
+        
+        [params setObject:@"6" forKey:@"type"];
+
+        [[HttpManager sharedHttpManager] postImageToserverWithBaseUrl:url image:model.image params:params callBack:^(id jsonData, NSError *error) {
+            [self.blacBoardArray removeObjectAtIndex:0];
+            [self.rowHeightsArray removeObjectAtIndex:0];
+            [self.successedIDs removeObjectAtIndex:0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.uploadedImageCount++;
+                [ProgressHUD showSuccess:[NSString stringWithFormat:@"已上传成功%d张图片！",self.uploadedImageCount] Interaction:YES];
+                [self.tableView beginUpdates];
+                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+                [self.tableView endUpdates];
+                
+                [self.tableView reloadData];
+            });
+            
+            [self startUploadImage];
+        }];
+    }else{
+        [self.blacBoardArray removeObjectAtIndex:0];
+        [self.rowHeightsArray removeObjectAtIndex:0];
+        [self.successedIDs removeObjectAtIndex:0];
+        [self.tableView beginUpdates];
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
+        [self.tableView reloadData];
+        [self startUploadImage];
+    }
+}
+
+
 #pragma mark- Cell Delegate
+
+- (void)didStartEditAt:(NSIndexPath *)indexPath
+{
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)tvdDidStartEditAt:(NSIndexPath *)indexPath
+{
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 - (void)finishedEditWith:(NSString *)text at:(NSIndexPath *)indexPath
 {
-    
+    NSMutableArray *temp = self.blacBoardArray[indexPath.section];
+    BlackBoardModel *model = temp[indexPath.row];
+    model.content = text;
+}
+
+- (void)didFinisheEditWith:(NSString *)text at:(NSIndexPath *)indexPath
+{
+    NSMutableArray *temp = self.blacBoardArray[indexPath.section];
+    BlackBoardModel *model = temp[indexPath.row];
+    model.title = text;
 }
 
 - (void)pickeImageAt:(NSIndexPath *)indexPath withOrignal:(UIImageView *)imageView
@@ -69,19 +182,13 @@ ContentCellDelegate>
     
 }
 
-- (void)didFinisheEditWith:(NSString *)text at:(NSIndexPath *)indexPath
-{
-    
-}
-
-
-
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.blacBoardArray = [NSMutableArray new];
     self.rowHeightsArray = [NSMutableArray new];
+    self.successedIDs = [NSMutableArray new];
     [self initFakeData];
 }
 - (IBAction)addParagraph:(UIButton *)sender
@@ -243,7 +350,6 @@ ContentCellDelegate>
         NSMutableArray *temp = self.blacBoardArray[self.currentImageIndexPath.section];
         NSMutableArray *rowHeightsTemp = self.rowHeightsArray[self.currentImageIndexPath.section];
  
-       // self.currentImageView.contentMode = UIViewContentModeScaleAspectFill;
         CGSize imageSize = portraitImg.size;
         CGFloat newImageHeight = imageSize.height * (Screen_Width / imageSize.width);
         rowHeightsTemp[1] = @(newImageHeight);
@@ -253,7 +359,7 @@ ContentCellDelegate>
         model.image = portraitImg;
         self.currentImageView.image = portraitImg;
         
-        //[self.tableView reloadData];
+
         [self.tableView beginUpdates];
         [self.tableView endUpdates];
     }];

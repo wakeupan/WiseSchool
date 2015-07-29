@@ -21,7 +21,6 @@
         _title = title;
         _content = content;
         _image = image;
-       // _mode = UIViewContentModeScaleAspectFill;
     }
     return self;
 }

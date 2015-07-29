@@ -94,6 +94,10 @@
 		FE51D5811B678F3C00AAF6A7 /* BlackBoardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51D5801B678F3C00AAF6A7 /* BlackBoardModel.m */; };
 		FE683FC61B6336AB00C3627F /* HomeWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE683FC51B6336AB00C3627F /* HomeWorkCell.m */; };
 		FE683FCA1B635EE700C3627F /* Homework.m in Sources */ = {isa = PBXBuildFile; fileRef = FE683FC91B635EE700C3627F /* Homework.m */; };
+		FE69F0BD1B689C8F00D967BA /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE69F0BC1B689C8F00D967BA /* NoticeCell.m */; };
+		FE69F0C01B68C26E00D967BA /* BlackBoardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE69F0BF1B68C26E00D967BA /* BlackBoardListVC.m */; };
+		FE69F0C31B68CA9E00D967BA /* BlackBoardDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE69F0C21B68CA9E00D967BA /* BlackBoardDetailVC.m */; };
+		FE69F0C91B68CC4700D967BA /* BlackBoardParagraphDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = FE69F0C81B68CC4700D967BA /* BlackBoardParagraphDetail.m */; };
 		FE70D12D1B5FDC92003780C3 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */; };
 		FE70D12E1B5FDC92003780C3 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */; };
 		FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE72402D1B50C79700AD3735 /* AttendanceCell.m */; };
@@ -365,6 +369,14 @@
 		FE683FC51B6336AB00C3627F /* HomeWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeWorkCell.m; path = wiseschool/HomeWorkCell.m; sourceTree = SOURCE_ROOT; };
 		FE683FC81B635EE700C3627F /* Homework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Homework.h; path = wiseschool/Homework.h; sourceTree = SOURCE_ROOT; };
 		FE683FC91B635EE700C3627F /* Homework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Homework.m; path = wiseschool/Homework.m; sourceTree = SOURCE_ROOT; };
+		FE69F0BB1B689C8F00D967BA /* NoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoticeCell.h; path = wiseschool/NoticeCell.h; sourceTree = SOURCE_ROOT; };
+		FE69F0BC1B689C8F00D967BA /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoticeCell.m; path = wiseschool/NoticeCell.m; sourceTree = SOURCE_ROOT; };
+		FE69F0BE1B68C26E00D967BA /* BlackBoardListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlackBoardListVC.h; path = wiseschool/BlackBoardListVC.h; sourceTree = SOURCE_ROOT; };
+		FE69F0BF1B68C26E00D967BA /* BlackBoardListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlackBoardListVC.m; path = wiseschool/BlackBoardListVC.m; sourceTree = SOURCE_ROOT; };
+		FE69F0C11B68CA9E00D967BA /* BlackBoardDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlackBoardDetailVC.h; path = wiseschool/BlackBoardDetailVC.h; sourceTree = SOURCE_ROOT; };
+		FE69F0C21B68CA9E00D967BA /* BlackBoardDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlackBoardDetailVC.m; path = wiseschool/BlackBoardDetailVC.m; sourceTree = SOURCE_ROOT; };
+		FE69F0C71B68CC4700D967BA /* BlackBoardParagraphDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlackBoardParagraphDetail.h; path = wiseschool/BlackBoardParagraphDetail.h; sourceTree = SOURCE_ROOT; };
+		FE69F0C81B68CC4700D967BA /* BlackBoardParagraphDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlackBoardParagraphDetail.m; path = wiseschool/BlackBoardParagraphDetail.m; sourceTree = SOURCE_ROOT; };
 		FE70D12A1B5FDC92003780C3 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 		FE70D12B1B5FDC92003780C3 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		FE70D12C1B5FDC92003780C3 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
@@ -941,6 +953,8 @@
 				FEA1C81A1B4E98D900033BF8 /* NoteReleaseTVC.m */,
 				FE51D5701B67526200AAF6A7 /* Notice.h */,
 				FE51D5711B67526200AAF6A7 /* Notice.m */,
+				FE69F0BB1B689C8F00D967BA /* NoticeCell.h */,
+				FE69F0BC1B689C8F00D967BA /* NoticeCell.m */,
 			);
 			name = "告家长书";
 			sourceTree = "<group>";
@@ -1017,6 +1031,12 @@
 				FE51D57D1B678ECC00AAF6A7 /* ContentCell.m */,
 				FE51D57F1B678F3C00AAF6A7 /* BlackBoardModel.h */,
 				FE51D5801B678F3C00AAF6A7 /* BlackBoardModel.m */,
+				FE69F0BE1B68C26E00D967BA /* BlackBoardListVC.h */,
+				FE69F0BF1B68C26E00D967BA /* BlackBoardListVC.m */,
+				FE69F0C11B68CA9E00D967BA /* BlackBoardDetailVC.h */,
+				FE69F0C21B68CA9E00D967BA /* BlackBoardDetailVC.m */,
+				FE69F0C71B68CC4700D967BA /* BlackBoardParagraphDetail.h */,
+				FE69F0C81B68CC4700D967BA /* BlackBoardParagraphDetail.m */,
 			);
 			name = "黑板报";
 			sourceTree = "<group>";
@@ -1381,6 +1401,7 @@
 				6D0EE6371B4F868D00D24E9D /* PSTGridLayoutRow.m in Sources */,
 				FE94170F1B5A223D0073C4CF /* AFHTTPSessionManager.m in Sources */,
 				FE94172E1B5A223D0073C4CF /* AFNetworkActivityIndicatorManager.m in Sources */,
+				FE69F0C01B68C26E00D967BA /* BlackBoardListVC.m in Sources */,
 				FEB70B821B5D0E5000F1F77B /* MJRefreshBaseView.m in Sources */,
 				FEB70B851B5D0E5000F1F77B /* MJRefreshHeaderView.m in Sources */,
 				FE94173B1B5A223D0073C4CF /* UUMessage.m in Sources */,
@@ -1389,8 +1410,10 @@
 				FEA1C8211B4EA20800033BF8 /* BlackboardReleaseVC.m in Sources */,
 				FEA1C81B1B4E98D900033BF8 /* NoteReleaseTVC.m in Sources */,
 				FEA1C81E1B4E9BFC00033BF8 /* HomeworkTVC.m in Sources */,
+				FE69F0C91B68CC4700D967BA /* BlackBoardParagraphDetail.m in Sources */,
 				FE36C9461B4FFF08007DCC4D /* FeedSectionModel.m in Sources */,
 				6D998B0C1B4E4CC800D9F275 /* ContactCell.m in Sources */,
+				FE69F0BD1B689C8F00D967BA /* NoticeCell.m in Sources */,
 				FE02EA1E1B65CE4E006A58A2 /* LoginThreeVC.m in Sources */,
 				6D0EE61A1B4F868D00D24E9D /* MWZoomingScrollView.m in Sources */,
 				6D0EE62E1B4F868D00D24E9D /* PSTCollectionViewCell.m in Sources */,
@@ -1423,6 +1446,7 @@
 				FEB70B841B5D0E5000F1F77B /* MJRefreshFooterView.m in Sources */,
 				FE9417351B5A223D0073C4CF /* UIWebView+AFNetworking.m in Sources */,
 				18032AAC1B5E674500ED801E /* BaseVC.m in Sources */,
+				FE69F0C31B68CA9E00D967BA /* BlackBoardDetailVC.m in Sources */,
 				FEB8F5CC1B47B99800EC4F57 /* NoteCell.m in Sources */,
 				6D0EE6301B4F868D00D24E9D /* PSTCollectionViewData.m in Sources */,
 				FE72402E1B50C79700AD3735 /* AttendanceCell.m in Sources */,

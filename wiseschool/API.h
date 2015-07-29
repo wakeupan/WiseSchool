@@ -47,4 +47,14 @@
 
 #define API_NAME_NOTICE_RELEASE_NOTICE @"zhxy_v3_java/app/parentNotice/publishParentNotice.app"//发布通知
 
+#define API_NAME_RELEASE_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardCreate.app" //发布黑板报
+
+#define API_NAME_LIST_OF_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardInfo.app" //黑板报列表
+
+#define API_NAME_DETAIL_OF_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardDetail.app" //详情
+
+#define API_NAME_FETCH_CLASS_HOME_PAGE @"zhxy_v3_java/app/class/getClassIndexInfo.app" //获取班级首页
+
+#define API_NAME_FETCH_CLASS_NAMES @"zhxy_v3_java/app/common/getClassList.app" //获取班级名称
+
 #endif
