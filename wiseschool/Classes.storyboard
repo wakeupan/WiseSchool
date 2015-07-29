@@ -2009,7 +2009,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Tep-do-3kq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Tep-do-3kq">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="UDS-ci-uDZ">
@@ -2047,26 +2047,18 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rDF-dP-u1L" id="bS6-5R-Kir">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="jgV-7N-B0q">
-                                                    <rect key="frame" x="262" y="2" width="76" height="76"/>
-                                                </imageView>
                                                 <imageView tag="1973" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OLl-x5-ae7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="jgV-7N-B0q" secondAttribute="centerY" id="1CK-r1-bon"/>
                                                 <constraint firstItem="OLl-x5-ae7" firstAttribute="leading" secondItem="bS6-5R-Kir" secondAttribute="leading" id="Jxl-6r-Nf0"/>
                                                 <constraint firstAttribute="bottom" secondItem="OLl-x5-ae7" secondAttribute="bottom" id="VHr-CD-JKK"/>
-                                                <constraint firstAttribute="centerX" secondItem="jgV-7N-B0q" secondAttribute="centerX" id="fvf-xE-7oL"/>
                                                 <constraint firstItem="OLl-x5-ae7" firstAttribute="top" secondItem="bS6-5R-Kir" secondAttribute="top" id="if4-H5-NH5"/>
                                                 <constraint firstAttribute="trailing" secondItem="OLl-x5-ae7" secondAttribute="trailing" id="ols-iR-I33"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="paraImageView" destination="OLl-x5-ae7" id="ul9-XX-O1L"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TitleCell" rowHeight="50" id="NBE-t3-vA8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -2075,32 +2067,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1973" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="西虐妻的开始" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ygZ-2c-jTG">
-                                                    <rect key="frame" x="16" y="4" width="534" height="41"/>
+                                                    <rect key="frame" x="16" y="4" width="534" height="42"/>
                                                     <color key="textColor" red="0.49803921569999998" green="0.75294117650000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msl-ic-ri4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="GoH-zq-aK2"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ygZ-2c-jTG" firstAttribute="leading" secondItem="4xR-dZ-SYL" secondAttribute="leading" constant="16" id="1FT-CT-ZA8"/>
-                                                <constraint firstItem="msl-ic-ri4" firstAttribute="top" secondItem="4xR-dZ-SYL" secondAttribute="top" id="25Z-el-iDR"/>
-                                                <constraint firstAttribute="trailing" secondItem="msl-ic-ri4" secondAttribute="trailing" id="PHd-Ly-Il1"/>
                                                 <constraint firstAttribute="bottom" secondItem="ygZ-2c-jTG" secondAttribute="bottom" constant="4" id="RR6-dg-Ghf"/>
                                                 <constraint firstItem="ygZ-2c-jTG" firstAttribute="top" secondItem="4xR-dZ-SYL" secondAttribute="top" constant="4" id="Yv2-Gh-cQS"/>
                                                 <constraint firstAttribute="trailing" secondItem="ygZ-2c-jTG" secondAttribute="trailing" constant="50" id="bxG-NV-f2k"/>
-                                                <constraint firstItem="msl-ic-ri4" firstAttribute="leading" secondItem="4xR-dZ-SYL" secondAttribute="leading" id="gsz-mq-i2n"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleTF" destination="ygZ-2c-jTG" id="n07-K9-vkN"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentCell" rowHeight="171" id="ucA-rs-7tW">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -2109,7 +2088,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1973" contentMode="scaleToFill" text="章节正文" translatesAutoresizingMaskIntoConstraints="NO" id="0YC-6A-3T8">
-                                                    <rect key="frame" x="16" y="4" width="568" height="162"/>
+                                                    <rect key="frame" x="16" y="4" width="568" height="163"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2123,9 +2102,6 @@
                                                 <constraint firstItem="0YC-6A-3T8" firstAttribute="leading" secondItem="h8o-Vr-g1K" secondAttribute="leading" constant="16" id="fuM-uf-YqT"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="contentTV" destination="0YC-6A-3T8" id="9q9-fm-vSO"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -9,6 +9,7 @@
 #import "BlackBoardListVC.h"
 #import "CommonConstants.h"
 #import "HttpManager.h"
+#import "BlackBoardDetailVC.h"
 
 @interface BlackBoardListVC ()<
 UITableViewDataSource,
@@ -55,6 +56,14 @@ UITableViewDelegate>
         }
 
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    BlackBoardDetailVC *destinationVC = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSString *bID = self.blackBoardArray[indexPath.row][@"blackboardId"];
+    destinationVC.blackBoardID = bID;
 }
 
 @end
