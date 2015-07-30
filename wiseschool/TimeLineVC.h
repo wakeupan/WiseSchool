@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TimeLineVC : UIViewController<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+#import "CommentTableViewCell.h"
+
+
+
+@interface TimeLineVC : UIViewController<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,CustomCellDelegateOfClick,UIActionSheetDelegate,UIAlertViewDelegate,
+UIImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *nameViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *classViewHeight;
 @property (strong, nonatomic) IBOutlet UIView *nameView;
@@ -20,8 +25,27 @@
 @property(nonatomic,weak)IBOutlet UICollectionView *cvChirdens;
 @property(nonatomic,weak)IBOutlet UITableView* tvComments;
 
-@property (nonatomic, strong) UITableViewCell *prototypeCell; 
+@property (nonatomic, strong) CommentTableViewCell *prototypeCell;
+
+@property (nonatomic, strong) NSMutableArray *dataForChirden;
 
 @property(nonatomic,strong) NSMutableArray *dataForComments;
 
+@property (strong,nonatomic) UITapGestureRecognizer *tap;
+
+@property (nonatomic) BOOL imageSelected;
+
+@property (nonatomic) int sendIndex;
+
+@property (nonatomic, strong) NSString *homeVisitID;
+
+@property (nonatomic, strong) NSString *studentID;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputViewBottomDistance;
+
+@property (weak, nonatomic) IBOutlet UIButton *sendContentBtn;
+- (IBAction)actionSendContent:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *sendContentView;
+@property (weak, nonatomic) IBOutlet UIImageView *takePhotoImageView;
+@property (weak, nonatomic) IBOutlet UITextField *sendContentTxt;
 @end

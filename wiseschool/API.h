@@ -37,8 +37,6 @@
 
 #define API_NAME_CALSS_DELETE_HOMEWORK @"zhxy_v3_java/app/homework/homeworkDelete.app"//删除家庭作业
 
-#define API_NAME_CALSS_DELETE_HOMEWORK @"zhxy_v3_java/app/homework/homeworkDelete.app"//删除家庭作业
-
 #define API_NAME_CALSS_RELEASE_HOMEWORK @"zhxy_v3_java/app/homework//homeworkCreate.app"//发布家庭作业
 
 #define API_NAME_CALSS_FIND_DETAIL_OF_HOMEWORK @"zhxy_v3_java/app/homework/homeworkDetail.app"//家庭作业信息详情
@@ -51,10 +49,30 @@
 
 #define API_NAME_LIST_OF_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardInfo.app" //黑板报列表
 
-#define API_NAME_DETAIL_OF_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardDetail.app" //详情
+#define API_NAME_RATE_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardZambiaCreate.app" //黑板报点赞
+
+#define API_NAME_POST_COMMENT_TO_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardCommentCreate.app" //黑板报评论
+
+#define API_NAME_DETAIL_OF_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardDetail.app" //黑板报详情
+
+#define API_NAME_CHECK_BLACK_BOARD @"zhxy_v3_java/app/blackboard/blackboardOperation.app" //黑板报审核
 
 #define API_NAME_FETCH_CLASS_HOME_PAGE @"zhxy_v3_java/app/class/getClassIndexInfo.app" //获取班级首页
 
 #define API_NAME_FETCH_CLASS_NAMES @"zhxy_v3_java/app/common/getClassList.app" //获取班级名称
+
+#define API_NAME_TIMELINE_GET_STUDENT_INFO @"zhxy_v3_java/app/homeVisit/relStudentInfo.app"//获取学生列表信息
+
+#define API_NAME_TIMELINE_GET_STUDENT_TIMELINE_INFO @"zhxy_v3_java/app/homeVisit/homeVisitInfo.app" //获取学生成长列表信息
+
+#define API_NAME_TIMELINE_CREATE_COMMENT_INFO @"zhxy_v3_java/app/homeVisit/homeVisitCommentCreate.app" //学生成长发布评论信息
+
+#define API_NAME_TIMELINE_CREATE_NEW_THREAM @"zhxy_v3_java/app/homeVisit/homeVisitCreate.app" //发布新主题
+
+#define API_NAME_CLASS_RELEASE_NOTICE_DETAIL @"zhxy_v3_java/app/parentNotice/parentNoticeDetail.app" //告家长书详情
+
+#define API_NAME_CLASS_RELEASE_NOTICE_REPLY  @"zhxy_v3_java/app/parentNotice/doReply.app"//告家长书回执
+
+#define API_NAME_CLASS_ADDRESS_DETAIL @"zhxy_v3_java/app/class/getContactDetail.app" //班级通讯录详情
 
 #endif

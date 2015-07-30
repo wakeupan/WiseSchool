@@ -126,9 +126,64 @@
                                 <rect key="frame" x="0.0" y="208" width="600" height="392"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPg-1a-vHw">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="2hS-hz-Cdb">
+                                        <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="gyo-s7-oct"/>
+                                            <constraint firstAttribute="width" constant="34" id="lik-6F-LNt"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="lvk-Ge-Vhw" appends="YES" id="pPL-9U-Q5h"/>
+                                        </connections>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hf-xg-gAI">
+                                        <rect key="frame" x="558" y="8" width="34" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="49h-db-5LE"/>
+                                            <constraint firstAttribute="width" constant="34" id="Tl8-Ey-ZFD"/>
+                                            <constraint firstAttribute="height" constant="34" id="wgK-sw-ctI"/>
+                                        </constraints>
+                                        <state key="normal" title="发送">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="49h-db-5LE"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="actionSendContent:" destination="GJ9-HK-1sB" eventType="touchUpInside" id="8Oa-wL-HD3"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HeU-w5-ZHq">
+                                        <rect key="frame" x="50" y="8" width="500" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="Gle-DM-YeX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HeU-w5-ZHq" firstAttribute="leading" secondItem="2hS-hz-Cdb" secondAttribute="trailing" constant="8" id="0Xq-hW-d22"/>
+                                    <constraint firstItem="HeU-w5-ZHq" firstAttribute="top" secondItem="IPg-1a-vHw" secondAttribute="top" constant="8" id="1Vz-Ch-SRu"/>
+                                    <constraint firstItem="1Hf-xg-gAI" firstAttribute="top" secondItem="IPg-1a-vHw" secondAttribute="top" constant="8" id="F2L-kQ-lwu"/>
+                                    <constraint firstItem="2hS-hz-Cdb" firstAttribute="leading" secondItem="IPg-1a-vHw" secondAttribute="leading" constant="8" id="LZa-ti-ma1"/>
+                                    <constraint firstItem="1Hf-xg-gAI" firstAttribute="leading" secondItem="HeU-w5-ZHq" secondAttribute="trailing" constant="8" id="PWZ-u2-WjJ"/>
+                                    <constraint firstItem="2hS-hz-Cdb" firstAttribute="top" secondItem="IPg-1a-vHw" secondAttribute="top" constant="8" id="Rbd-TD-Dsp"/>
+                                    <constraint firstAttribute="height" constant="50" id="lUK-Jo-T18"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Hf-xg-gAI" secondAttribute="trailing" constant="8" id="suA-zH-L2j"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="xq9-D9-i8V" firstAttribute="top" secondItem="IPg-1a-vHw" secondAttribute="bottom" id="1nf-kS-J4T"/>
                             <constraint firstItem="27l-5Z-8hn" firstAttribute="leading" secondItem="Fs2-q1-GNL" secondAttribute="leading" id="3px-gv-kRO"/>
                             <constraint firstItem="Mxg-aR-bTV" firstAttribute="top" secondItem="n0e-Q8-LUd" secondAttribute="bottom" id="Kcx-Sr-n2n"/>
                             <constraint firstAttribute="trailing" secondItem="27l-5Z-8hn" secondAttribute="trailing" id="L7D-nI-sZU"/>
@@ -137,28 +192,41 @@
                             <constraint firstItem="plS-TX-ACH" firstAttribute="leading" secondItem="Fs2-q1-GNL" secondAttribute="leading" id="YG4-tM-Y5w"/>
                             <constraint firstItem="n0e-Q8-LUd" firstAttribute="top" secondItem="plS-TX-ACH" secondAttribute="bottom" id="eea-5O-S57"/>
                             <constraint firstAttribute="trailing" secondItem="n0e-Q8-LUd" secondAttribute="trailing" id="gTX-vj-jPV"/>
+                            <constraint firstItem="IPg-1a-vHw" firstAttribute="leading" secondItem="Fs2-q1-GNL" secondAttribute="leading" id="h4F-om-f6w"/>
                             <constraint firstAttribute="trailing" secondItem="plS-TX-ACH" secondAttribute="trailing" id="hcy-iR-RjD"/>
                             <constraint firstItem="Mxg-aR-bTV" firstAttribute="leading" secondItem="Fs2-q1-GNL" secondAttribute="leading" id="lb8-fn-HL6"/>
                             <constraint firstItem="xq9-D9-i8V" firstAttribute="top" secondItem="Mxg-aR-bTV" secondAttribute="bottom" id="me2-gI-fcy"/>
                             <constraint firstItem="27l-5Z-8hn" firstAttribute="top" secondItem="Fs2-q1-GNL" secondAttribute="top" id="uYq-fJ-rXK"/>
                             <constraint firstAttribute="trailing" secondItem="Mxg-aR-bTV" secondAttribute="trailing" id="wHJ-Or-GTN"/>
+                            <constraint firstAttribute="trailing" secondItem="IPg-1a-vHw" secondAttribute="trailing" id="zR5-FI-qvx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="classView" destination="n0e-Q8-LUd" id="B3F-n2-jrp"/>
                         <outlet property="classViewHeight" destination="UKZ-Kt-KOG" id="bYL-lt-dWZ"/>
                         <outlet property="cvChirdens" destination="27l-5Z-8hn" id="pWg-l0-ov1"/>
+                        <outlet property="inputViewBottomDistance" destination="1nf-kS-J4T" id="Viu-0m-RUN"/>
                         <outlet property="nameView" destination="plS-TX-ACH" id="FPO-8g-4Ba"/>
                         <outlet property="nameViewHeight" destination="LUw-o0-woA" id="bqE-IG-Gis"/>
+                        <outlet property="sendContentBtn" destination="1Hf-xg-gAI" id="9mQ-db-2Dk"/>
+                        <outlet property="sendContentTxt" destination="HeU-w5-ZHq" id="16P-xo-aHv"/>
+                        <outlet property="sendContentView" destination="IPg-1a-vHw" id="rAh-LN-wOv"/>
+                        <outlet property="takePhotoImageView" destination="2hS-hz-Cdb" id="yQw-4V-qm4"/>
                         <outlet property="tvComments" destination="Mxg-aR-bTV" id="6ba-bo-Y9f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljc-Rc-Pdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="lvk-Ge-Vhw">
+                    <connections>
+                        <action selector="tapTakePhoto:" destination="GJ9-HK-1sB" id="suq-Pt-jWu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="326" y="393"/>
         </scene>
     </scenes>
     <resources>
+        <image name="takePhoto" width="76" height="76"/>
         <image name="yosmeti" width="338" height="292"/>
     </resources>
 </document>

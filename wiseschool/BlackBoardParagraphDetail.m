@@ -18,7 +18,10 @@
         _title = dicPara[Title_key];
         _content = dicPara[Content_key];
         _seNo = [dicPara[SeqNo_key] intValue];
-        _imageDictionary = dicPara[BlackboardItemImages_key][0];
+        NSArray *temp = dicPara[BlackboardItemImages_key];
+        if (temp.count > 0) {
+            _imageDictionary = dicPara[BlackboardItemImages_key][0];
+        }
     }
     return self;
 }

@@ -39,7 +39,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
     {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.viewController = [[LoginOneVCViewController alloc] initWithNibName:@"LoginOneVCViewController" bundle:nil];

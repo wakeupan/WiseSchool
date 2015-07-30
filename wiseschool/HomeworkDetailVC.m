@@ -329,7 +329,7 @@ UINavigationControllerDelegate>
     [ProgressHUD show:@"上传图片中..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    NSString *url= @"http://192.168.13.103:8080/zhxy_v3_java/app/common/commonUploadImg.app";
+    NSString *url= @"http://192.168.13.106:8080/zhxy_v3_java/app/common/commonUploadImg.app";
     
     NSMutableDictionary *params =[[NSMutableDictionary alloc]init];
     

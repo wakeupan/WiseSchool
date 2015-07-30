@@ -21,6 +21,7 @@
 
 @property(nonatomic,weak) IBOutlet UITextField *phoneTXT;
 @property(nonatomic,weak) IBOutlet UITextField *codeTXT;
+@property (strong,nonatomic) UITapGestureRecognizer *tap;
 
 - (IBAction) actionJoinClasses:(id)sender;
 - (IBAction) actionClear:(id)sender;

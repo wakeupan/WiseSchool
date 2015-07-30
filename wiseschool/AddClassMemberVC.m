@@ -10,11 +10,11 @@
 #import "VPImageCropperViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+
+#import "CommonConstants.h"
 #define ORIGINAL_MAX_WIDTH 640.0f
 @interface AddClassMemberVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, VPImageCropperDelegate>
-{
-    BOOL teacherFlag ,pardentFlag,studentFlag ;
-}
+
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 
 @end
@@ -36,10 +36,26 @@
     self.title = @"添加成员";
     [self.teacherView setNeedsDisplay];
     [self.pardentView setNeedsDisplay];
+    [self.relationShipView setNeedsDisplay];
     
-    [self.btnSelectedTeacher setBackgroundColor:[UIColor grayColor]];
-    [self.btnSelectedPardent setBackgroundColor:[UIColor grayColor]];
-    [self.btnSelectedStudent setBackgroundColor:[UIColor grayColor]];
+    [[self.btnSelectedTeacher layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.btnSelectedTeacher layer] setCornerRadius:1.0f];
+    [[self.btnSelectedTeacher layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.btnSelectedTeacher layer] setBorderWidth:1.0f];
+    
+    [[self.btnSelectedPardent layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.btnSelectedPardent layer] setCornerRadius:1.0f];
+    [[self.btnSelectedPardent layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.btnSelectedPardent layer] setBorderWidth:1.0f];
+    
+    [[self.btnSelectedStudent layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self.btnSelectedStudent layer] setCornerRadius:1.0f];
+    [[self.btnSelectedStudent layer] setBorderColor:DEFINE_BLUE.CGColor];
+    [[self.btnSelectedStudent layer] setBorderWidth:1.0f];
+    
+    [self.btnSelectedTeacher setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+    [self.btnSelectedPardent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+    [self.btnSelectedStudent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
     
     [self.btnSelectedTeacher setEnabled:NO];
     [self.btnSelectedPardent setEnabled:NO];
@@ -47,6 +63,7 @@
     
         self.teachViewHeight.constant = 0;
         self.pardentViewHeight.constant = 0;
+        self.relationShipViewHeight.constant =0;
         [UIView animateWithDuration:0 animations:^
          {
              [self.view layoutIfNeeded];
@@ -61,74 +78,128 @@
 
 - (IBAction) actionSelectedTeacher:(id)sender
 {
-    teacherFlag = !teacherFlag;
-    studentFlag = NO;
-    [self.btnSelectedStudent setBackgroundColor:[UIColor grayColor]];
-    if (teacherFlag)
-    {
-        self.teachViewHeight.constant = 44;
-        [self.btnSelectedTeacher setBackgroundColor:[UIColor redColor]];
-    }
-    else
-    {
-        self.teachViewHeight.constant = 0;
-        
-        [self.btnSelectedTeacher setBackgroundColor:[UIColor grayColor]];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    self.teacherFlag = !self.teacherFlag;
+    [self selectedBtn:0];
 }
 
 - (IBAction) actionSelectedPardent:(id)sender
 {
     
-    pardentFlag = !pardentFlag;
-    studentFlag = NO;
-    [self.btnSelectedStudent setBackgroundColor:[UIColor grayColor]];
-    if (pardentFlag)
-    {
-        self.pardentViewHeight.constant = 44;
-        [self.btnSelectedPardent setBackgroundColor:[UIColor redColor]];
-    }
-    else
-    {
-        self.pardentViewHeight.constant = 0;
-        
-        [self.btnSelectedPardent setBackgroundColor:[UIColor grayColor]];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    self.pardentFlag = !self.pardentFlag;
+    [self selectedBtn:1];
     
     
 }
 
 - (IBAction) actionSelectedStudent:(id)sender
 {
-    studentFlag = !studentFlag;
-    if(studentFlag)
+    self.studentFlag = !self.studentFlag;
+    [self selectedBtn:2];
+}
+
+-(void)selectedBtn:(int)index
+{
+    switch (index)
     {
-        [self.btnSelectedStudent setBackgroundColor:[UIColor redColor]];
+        case 0:
+        {
+            if(self.teacherFlag)
+            {
+                [self.btnSelectedTeacher setBackgroundColor:DEFINE_BLUE];
+                [self.btnSelectedTeacher setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 44;
+                
+            }
+
+            else
+            {
+                [self.btnSelectedTeacher setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedTeacher setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 0;
+                
+            }
+            if(self.studentFlag)
+            {
+                self.studentFlag = NO;
+                
+                [self.btnSelectedStudent setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedStudent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+        }
+            
+            break;
+        case 1:
+        {
+            if(self.pardentFlag)
+            {
+                [self.btnSelectedPardent setBackgroundColor:DEFINE_BLUE];
+                [self.btnSelectedPardent setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 44;
+                self.relationShipViewHeight.constant =44;
+            }else
+            {
+                [self.btnSelectedStudent setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedStudent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 0;
+                self.relationShipViewHeight.constant =0;
+            }
+            
+            if(self.studentFlag)
+            {
+                self.studentFlag = NO;
+                
+                [self.btnSelectedStudent setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedStudent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+            
+        }
+            
+            break;
+        case 2:
+        {
+            if(self.studentFlag)
+            {
+                [self.btnSelectedStudent setBackgroundColor:DEFINE_BLUE];
+                [self.btnSelectedStudent setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }else
+            {
+                [self.btnSelectedStudent setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedStudent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+            }
+            if(self.teacherFlag)
+            {
+                self.teacherFlag = NO;
+                
+                [self.btnSelectedTeacher setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedTeacher setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                
+                self.teachViewHeight.constant = 0;
+                
+            }
+            if(self.pardentFlag)
+            {
+                self.pardentFlag = NO;
+                
+                [self.btnSelectedPardent setBackgroundColor:[UIColor whiteColor]];
+                [self.btnSelectedPardent setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
+                self.pardentViewHeight.constant = 0;
+                self.relationShipViewHeight.constant = 0;
+            }
+        }
+            
+            break;
+            
+        default:
+            break;
     }
-    else
-        [self.btnSelectedStudent setBackgroundColor:[UIColor grayColor]];
-    pardentFlag = NO;
     
-    teacherFlag = NO;
-    
-    self.pardentViewHeight.constant = 0;
-    
-    [self.btnSelectedPardent setBackgroundColor:[UIColor grayColor]];
-    
-    self.teachViewHeight.constant = 0;
-    [self.btnSelectedTeacher setBackgroundColor:[UIColor grayColor]];
     
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
-
 
 
 #pragma mark- 图片编辑

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BlackBoardDetailVC : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *topRightBtn;
+
 @property (nonatomic,strong) NSString *blackBoardID;
 @end

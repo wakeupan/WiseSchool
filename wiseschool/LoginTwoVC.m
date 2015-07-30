@@ -52,7 +52,7 @@
      [self.selectGardeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 //     [self.selecteQuareBtn setEnabled:YES];
     
-    
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopEditing:)];
     
    self.quareDatas =[[NSMutableArray alloc]init];
     
@@ -64,8 +64,66 @@
     
    [self resetPickerView:YES];
     
+    AppDelegate *delegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.user = delegate.user;
+    
 
 
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self.view removeGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+  //  self.inputViewBottomDistance.constant = 0;
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
+}
+
+- (void)stopEditing:(UITapGestureRecognizer*)tap
+{
+    [self.view endEditing:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self.view addGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
 }
 
 -(void)resetPickerView :(BOOL)hidden
@@ -117,10 +175,12 @@
     [self.selectSchoolBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.selectGardeBtn setEnabled:NO];
     [self.selectGardeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [ProgressHUD show:@"获取区域信息..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-   [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_AREA_FOR_CITY portID:8090 queryString:@"" callBack:^(id jsonData,NSError *error)
+   [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_AREA_FOR_CITY portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
     {
+        [ProgressHUD dismiss];
         if(jsonData !=nil)
         {
             NSArray* arr = [jsonData allKeys];
@@ -150,11 +210,14 @@
                 [self.picker selectRow:0 inComponent:0 animated:YES];
                 [self resetPickerView:NO];
                 
-             }
+            }else
+            {
+                [ProgressHUD showError:jsonData[@"errorMsg"]];
+            }
 
         }
         
-               
+        
     }];
     
 
@@ -164,18 +227,19 @@
 
 -(void)requestSchoolData:(int)index
 {
-    
+    [ProgressHUD show:@"获取学校信息..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
 
     NSDictionary *areaData =[self.quareDatas objectAtIndex:index];
     
     NSString *queryString =[NSString stringWithFormat:@"%@=%@",AREA_ID_KEY,areaData[AREA_ID_KEY]];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SCHOOL_FOR_AREA portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SCHOOL_FOR_AREA portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
-
+             
              NSString * status =[jsonData objectForKey:@"status"];
              
              NSMutableArray * tmpSchools = [[NSMutableArray alloc]init];
@@ -201,6 +265,9 @@
                  }
 
                  
+             }else
+             {
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
              }
          }
          
@@ -212,15 +279,16 @@
 
 -(void)requestGradeData:(int)intdex
 {
-    
+    [ProgressHUD show:@"获取年级信息..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
  
     NSDictionary *areaData =[self.schoolDatas objectAtIndex:0];
     
     NSString *queryString =[NSString stringWithFormat:@"%@=%@",SCHOOL_ID_KEY,areaData[SCHOOL_ID_KEY]];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_GRADE_FOR_SCHOOL portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
              NSArray* arr = [jsonData allKeys];
@@ -253,7 +321,10 @@
                  
 
                  
-            }
+             }else
+             {
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
+             }
          }
          
          
@@ -319,9 +390,24 @@
     [self requestGradeData:schoolIndex];
 }
 
--(BOOL)validateInputMessage
+-(BOOL)invlidateUserData
 {
-    
+    if(self.classTextField.text.length>0)
+    {
+        self.user.ClassNo = [self.classTextField.text intValue];
+    }else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                        message:@"请选择所在班级"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert setTag:7];
+        [alert show];
+        
+        return NO;
+        
+    }
     return YES;
 }
 
@@ -329,7 +415,10 @@
 
 - (IBAction) actionNext:(id)sender
 {
-    
+    if(![self invlidateUserData])
+    {
+        return;
+    }
     
     LoginThreeVC *login3= [[LoginThreeVC alloc ]initWithNibName:@"LoginThreeVC" bundle:nil];
     

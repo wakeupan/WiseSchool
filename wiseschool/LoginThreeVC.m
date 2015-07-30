@@ -22,16 +22,21 @@
 @interface LoginThreeVC ()<
 UINavigationControllerDelegate,UIImagePickerControllerDelegate,
 UIActionSheetDelegate, VPImageCropperDelegate>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *teachViewHeight;
 
 #pragma mark- Outlets
 @property (weak,   nonatomic) IBOutlet NSLayoutConstraint *relationViewHeight;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *teachViewHeight;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pardentViewHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pardentViewHeight;
+
+
 
 
 @property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *studentBtn;
 @property (weak, nonatomic) IBOutlet UIButton *pardentBtn;
+
 
 
 @property (weak, nonatomic) IBOutlet UIView *relationView;
@@ -44,10 +49,14 @@ UIActionSheetDelegate, VPImageCropperDelegate>
 @property (weak, nonatomic) IBOutlet UIView *selectedView;
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
 
+@property (weak, nonatomic) IBOutlet UITextField *userNameTxt;
+@property (weak, nonatomic) IBOutlet UITextField *chirdenNameTxt;
+@property (weak, nonatomic) IBOutlet UITextField *relationshipTxt;
 #pragma mark- Properties
 @property (nonatomic) BOOL teacherFlag;
 @property (nonatomic) BOOL pardentFlag;
 @property (nonatomic) BOOL studentFlag;
+@property (nonatomic) BOOL subjectIdFlag;
 @property (nonatomic,strong) NSArray  *dataSet;
 @property (nonatomic,strong) NSMutableArray * courseDatas;
 
@@ -62,7 +71,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
 }
 - (IBAction)toMainVC
 {
-    [self addClass:nil];
+    [self addClass:self.user];
    //   [self enroll];
 
 }
@@ -90,6 +99,8 @@ UIActionSheetDelegate, VPImageCropperDelegate>
             [self.selectCourseBtn setTitle:textField.text forState:UIControlStateNormal];
             
             delegate.user.subjectName = textField.text;
+            
+            self.subjectIdFlag = NO ;
         }
     }
 }
@@ -109,16 +120,20 @@ UIActionSheetDelegate, VPImageCropperDelegate>
         [self.selectCourseBtn setTitle:self.dataSet[pickerIndex] forState:UIControlStateNormal];
         AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
         
-        delegate.user.subjectName = self.dataSet[pickerIndex];
+        delegate.user.subjectId = self.courseDatas[pickerIndex][SUBJECTINFO_ID_KEY];
+        
+        self.subjectIdFlag = YES;
     }
 }
 
 - (IBAction)actionSelectCourse:(id)sender
 {
+    [ProgressHUD show:@"获取课程信息..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8090 queryString:@"" callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_GET_SUBJECT_INFO portID:8080 queryString:@"" callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
              NSArray* arr = [jsonData allKeys];
@@ -150,6 +165,9 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                  
                  [self.pickerView selectRow:0 inComponent:0 animated:YES];
                  
+             }else
+             {
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
              }
              
          }
@@ -158,19 +176,20 @@ UIActionSheetDelegate, VPImageCropperDelegate>
      }];
     
 }
-
-- (IBAction) actionSelectedTeacher:(id)sender
-{
+- (IBAction)actionSelectedTeacher:(id)sender {
     self.teacherFlag = !self.teacherFlag;
     [self selectedBtn:0];
 }
 
-- (IBAction) actionSelectedPardent:(id)sender
+
+
+- (IBAction)actionSelectedPardent:(id)sender
 {
-    
     self.pardentFlag = !self.pardentFlag;
     [self selectedBtn:1];
 }
+
+
 
 - (IBAction) actionSelectedStudent:(id)sender
 {
@@ -249,6 +268,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
         [self.studentBtn setEnabled:YES];
     }];
     
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopEditing:)];
     self.courseDatas = [[NSMutableArray alloc]init];
     
     [self.selectedBtn setBackgroundColor:DEFINE_ORGANG];
@@ -257,51 +277,212 @@ UIActionSheetDelegate, VPImageCropperDelegate>
     
     AppDelegate *delegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    self.user = delegate.user;
+    
     self.userId =delegate.user.userID;
     
-//    [self addClass];
-    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self.view removeGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+  //  self.inputViewBottomDistance.constant = 0;
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
+}
+
+- (void)stopEditing:(UITapGestureRecognizer*)tap
+{
+    [self.view endEditing:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self.view addGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
 }
 
 #pragma mark_API_INTEFACE
+
+-(BOOL)invlidateUserData
+{
+    if(self.userNameTxt.text.length>0)
+    {
+        self.user.username = self.userNameTxt.text;
+    }else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                        message:@"请填写您的用户姓名"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert setTag:7];
+        [alert show];
+        
+        return NO;
+ 
+    }
+    
+    if(self.teacherFlag&&self.pardentFlag)
+    {
+        self.user.userType = @"4";
+        
+    }
+    else if (self.teacherFlag&&!self.pardentFlag)
+    {
+        self.user.userType = @"1";
+    }
+    else if (!self.teacherFlag&&self. pardentFlag)
+    {
+        self.user.userType = @"2";
+    }
+    else if (self.studentFlag)
+    {
+        self.user.userType = @"3";
+    }
+    else if (!(self.teacherFlag||self.pardentFlag||self. studentFlag))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                        message:@"请选择一个身份"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert setTag:6];
+        [alert show];
+        
+        return NO;
+    }
+    
+    if([self.user.userType isEqualToString:@"1"]||[self.user.userType isEqualToString:@"4"])
+    {
+        if(!((self.user.subjectId!=nil&&self.user.subjectId.length>0)||(self.user.subjectName!=nil&&self.user.subjectName.length>0)))
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                            message:@"请选择您所担任的课程信息"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert setTag:7];
+            [alert show];
+            
+            return NO;
+        }
+    }
+    
+    if([self.user.userType isEqualToString:@"2"]||[self.user.userType isEqualToString:@"4"])
+    {
+        if(self.chirdenNameTxt.text.length>0)
+        {
+            self.user.childName =self.chirdenNameTxt.text;
+        }else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                            message:@"请输入您的孩子姓名"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert setTag:7];
+            [alert show];
+            
+            return NO;
+        }
+        
+        if(self.relationshipTxt.text.length>0)
+        {
+            self.user.relationship = self.relationshipTxt.text;
+        }else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请完善信息"
+                                                            message:@"请输入您和孩子的关系"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert setTag:8];
+            [alert show];
+            
+            return NO;
+        }
+
+    }
+    
+    return YES;
+}
 -(void)addClass:(User*)user
 {
+    if(![self invlidateUserData])
+    {
+        return ;
+    }
+    [ProgressHUD show:@"申请加入班级..."];
     HttpManager *httpManager = [HttpManager sharedHttpManager];
     NSMutableString *quesryString = [[NSMutableString alloc]init];
-    [quesryString appendString:[NSString stringWithFormat:@"%@=%@",USER_ID_KEY, self.userId]];
-    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userName",@"张虎"]];
-    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userType",@"1"]];
-//    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    NSString *gradeId =[[NSUserDefaults standardUserDefaults]objectForKey:@"gradeId"];
-    
-    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"gradeId",gradeId]];
-
-    [quesryString appendString:[NSString stringWithFormat:@"&%@=%d",@"classSeqNo",100]];
-    NSString *userType = @"1";
+    [quesryString appendString:[NSString stringWithFormat:@"%@=%@",USER_ID_KEY, user.userID]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userName",user.username]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"userType",user.userType]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"gradeId",user.gradeId]];
+    [quesryString appendString:[NSString stringWithFormat:@"&%@=%d",@"classSeqNo",user.ClassNo]];
+    NSString *userType =user.userType;
     if([userType isEqualToString:@"2"]||[userType isEqualToString:@"4"])
     {
-        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"childName",@"张小虎"]];
-        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"relationship",@"父子"]];
+        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"childName",user.childName]];
+        [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"relationship",user.relationship]];
     }
     
     if([userType isEqualToString:@"1"]||[userType isEqualToString:@"4"])
     {
-        if(NO)
+        if(self.subjectIdFlag)
         {
       
-          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectId",@"父子"]];
+          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectId",user.subjectId]];
         }else
         {
      
-          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectName",@"神经"]];
+          [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",@"subjectName",user.subjectName]];
         }
     }
     
 
     
     
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_ADD_CLASS portID:8090 queryString:quesryString callBack:^(id jsonData,NSError *error)
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_ADD_CLASS portID:8080 queryString:quesryString callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
              NSArray* arr = [jsonData allKeys];
@@ -339,7 +520,10 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                      }
                  }
                  
-            }
+             }else
+             {
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
+             }
          }
          
          
@@ -353,9 +537,10 @@ UIActionSheetDelegate, VPImageCropperDelegate>
     [quesryString appendString:[NSString stringWithFormat:@"&%@=%d",@"isAudit",isAudit]];
     [quesryString appendString:[NSString stringWithFormat:@"&%@=%@",USER_ID_KEY,self.userId]];
     //    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
-
-    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_ADD_STYLE portID:8090 queryString:quesryString callBack:^(id jsonData,NSError *error)
+     [ProgressHUD show:@" "];
+    [httpManager jsonDataFromServerWithBaseUrl:API_NAME_CLASS_ADD_STYLE portID:8080 queryString:quesryString callBack:^(id jsonData,NSError *error)
      {
+         [ProgressHUD dismiss];
          if(jsonData !=nil)
          {
              NSArray* arr = [jsonData allKeys];
@@ -373,6 +558,9 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                      delegate.window.rootViewController = enteranceVC;
                  
                  
+             }else
+             {
+                 [ProgressHUD showError:jsonData[@"errorMsg"]];
              }
          }
          
@@ -393,7 +581,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                 [self.teacherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 
                 self.teachViewHeight.constant = 44;
-                self.relationViewHeight.constant = 44;
+
             }
             else
             {
@@ -401,7 +589,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                 [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
                 
                 self.teachViewHeight.constant = 0;
-                self.relationViewHeight.constant = 0;
+
             }
             if(self.studentFlag)
             {
@@ -420,11 +608,13 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                 [self.pardentBtn setBackgroundColor:DEFINE_BLUE];
                 [self.pardentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 self.pardentViewHeight.constant = 44;
+                self.relationViewHeight.constant =44;
             }else
             {
                 [self.pardentBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
                 self.pardentViewHeight.constant = 0;
+                self.relationViewHeight.constant =0;
             }
             
             if(self.studentFlag)
@@ -457,7 +647,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                 [self.teacherBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
                 
                 self.teachViewHeight.constant = 0;
-                self.relationViewHeight.constant = 0;
+                
             }
             if(self.pardentFlag)
             {
@@ -466,6 +656,7 @@ UIActionSheetDelegate, VPImageCropperDelegate>
                 [self.pardentBtn setBackgroundColor:[UIColor whiteColor]];
                 [self.pardentBtn setTitleColor:DEFINE_BLUE forState:UIControlStateNormal];
                 self.pardentViewHeight.constant = 0;
+                self.relationViewHeight.constant = 0;
             }
         }
             

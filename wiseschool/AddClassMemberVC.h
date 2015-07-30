@@ -16,6 +16,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnSelectedStudent;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *teachViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *pardentViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *relationShipViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *relationShipView;
+@property (weak, nonatomic) IBOutlet UITextField *relationShipTxt;
+@property ( nonatomic) BOOL teacherFlag ,pardentFlag,studentFlag ;
+
 
 - (IBAction) actionSelectedTeacher:(id)sender;
 - (IBAction) actionSelectedStudent:(id)sender;

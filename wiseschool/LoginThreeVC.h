@@ -8,6 +8,8 @@
 
 #import "BaseVC.h"
 
+#import "User.h"
+
 @interface LoginThreeVC : BaseVC<UIAlertViewDelegate>
 @property (weak,   nonatomic) IBOutlet UIImageView *iconImageView;
 @property (nonatomic, strong) NSURLSession *upLoadSession;
@@ -15,4 +17,7 @@
 @property (nonatomic, strong) NSString *classId;
 
 @property (nonatomic, strong) NSString *userId;
+
+@property (nonatomic, strong) User *user;
+@property (strong,nonatomic) UITapGestureRecognizer *tap;
 @end

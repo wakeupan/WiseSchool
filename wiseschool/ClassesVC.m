@@ -168,15 +168,24 @@ ClassesSectionHeaderViewDelegate>
         UIViewController *vc = segue.destinationViewController;
         [vc setValue:model.homeworkId forKey:@"homeworkID"];
     }
+    
+    if ([segue.identifier isEqualToString:@"show blackboard detail"]) {
+        NSString *bid = self.blacBoardDictionary[@"blackBoardId"];
+        UIViewController *vc = segue.destinationViewController;
+        [vc setValue:bid forKey:@"blackBoardID"];
+    }
+
+    
 }
 
 - (void)updateBlackBoard
 {
     NSString *title = self.blacBoardDictionary[@"blackBoardTitle"];
     NSString *url = self.blacBoardDictionary[@"blackBoardImage"];
+    NSString *fullUrl = [NSString stringWithFormat:@"%@%@",@"http://192.168.13.106:8080/zhxy_v3_java/",url];
     self.blackBoardTitle.text = title.length > 0 ? title : @"没有新的黑板报！";
     if (url.length > 0) {
-        [self.blackBoardImageView sd_setImageWithURL:URL(url) placeholderImage:nil];
+        [self.blackBoardImageView sd_setImageWithURL:URL(fullUrl) placeholderImage:nil];
     }
     
 }

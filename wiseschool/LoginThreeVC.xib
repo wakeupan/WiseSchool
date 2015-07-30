@@ -7,20 +7,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginThreeVC">
             <connections>
+                <outlet property="chirdenNameTxt" destination="pBi-a7-W4I" id="Jvm-f0-yww"/>
                 <outlet property="iconImageView" destination="bzB-4H-Z6c" id="PvY-kP-fWx"/>
-                <outlet property="pardentBtn" destination="0KL-Qa-DUd" id="IKF-st-3yi"/>
+                <outlet property="pardentBtn" destination="LeM-ud-stm" id="QTg-dr-3GV"/>
                 <outlet property="pardentView" destination="jNE-IE-T9T" id="A6z-5k-tC9"/>
-                <outlet property="pardentViewHeight" destination="yQh-Xw-q5X" id="my1-UX-ag5"/>
+                <outlet property="pardentViewHeight" destination="CrN-W3-rWF" id="vc7-MM-bbL"/>
                 <outlet property="pickerView" destination="PY1-Qi-0Um" id="5WR-Bg-QUw"/>
                 <outlet property="relationView" destination="GoJ-Ir-sEm" id="D9S-bg-2fB"/>
                 <outlet property="relationViewHeight" destination="vjT-RW-rZv" id="3Eq-4I-Skd"/>
+                <outlet property="relationshipTxt" destination="9Ud-3j-RXI" id="q8B-HZ-vEk"/>
                 <outlet property="selectCourseBtn" destination="A9f-fC-ljF" id="3O8-IA-LdW"/>
                 <outlet property="selectedBtn" destination="cyz-Sd-nrX" id="Hqn-5e-9dQ"/>
                 <outlet property="selectedView" destination="mZ8-4W-Ijq" id="jir-Jb-7P3"/>
                 <outlet property="studentBtn" destination="dqk-F3-425" id="Omq-7p-wPg"/>
-                <outlet property="teachViewHeight" destination="CrN-W3-rWF" id="rSg-gC-ulg"/>
-                <outlet property="teacherBtn" destination="LeM-ud-stm" id="MsQ-ec-gTl"/>
+                <outlet property="teachViewHeight" destination="yQh-Xw-q5X" id="kWP-Rt-vjx"/>
+                <outlet property="teacherBtn" destination="0KL-Qa-DUd" id="8y9-SA-Rtz"/>
                 <outlet property="teacherView" destination="OHY-ye-zI6" id="SNK-Cs-VAP"/>
+                <outlet property="userNameTxt" destination="VHK-2O-WS0" id="U8U-9i-RP1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -83,7 +86,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="actionSelectedPardent:" destination="-1" eventType="touchUpInside" id="zEx-nr-Bg9"/>
+                                <action selector="actionSelectedTeacher:" destination="-1" eventType="touchUpInside" id="c63-6d-cik"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeM-ud-stm">
@@ -93,7 +96,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="actionSelectedTeacher:" destination="-1" eventType="touchUpInside" id="jbS-cU-Hsg"/>
+                                <action selector="actionSelectedPardent:" destination="-1" eventType="touchUpInside" id="JHb-7l-vSp"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-F3-425">
@@ -160,7 +163,7 @@
                                 <constraint firstAttribute="height" constant="30" id="dqo-KP-stA"/>
                             </constraints>
                             <state key="normal" title="您担任的课程">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -202,15 +205,14 @@
                                 <constraint firstAttribute="height" constant="30" id="psI-z0-9UA"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="您和孩子的关系" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ud-3j-RXI">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您和孩子的关系" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ud-3j-RXI">
                             <rect key="frame" x="124" y="7" width="468" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="mKn-gw-5jd"/>
                             </constraints>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>

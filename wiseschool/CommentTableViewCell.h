@@ -8,11 +8,34 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommentTableViewCell : UITableViewCell
+#import "CommentDTO.h"
+@protocol CustomCellDelegateOfClick<NSObject>
 
-@property(nonatomic,weak)IBOutlet UIImageView  *icon;
-@property(nonatomic,weak)IBOutlet UILabel    *content;
-@property(nonatomic,weak)IBOutlet UIButton         *btn;
+-(void)delegateAddComment:(NSIndexPath*)indexPath;
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 @end
+@interface CommentTableViewCell : UITableViewCell<UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,weak)IBOutlet    UIImageView  *icon;
+@property (weak, nonatomic) IBOutlet UITableView  *contentTB;
+@property(nonatomic,weak)IBOutlet    UIButton     *btn;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property(nonatomic,strong)NSMutableArray *souceData;
+
+@property(nonatomic,strong)NSString *titleContent;
+
+@property(nonatomic,weak)NSIndexPath *indexPath;
+
+@property(nonatomic,weak) id<CustomCellDelegateOfClick> delegate;
+
+- (IBAction)actionAddComment:(id)sender;
+
+-(void)loadDataFromNib:(CommentDTO *)data;
+
+-(int)heightForCell:(CommentDTO *)data;
+@end
+
+
+

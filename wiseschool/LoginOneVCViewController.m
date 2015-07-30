@@ -42,6 +42,8 @@
     
    [self createCustomNavigationBar:NO withTitle:@"账号注册" withBackButton:NO];
     
+    
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopEditing:)];
     self.phoneTXT.delegate =self;
    
     AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -51,6 +53,65 @@
         appDelegate.user =[[User alloc]init];
     }
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self.view removeGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+   // self.inputViewBottomDistance.constant = 0;
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
+}
+
+- (void)stopEditing:(UITapGestureRecognizer*)tap
+{
+    [self.view endEditing:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self.view addGestureRecognizer:self.tap];
+    NSDictionary *userInfo = [notification userInfo];
+   // NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect = [aValue CGRectValue];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSValue *animationCurveObject = [userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey];
+    NSUInteger animationCurve;
+    [animationCurveObject getValue:&animationCurve];
+
+    [UIView animateKeyframesWithDuration:animationDuration
+                                   delay:0
+                                 options:animationCurve
+                              animations:^{
+                                  [self.view layoutIfNeeded];
+                              } completion:NULL];
+    
+    [self.errorLabel setHidden:YES];
+
+    [self.clearBtn  setHidden:YES];
 }
 #pragma  mark ACTIONS
 - (IBAction)toMainVC
@@ -62,9 +123,10 @@
 }
 -(void)verifyCode
 {
-    
+           [ProgressHUD show:@"正在验证中......"];
            [SMS_SDK commitVerifyCode:self.codeTXT.text result:^(enum SMS_ResponseState state)
            {
+               [ProgressHUD dismiss];
                if (1==state)
                {
     
@@ -75,11 +137,11 @@
                else if (0==state)
                {
                    NSLog(@"验证失败");
-                   NSString* str=[NSString stringWithFormat:NSLocalizedString(@"verifycodeerrormsg", nil)];
-                   UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"verifycodeerrortitle", nil)
+                   NSString* str=[NSString stringWithFormat:@"验证失败"];
+                   UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"验证码不匹配，输入正确的验证码"
                                                                  message:str
                                                                 delegate:self
-                                                       cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                       cancelButtonTitle:@"确定"
                                                        otherButtonTitles:nil, nil];
                    [alert show];
                }
@@ -87,22 +149,45 @@
 }
 - (IBAction) actionJoinClasses:(id)sender
 {
-   if (self.codeTXT.text.length != 4)
+   if (!self.phoneTXT.text.length>0)
    {
-       UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"notice"
-                                                     message:@"verifycodeformaterror"
+       UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"请输入手机号码"
+                                                     message:@"清输入您的手机号码，通过验证后再加入"
                                                     delegate:self
                                            cancelButtonTitle:@"确定"
                                            otherButtonTitles:nil, nil];
        [alert show];
+       return ;
    }
-   else
+   if(self.codeTXT.text.length>0)
    {
-       [self verifyCode];
+       if (self.codeTXT.text.length != 4)
+       {
+           UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"验证码出错"
+                                                         message:@"请输入手机收到的正确验证码"
+                                                        delegate:self
+                                               cancelButtonTitle:@"确定"
+                                               otherButtonTitles:nil, nil];
+           [alert show];
+       }
+       else
+       {
+           [self verifyCode];
+           
+       }
 
-   }
+   }else
+    {
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"验证码出错"
+                                                      message:@"验证码不能为空，请先获取验证码"
+                                                     delegate:self
+                                            cancelButtonTitle:@"确定"
+                                            otherButtonTitles:nil, nil];
+        [alert show];
+    }
 
-    [self actionToNext];
+
+   // [self actionToNext];
   
 }
 -(void)actionToNext
@@ -114,13 +199,15 @@
 }
 -(void)requestUserId
 {
+           [ProgressHUD show:@"正在验证中......"];
            HttpManager *httpManager = [HttpManager sharedHttpManager];
     
     
            NSString *queryString =[NSString stringWithFormat:@"mobile=%@&smsCode=%@",self.phoneTXT.text,@""];
     
-           [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_VALIDATE_MOBILE portID:8090 queryString:queryString callBack:^(id jsonData,NSError *error)
+           [httpManager jsonDataFromServerWithBaseUrl:API_NAME_LOGIN_VALIDATE_MOBILE portID:8080 queryString:queryString callBack:^(id jsonData,NSError *error)
             {
+                [ProgressHUD dismiss];
                 if(jsonData !=nil)
                 {
                     NSArray* arr = [jsonData allKeys];
@@ -139,21 +226,26 @@
                         {
                             AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
                             appDelegate.user.userID = [data objectAtIndex:0][@"userId"];
+                            [[NSUserDefaults standardUserDefaults] setObject:appDelegate.user.userID forKey:USER_ID_KEY];//;
+                            NSString *isEntryIndex =[NSString stringWithFormat:@"%ld",[[data objectAtIndex:0][@"isEntityIndex"]integerValue]];
                             
-                            NSInteger isEntryIndex = [data objectAtIndex:0][@"isEntityIndex"];
-                            
-                            if(isEntryIndex==1)
+                            if([isEntryIndex isEqualToString:@"1"])
                             {
                             
                                 [self toMainVC];
                             }
                             else
                             {
-                                [self actionToNext];
+                                
+                                //[self actionToNext];
+                                [self getValidateCodebySMS];
                             }
                            
                         }
                         
+                    }else
+                    {
+                        [ProgressHUD showError:jsonData[@"errorMsg"]];
                     }
 
                     
@@ -165,13 +257,17 @@
 }
 -(void)getValidateCodebySMS
 {
+           [ProgressHUD show:@"正在验证中......"];
+    
+    
            [SMS_SDK getVerificationCodeBySMSWithPhone:self.phoneTXT.text
                                                  zone:CHINA_AREA_ZONE
                                                result:^(SMS_SDKError *error)
             {
+                [ProgressHUD dismiss];
                 if (!error)
                 {
-    
+                    
                 }
                 else
                 {

@@ -296,13 +296,6 @@
                         <constraint firstAttribute="trailing" secondItem="ZeH-Wb-CHu" secondAttribute="trailing" constant="16" id="lFK-gp-SWf"/>
                     </constraints>
                 </view>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="suT-Fm-Lao">
-                    <rect key="frame" x="290" y="500" width="20" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="eGd-pf-PBI"/>
-                        <constraint firstAttribute="width" constant="20" id="zpY-2A-0HE"/>
-                    </constraints>
-                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -329,13 +322,11 @@
                 <constraint firstItem="ZMJ-oI-gRS" firstAttribute="top" secondItem="QTP-q0-3an" secondAttribute="bottom" constant="1" id="jok-l8-EwF"/>
                 <constraint firstItem="atf-YJ-V3a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="n8n-xf-gHa"/>
                 <constraint firstItem="QTP-q0-3an" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tjd-t9-2Sm"/>
-                <constraint firstAttribute="bottom" secondItem="suT-Fm-Lao" secondAttribute="bottom" constant="80" id="v7A-Bf-1z3"/>
                 <constraint firstAttribute="trailing" secondItem="oaL-lK-UWm" secondAttribute="trailing" id="vk0-Hg-gMq"/>
                 <constraint firstItem="nGq-ET-8pq" firstAttribute="top" secondItem="ewa-O6-JEo" secondAttribute="bottom" constant="1" id="wFM-oS-DDT"/>
                 <constraint firstAttribute="trailing" secondItem="ewa-O6-JEo" secondAttribute="trailing" id="whH-R6-fsa"/>
                 <constraint firstAttribute="centerX" secondItem="atf-YJ-V3a" secondAttribute="centerX" id="xSc-6c-SfF"/>
                 <constraint firstItem="ZMJ-oI-gRS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yXX-ZR-rvf"/>
-                <constraint firstAttribute="centerX" secondItem="suT-Fm-Lao" secondAttribute="centerX" id="zCd-q0-QH3"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">

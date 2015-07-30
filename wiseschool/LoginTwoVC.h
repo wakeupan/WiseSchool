@@ -8,6 +8,8 @@
 
 #import "BaseVC.h"
 
+#import "User.h"
+
 @interface LoginTwoVC : BaseVC<UIPickerViewDataSource,UIPickerViewDelegate>
 
 
@@ -31,6 +33,10 @@
 @property(nonatomic,strong) NSMutableArray * schoolDatas;
 
 @property(nonatomic,strong) NSMutableArray * gradeDatas;
+
+@property (nonatomic, strong) User *user;
+
+@property (strong,nonatomic) UITapGestureRecognizer *tap;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *classTextField;

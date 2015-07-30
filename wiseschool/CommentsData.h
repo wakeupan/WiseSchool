@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#define COMMENTS_YEAR                    @"years"
+#define COMMENTS_VISIT_DATAS             @"homeVisitDatas"
+
+
 @interface CommentsData : NSObject
-@property(nonatomic,retain) NSString *commentsHead;
-@property(nonatomic,retain) NSMutableArray *commentArray;
+@property(nonatomic,strong) NSString *commentsYear;
+@property(nonatomic,strong) NSMutableArray *commentVisitDatas;
+
+- (instancetype)initFromDictionary:(NSDictionary *)dictionary;
 @end
