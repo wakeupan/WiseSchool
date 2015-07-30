@@ -36,6 +36,7 @@
     
     [[HttpManager sharedHttpManager] jsonDataFromServerWithBaseUrl:API_NAME_RELEASE_BLACK_BOARD portID:8080 queryString:queryString callBack:^(id jsonData, NSError *error) {
         NSLog(@"WHAT A FOX");
+        NSLog(@"WHAT A FOX");
     }];
 }
 
